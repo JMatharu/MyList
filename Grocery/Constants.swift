@@ -1,0 +1,30 @@
+//
+//  Constants.swift
+//  Grocery
+//
+//  Created by Jagdeep Matharu on 2017-06-14.
+//  Copyright © 2017 Jagdeep Matharu. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+struct Constants {
+    struct Identifiers {
+        static let ListViewControllerTableCellIdentifier = "ListItem"
+        static let StoreIdentifier = 50
+        static let CategoryIdentifier = 51
+        static let AmountIdentifier = 52
+        static let NameIdentifier = 53
+        static let TableViewRowActionEdit = "Edit"
+        static let TableViewRowActionDelete = "Delete"
+        static let MainStoryBoard = "Main"
+        static let AddItemStoryBoard = "AddItemStoryBoard"
+        static let AddItemSegue = "AddItem"
+    }
+    
+    struct UIDimentions {
+        static let PaddingWidth: CGFloat = 5
+        static let EstimatedRowHeightForTableCell: CGFloat = 40
+    }
+}
