@@ -67,12 +67,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionEdit, handler: {
             action, index in
-            guard let addItemViewController = UIStoryboard(name: Constants.Identifiers.MainStoryBoard, bundle: nil).instantiateViewController(withIdentifier: Constants.Identifiers.AddItemStoryBoard) as? AddItemViewController else {
-                return
-            }
-            addItemViewController.itemToEdit = self.groceryItems[indexPath.row]
-            self.navigationController?.pushViewController(addItemViewController, animated: true)
-
+            self.performSegue(withIdentifier: "AddItem", sender: self.groceryItems[indexPath.row])
         })
         let delete = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionDelete, handler: {
             action, index in
@@ -105,13 +100,12 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         } else {
             self.title = "No Items in List"
         }
-        
     }
     
     // MARK: - IBAction
     
     //MARK: - Add Item View Controller delegate
-    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: GroceryItem) {
+    func addItemViewController(didFinishAdding item: GroceryItem) {
         let newRowIndex = groceryItems.count
         groceryItems.append(item)
         
@@ -120,30 +114,28 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         tableView.insertRows(at: indexPaths, with: .automatic)
         
         updateScreenUI()
-        
-        dismiss(animated: true, completion: nil)
+        self.tableView.reloadData()
     }
     
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
-        dismiss(animated: true, completion: nil)
+    func addItemViewControllerDidCancel() {
+        self.tableView.reloadData()
     }
     
-    func addItemViewController(_ controller: AddItemViewController, didFinishEditing item: GroceryItem) {
+    func addItemViewController(didFinishEditing item: GroceryItem) {
         if let index = groceryItems.index(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) {
                 configureText(for: cell, with: item)
             }
         }
-        dismiss(animated: true, completion: nil)
     }
     
     //MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.Identifiers.AddItemSegue {
-            let navigationController = segue.destination as! UINavigationController
-            let controller = navigationController.topViewController as! AddItemViewController
+            let controller = segue.destination as! AddEditItemViewController
             controller.delegate = self
+            controller.itemToEdit = sender as? GroceryItem
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AddItemViewController.swift
+//  AddEditItemViewController.swift
 //  Grocery
 //
 //  Created by Jagdeep Matharu on 2017-06-15.
@@ -9,12 +9,12 @@
 import UIKit
 
 protocol AddEditItemViewControllerDelegate: class {
-    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: GroceryItem)
-    func addItemViewController(_ controller: AddItemViewController, didFinishEditing item: GroceryItem)
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController)
+    func addItemViewController(didFinishAdding item: GroceryItem)
+    func addItemViewController(didFinishEditing item: GroceryItem)
+    func addItemViewControllerDidCancel()
 }
 
-class AddItemViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var storeName: UITextField!
     @IBOutlet weak var amount: UITextField!
@@ -43,7 +43,8 @@ class AddItemViewController: UITableViewController, UIPickerViewDataSource, UIPi
  
     // MARK: - IBAction
     @IBAction func cancel() {
-        delegate?.addItemViewControllerDidCancel(self)
+        delegate?.addItemViewControllerDidCancel()
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func done() {
@@ -52,15 +53,17 @@ class AddItemViewController: UITableViewController, UIPickerViewDataSource, UIPi
             item.store = storeName.text!
             item.category = categoryTextField.text!
             item.name = nameTextField.text!
-            delegate?.addItemViewController(self, didFinishEditing: item)
+            delegate?.addItemViewController(didFinishEditing: item)
         } else {
             let item = GroceryItem()
             item.category = categoryTextField.text!
             item.amount = amount.text!
             item.name = nameTextField.text!
             item.store = nameTextField.text!
-            delegate?.addItemViewController(self, didFinishAdding: item)
+            delegate?.addItemViewController(didFinishAdding: item)
         }
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Table View Delegate
