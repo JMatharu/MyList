@@ -27,4 +27,15 @@ struct Constants {
         static let PaddingWidth: CGFloat = 5
         static let EstimatedRowHeightForTableCell: CGFloat = 40
     }
+    
+    struct Titles {
+        static let AddItem = "Add Item"
+        static let EditItem = "Edit Item"
+        static let NoItem = "No Items in List"
+        static let Items = " Items"
+    }
+    
+    struct Segue {
+        static let AddItem = "AddItem"
+    }
 }

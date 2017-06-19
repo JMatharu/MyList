@@ -67,7 +67,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionEdit, handler: {
             action, index in
-            self.performSegue(withIdentifier: "AddItem", sender: self.groceryItems[indexPath.row])
+            self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: self.groceryItems[indexPath.row])
         })
         let delete = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionDelete, handler: {
             action, index in
@@ -96,9 +96,9 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     func updateScreenUI() {
         if groceryItems.count > 0 {
-            self.title = "\(groceryItems.count) Items"
+            self.title = String(groceryItems.count) + Constants.Titles.Items
         } else {
-            self.title = "No Items in List"
+            self.title = Constants.Titles.NoItem
         }
     }
     
@@ -128,6 +128,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                 configureText(for: cell, with: item)
             }
         }
+        self.tableView.reloadData()
     }
     
     //MARK: - Segue

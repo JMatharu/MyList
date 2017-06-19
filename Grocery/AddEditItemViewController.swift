@@ -30,9 +30,11 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     var itemToEdit: GroceryItem?
     
     override func viewDidLoad() {
+        setNavigationBar()
+        updateTableUI()
         storeName.becomeFirstResponder()
-        setDelegateAndDataSource()
-        addPaddingOnUI()
+        setDelegateAndDataSourceForPicker()
+        addPaddingOnUITextFields()
         setDataforEditScreen()
         
 //        doneBarButton.isEnabled = false
@@ -42,12 +44,15 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     }
  
     // MARK: - IBAction
-    @IBAction func cancel() {
+    func cancel() {
         delegate?.addItemViewControllerDidCancel()
-        self.navigationController?.popViewController(animated: true)
+        // If using "Modal" then dismiss
+        dismiss(animated: true, completion: nil)
+        // If using "show" then popviewcontroller
+        // self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func done() {
+    func done() {
         if let item = itemToEdit {
             item.amount = amount.text!
             item.store = storeName.text!
@@ -62,8 +67,10 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             item.store = nameTextField.text!
             delegate?.addItemViewController(didFinishAdding: item)
         }
-        
-        self.navigationController?.popViewController(animated: true)
+        // If using "Modal" then dismiss
+        dismiss(animated: true, completion: nil)
+        // If using "show" then popviewcontroller
+        // self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Table View Delegate
@@ -123,7 +130,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         textField.leftViewMode = UITextFieldViewMode.always
     }
     
-    private func setDelegateAndDataSource() {
+    private func setDelegateAndDataSourceForPicker() {
         namePicker.delegate = self
         namePicker.dataSource = self
         nameTextField.inputView = namePicker
@@ -133,7 +140,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         categoryTextField.inputView = categoryPicker
     }
     
-    private func addPaddingOnUI() {
+    private func addPaddingOnUITextFields() {
         addPadding(textField: storeName)
         addPadding(textField: amount)
         addPadding(textField: categoryTextField)
@@ -151,13 +158,32 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     
     private func setDataforEditScreen() {
         if let item = itemToEdit {
-            self.title = "Edit Item"
             storeName.text = item.store
             amount.text = item.amount
             categoryTextField.text = item.category
             nameTextField.text = item.name
             doneBarButton.isEnabled = true
         }
+    }
+    
+    private func setNavigationBar() {
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 60))
+        self.view.addSubview(navigationBar)
+        let navItem: UINavigationItem
+        if itemToEdit != nil {
+            navItem = UINavigationItem(title: Constants.Titles.EditItem)
+        } else {
+            navItem = UINavigationItem(title: Constants.Titles.AddItem)
+        }
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: nil, action: #selector(AddEditItemViewController.done))
+        navItem.rightBarButtonItem = doneBarButton
+        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: nil, action: #selector(AddEditItemViewController.cancel))
+        navItem.leftBarButtonItem = cancelBarButton
+        navigationBar.setItems([navItem], animated: true)
+    }
+    
+    func updateTableUI() {
+        tableView.tableHeaderView = UIView(frame: CGRect(x: CGFloat(0.0), y: CGFloat(0.0), width: CGFloat(tableView.bounds.size.width), height: CGFloat(60)))
     }
     
 }
