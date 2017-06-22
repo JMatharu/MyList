@@ -167,7 +167,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     }
     
     private func setNavigationBar() {
-        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: 60))
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: Int(self.view.frame.width), height: Int(Constants.UIDimentions.NavigationBarHeight)))
         self.view.addSubview(navigationBar)
         let navItem: UINavigationItem
         if itemToEdit != nil {
@@ -183,7 +183,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     }
     
     func updateTableUI() {
-        tableView.tableHeaderView = UIView(frame: CGRect(x: CGFloat(0.0), y: CGFloat(0.0), width: CGFloat(tableView.bounds.size.width), height: CGFloat(60)))
+        tableView.tableHeaderView = UIView(frame: CGRect(x: CGFloat(0.0), y: CGFloat(0.0), width: CGFloat(tableView.bounds.size.width), height: Constants.UIDimentions.NavigationBarHeight))
     }
     
 }

@@ -26,6 +26,7 @@ struct Constants {
     struct UIDimentions {
         static let PaddingWidth: CGFloat = 5
         static let EstimatedRowHeightForTableCell: CGFloat = 40
+        static let NavigationBarHeight: CGFloat = 60
     }
     
     struct Titles {
