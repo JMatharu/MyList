@@ -108,7 +108,7 @@
 		D15E339D1EF2C4BF004D8B2E /* GroceryList */ = {
 			isa = PBXGroup;
 			children = (
-				D15E33A51EF3103D004D8B2E /* View */,
+				D15E33A51EF3103D004D8B2E /* Controller */,
 				D15E33A41EF31035004D8B2E /* Model */,
 			);
 			name = GroceryList;
@@ -131,13 +131,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		D15E33A51EF3103D004D8B2E /* View */ = {
+		D15E33A51EF3103D004D8B2E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				D19E345A1EF08C18006455DD /* ListViewController.swift */,
 				D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */,
 			);
-			name = View;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		D19E344C1EF08C18006455DD = {
