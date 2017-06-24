@@ -210,7 +210,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("GroceryTableHeader", owner: self, options: nil)?.first as! GroceryTableHeader
-        return headerView
+        return headerView.contentView
     }
     
     // MARK: - Methods
