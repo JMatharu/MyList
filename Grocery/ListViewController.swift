@@ -10,6 +10,7 @@ import UIKit
 
 class ListViewController: UITableViewController, AddEditItemViewControllerDelegate {
     var groceryItems: [GroceryItem]
+    let heightOfHeader: CGFloat = 40
 
     required init?(coder aDecoder: NSCoder) {
         groceryItems = [GroceryItem]()
@@ -28,6 +29,119 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         row1.store = "Store1"
         groceryItems.append(row1)
         
+        let row2 = GroceryItem()
+        row2.category = "three"
+        row2.amount = "222.22"
+        row2.name = "C"
+        row2.store = "Store1"
+        groceryItems.append(row2)
+        
+        let row3 = GroceryItem()
+        row3.category = "three"
+        row3.amount = "222.22"
+        row3.name = "C"
+        row3.store = "Store1"
+        groceryItems.append(row3)
+       
+        let row4 = GroceryItem()
+        row4.category = "three"
+        row4.amount = "222.22"
+        row4.name = "C"
+        row4.store = "Store1"
+        groceryItems.append(row4)
+        
+        let row5 = GroceryItem()
+        row5.category = "three"
+        row5.amount = "222.22"
+        row5.name = "C"
+        row5.store = "Store1"
+        groceryItems.append(row5)
+        
+        let row6 = GroceryItem()
+        row6.category = "three"
+        row6.amount = "222.22"
+        row6.name = "C"
+        row6.store = "Store1"
+        groceryItems.append(row6)
+        
+        let row7 = GroceryItem()
+        row7.category = "three"
+        row7.amount = "222.22"
+        row7.name = "C"
+        row7.store = "Store1"
+        groceryItems.append(row7)
+        
+        let row8 = GroceryItem()
+        row8.category = "three"
+        row8.amount = "222.22"
+        row8.name = "C"
+        row8.store = "Store1"
+        groceryItems.append(row8)
+        
+        let row9 = GroceryItem()
+        row9.category = "three"
+        row9.amount = "222.22"
+        row9.name = "C"
+        row9.store = "Store1"
+        groceryItems.append(row9)
+        
+        let row10 = GroceryItem()
+        row10.category = "three"
+        row10.amount = "222.22"
+        row10.name = "C"
+        row10.store = "Store1"
+        groceryItems.append(row10)
+        
+        let row11 = GroceryItem()
+        row11.category = "three"
+        row11.amount = "222.22"
+        row11.name = "C"
+        row11.store = "Store1"
+        groceryItems.append(row11)
+        
+        let row12 = GroceryItem()
+        row12.category = "three"
+        row12.amount = "222.22"
+        row12.name = "C"
+        row12.store = "Store1"
+        groceryItems.append(row12)
+        
+        let row13 = GroceryItem()
+        row13.category = "three"
+        row13.amount = "222.22"
+        row13.name = "C"
+        row13.store = "Store1"
+        groceryItems.append(row13)
+        
+        let row14 = GroceryItem()
+        row14.category = "three"
+        row14.amount = "222.22"
+        row14.name = "C"
+        row14.store = "Store1"
+        groceryItems.append(row14)
+        
+        let row15 = GroceryItem()
+        row15.category = "three"
+        row15.amount = "222.22"
+        row15.name = "C"
+        row15.store = "Store1"
+        groceryItems.append(row15)
+        
+        let row16 = GroceryItem()
+        row16.category = "three"
+        row16.amount = "222.22"
+        row16.name = "C"
+        row16.store = "Store1"
+        groceryItems.append(row16)
+        
+        let row17 = GroceryItem()
+        row17.category = "three"
+        row17.amount = "222.22"
+        row17.name = "C"
+        row17.store = "Store1"
+        groceryItems.append(row17)
+        
+        
         super.init(coder: aDecoder)
     }
     
@@ -39,6 +153,11 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
         
         updateScreenUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,6 +198,19 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         edit.backgroundColor = UIColor.orange
         delete.backgroundColor = UIColor.red
         return [edit, delete]
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return heightOfHeader
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = Bundle.main.loadNibNamed("GroceryTableHeader", owner: self, options: nil)?.first as! GroceryTableHeader
+        return headerView
     }
     
     // MARK: - Methods

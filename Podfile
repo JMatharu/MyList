@@ -6,4 +6,5 @@ target 'Grocery' do
   use_frameworks!
 
   # Pods for Grocery
+  pod 'UIColor_Hex_Swift', '~> 3.0.2'
 end

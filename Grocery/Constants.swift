@@ -39,4 +39,8 @@ struct Constants {
     struct Segue {
         static let AddItem = "AddItem"
     }
+    
+    struct Color {
+        static let NavigationBarColor = "#7A61BD"
+    }
 }
