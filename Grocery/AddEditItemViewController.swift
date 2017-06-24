@@ -182,6 +182,8 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         navItem.leftBarButtonItem = cancelBarButton
         navigationBar.setItems([navItem], animated: true)
         navigationBar.barTintColor = AppColor().navigationBarColor()
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationBar.tintColor = UIColor.white
     }
     
     func updateTableUI() {
