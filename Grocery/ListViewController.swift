@@ -7,139 +7,142 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ListViewController: UITableViewController, AddEditItemViewControllerDelegate {
     var groceryItems: [GroceryItem]
     let heightOfHeader: CGFloat = 40
+    var firebaseReference: FIRDatabaseReference?
+    var dataBaseHandler: FIRDatabaseHandle?
 
     required init?(coder aDecoder: NSCoder) {
         groceryItems = [GroceryItem]()
         
-        let row0 = GroceryItem()
-        row0.category = "two"
-        row0.amount = "111.11"
-        row0.name = "A"
-        row0.store = "Store"
-        groceryItems.append(row0)
+//        let row0 = GroceryItem()
+//        row0.category = "two"
+//        row0.amount = "111.11"
+//        row0.name = "A"
+//        row0.store = "Store"
+//        groceryItems.append(row0)
         
-        let row1 = GroceryItem()
-        row1.category = "three"
-        row1.amount = "222.22"
-        row1.name = "C"
-        row1.store = "Store1"
-        groceryItems.append(row1)
-        
-        let row2 = GroceryItem()
-        row2.category = "three"
-        row2.amount = "222.22"
-        row2.name = "C"
-        row2.store = "Store1"
-        groceryItems.append(row2)
-        
-        let row3 = GroceryItem()
-        row3.category = "three"
-        row3.amount = "222.22"
-        row3.name = "C"
-        row3.store = "Store1"
-        groceryItems.append(row3)
-       
-        let row4 = GroceryItem()
-        row4.category = "three"
-        row4.amount = "222.22"
-        row4.name = "C"
-        row4.store = "Store1"
-        groceryItems.append(row4)
-        
-        let row5 = GroceryItem()
-        row5.category = "three"
-        row5.amount = "222.22"
-        row5.name = "C"
-        row5.store = "Store1"
-        groceryItems.append(row5)
-        
-        let row6 = GroceryItem()
-        row6.category = "three"
-        row6.amount = "222.22"
-        row6.name = "C"
-        row6.store = "Store1"
-        groceryItems.append(row6)
-        
-        let row7 = GroceryItem()
-        row7.category = "three"
-        row7.amount = "222.22"
-        row7.name = "C"
-        row7.store = "Store1"
-        groceryItems.append(row7)
-        
-        let row8 = GroceryItem()
-        row8.category = "three"
-        row8.amount = "222.22"
-        row8.name = "C"
-        row8.store = "Store1"
-        groceryItems.append(row8)
-        
-        let row9 = GroceryItem()
-        row9.category = "three"
-        row9.amount = "222.22"
-        row9.name = "C"
-        row9.store = "Store1"
-        groceryItems.append(row9)
-        
-        let row10 = GroceryItem()
-        row10.category = "three"
-        row10.amount = "222.22"
-        row10.name = "C"
-        row10.store = "Store1"
-        groceryItems.append(row10)
-        
-        let row11 = GroceryItem()
-        row11.category = "three"
-        row11.amount = "222.22"
-        row11.name = "C"
-        row11.store = "Store1"
-        groceryItems.append(row11)
-        
-        let row12 = GroceryItem()
-        row12.category = "three"
-        row12.amount = "222.22"
-        row12.name = "C"
-        row12.store = "Store1"
-        groceryItems.append(row12)
-        
-        let row13 = GroceryItem()
-        row13.category = "three"
-        row13.amount = "222.22"
-        row13.name = "C"
-        row13.store = "Store1"
-        groceryItems.append(row13)
-        
-        let row14 = GroceryItem()
-        row14.category = "three"
-        row14.amount = "222.22"
-        row14.name = "C"
-        row14.store = "Store1"
-        groceryItems.append(row14)
-        
-        let row15 = GroceryItem()
-        row15.category = "three"
-        row15.amount = "222.22"
-        row15.name = "C"
-        row15.store = "Store1"
-        groceryItems.append(row15)
-        
-        let row16 = GroceryItem()
-        row16.category = "three"
-        row16.amount = "222.22"
-        row16.name = "C"
-        row16.store = "Store1"
-        groceryItems.append(row16)
-        
-        let row17 = GroceryItem()
-        row17.category = "three"
-        row17.amount = "222.22"
-        row17.name = "C"
-        row17.store = "Store1"
-        groceryItems.append(row17)
+//        let row1 = GroceryItem()
+//        row1.category = "three"
+//        row1.amount = "222.22"
+//        row1.name = "C"
+//        row1.store = "Store1"
+//        groceryItems.append(row1)
+//        
+//        let row2 = GroceryItem()
+//        row2.category = "three"
+//        row2.amount = "222.22"
+//        row2.name = "C"
+//        row2.store = "Store1"
+//        groceryItems.append(row2)
+//        
+//        let row3 = GroceryItem()
+//        row3.category = "three"
+//        row3.amount = "222.22"
+//        row3.name = "C"
+//        row3.store = "Store1"
+//        groceryItems.append(row3)
+//       
+//        let row4 = GroceryItem()
+//        row4.category = "three"
+//        row4.amount = "222.22"
+//        row4.name = "C"
+//        row4.store = "Store1"
+//        groceryItems.append(row4)
+//        
+//        let row5 = GroceryItem()
+//        row5.category = "three"
+//        row5.amount = "222.22"
+//        row5.name = "C"
+//        row5.store = "Store1"
+//        groceryItems.append(row5)
+//        
+//        let row6 = GroceryItem()
+//        row6.category = "three"
+//        row6.amount = "222.22"
+//        row6.name = "C"
+//        row6.store = "Store1"
+//        groceryItems.append(row6)
+//        
+//        let row7 = GroceryItem()
+//        row7.category = "three"
+//        row7.amount = "222.22"
+//        row7.name = "C"
+//        row7.store = "Store1"
+//        groceryItems.append(row7)
+//        
+//        let row8 = GroceryItem()
+//        row8.category = "three"
+//        row8.amount = "222.22"
+//        row8.name = "C"
+//        row8.store = "Store1"
+//        groceryItems.append(row8)
+//        
+//        let row9 = GroceryItem()
+//        row9.category = "three"
+//        row9.amount = "222.22"
+//        row9.name = "C"
+//        row9.store = "Store1"
+//        groceryItems.append(row9)
+//        
+//        let row10 = GroceryItem()
+//        row10.category = "three"
+//        row10.amount = "222.22"
+//        row10.name = "C"
+//        row10.store = "Store1"
+//        groceryItems.append(row10)
+//        
+//        let row11 = GroceryItem()
+//        row11.category = "three"
+//        row11.amount = "222.22"
+//        row11.name = "C"
+//        row11.store = "Store1"
+//        groceryItems.append(row11)
+//        
+//        let row12 = GroceryItem()
+//        row12.category = "three"
+//        row12.amount = "222.22"
+//        row12.name = "C"
+//        row12.store = "Store1"
+//        groceryItems.append(row12)
+//        
+//        let row13 = GroceryItem()
+//        row13.category = "three"
+//        row13.amount = "222.22"
+//        row13.name = "C"
+//        row13.store = "Store1"
+//        groceryItems.append(row13)
+//        
+//        let row14 = GroceryItem()
+//        row14.category = "three"
+//        row14.amount = "222.22"
+//        row14.name = "C"
+//        row14.store = "Store1"
+//        groceryItems.append(row14)
+//        
+//        let row15 = GroceryItem()
+//        row15.category = "three"
+//        row15.amount = "222.22"
+//        row15.name = "C"
+//        row15.store = "Store1"
+//        groceryItems.append(row15)
+//        
+//        let row16 = GroceryItem()
+//        row16.category = "three"
+//        row16.amount = "222.22"
+//        row16.name = "C"
+//        row16.store = "Store1"
+//        groceryItems.append(row16)
+//        
+//        let row17 = GroceryItem()
+//        row17.category = "three"
+//        row17.amount = "222.22"
+//        row17.name = "C"
+//        row17.store = "Store1"
+//        groceryItems.append(row17)
         
         
         super.init(coder: aDecoder)
@@ -151,6 +154,21 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Make table cell expand if string is bigger than label size
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
+        
+        //Firebase
+//        firebaseReference = FIRDatabase.database().reference()
+//        dataBaseHandler = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observe(.childAdded, with: { (snapshot) in
+//            if let item = snapshot.value as? NSDictionary {
+//                let firebaseRow = GroceryItem()
+//                firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
+//                firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
+//                firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
+//                firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
+//                self.groceryItems.append(firebaseRow)
+//                self.tableView.reloadData()
+//            }
+//        })
+
         
         updateScreenUI()
     }
@@ -241,10 +259,23 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         let newRowIndex = groceryItems.count
         groceryItems.append(item)
         
+        //Firebase
+        firebaseReference = FIRDatabase.database().reference()
+        dataBaseHandler = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observe(.childAdded, with: { (snapshot) in
+            if let item = snapshot.value as? NSDictionary {
+                let firebaseRow = GroceryItem()
+                firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
+                firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
+                firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
+                firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
+                self.groceryItems.append(firebaseRow)
+            }
+        })
+        
         let indexPath = IndexPath(row: newRowIndex, section: 0)
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
-        
+                
         updateScreenUI()
         self.tableView.reloadData()
     }
@@ -270,6 +301,15 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             controller.delegate = self
             controller.itemToEdit = sender as? GroceryItem
         }
+    }
+    
+    // MARK: - Firebase
+    func getFirebaseChildValueWithKey(_ key: String, withDictionary items: NSDictionary) -> String {
+        var childItem = ""
+        if let item = items.value(forKey: key) as? String {
+            childItem = item
+        }
+        return childItem
     }
 }
 

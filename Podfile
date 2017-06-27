@@ -7,4 +7,6 @@ target 'Grocery' do
 
   # Pods for Grocery
   pod 'UIColor_Hex_Swift', '~> 3.0.2'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
 end

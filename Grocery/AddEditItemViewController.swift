@@ -8,6 +8,7 @@
 
 import UIKit
 import UIColor_Hex_Swift
+import FirebaseDatabase
 
 protocol AddEditItemViewControllerDelegate: class {
     func addItemViewController(didFinishAdding item: GroceryItem)
@@ -29,6 +30,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     var categoryPicker = UIPickerView()
     weak var delegate: AddEditItemViewControllerDelegate?
     var itemToEdit: GroceryItem?
+    var firebaseReference: FIRDatabaseReference?
     
     override func viewDidLoad() {
         setNavigationBar()
@@ -54,6 +56,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     }
     
     func done() {
+        firebaseReference = FIRDatabase.database().reference()
         if let item = itemToEdit {
             item.amount = amount.text!
             item.store = storeName.text!
@@ -65,7 +68,18 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             item.category = categoryTextField.text!
             item.amount = amount.text!
             item.name = nameTextField.text!
-            item.store = nameTextField.text!
+            item.store = storeName.text!
+            
+            //saving data to firebase
+            let refForGroceryDataValue = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot)
+            let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
+            refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store])
+           
+            // saving keys to firebase
+            let refKeys = firebaseReference?.child(Constants.Firebase.ParentGroceryKeyRoot)
+            refForGroceryDataValue?.observeSingleEvent(of: .value, with: { (snapshot) in
+                refKeys?.childByAutoId().setValue([refChildByAutoId?.key])
+                })
             delegate?.addItemViewController(didFinishAdding: item)
         }
         // If using "Modal" then dismiss

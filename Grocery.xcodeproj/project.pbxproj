@@ -10,6 +10,7 @@
 		D14DEA331EFD9847000ECE78 /* GroceryTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14DEA311EFD9847000ECE78 /* GroceryTableHeader.swift */; };
 		D14DEA341EFD9847000ECE78 /* GroceryTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14DEA321EFD9847000ECE78 /* GroceryTableHeader.xib */; };
 		D14DEA361EFDDB5A000ECE78 /* AppColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14DEA351EFDDB5A000ECE78 /* AppColours.swift */; };
+		D14DEA381EFEB9A9000ECE78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D14DEA371EFEB9A9000ECE78 /* GoogleService-Info.plist */; };
 		D15E339C1EF205BA004D8B2E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15E339B1EF205BA004D8B2E /* Constants.swift */; };
 		D15E33A71EF31050004D8B2E /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15E33A61EF31050004D8B2E /* GroceryItem.swift */; };
 		D15E33A91EF32808004D8B2E /* AddEditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */; };
@@ -28,6 +29,7 @@
 		D14DEA311EFD9847000ECE78 /* GroceryTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryTableHeader.swift; sourceTree = "<group>"; };
 		D14DEA321EFD9847000ECE78 /* GroceryTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroceryTableHeader.xib; sourceTree = "<group>"; };
 		D14DEA351EFDDB5A000ECE78 /* AppColours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColours.swift; sourceTree = "<group>"; };
+		D14DEA371EFEB9A9000ECE78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D15E339B1EF205BA004D8B2E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D15E33A61EF31050004D8B2E /* GroceryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditItemViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				D19E345F1EF08C18006455DD /* Assets.xcassets */,
 				D19E34611EF08C18006455DD /* LaunchScreen.storyboard */,
 				D19E34641EF08C18006455DD /* Info.plist */,
+				D14DEA371EFEB9A9000ECE78 /* GoogleService-Info.plist */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			files = (
 				D19E34631EF08C18006455DD /* LaunchScreen.storyboard in Resources */,
 				D19E34601EF08C18006455DD /* Assets.xcassets in Resources */,
+				D14DEA381EFEB9A9000ECE78 /* GoogleService-Info.plist in Resources */,
 				D19E345E1EF08C18006455DD /* Main.storyboard in Resources */,
 				D14DEA341EFD9847000ECE78 /* GroceryTableHeader.xib in Resources */,
 			);
@@ -429,7 +433,7 @@
 				INFOPLIST_FILE = Grocery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jmatharu.Grocery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jmatharu.mylist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -444,7 +448,7 @@
 				INFOPLIST_FILE = Grocery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jmatharu.Grocery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jmatharu.mylist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
