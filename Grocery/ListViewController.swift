@@ -154,22 +154,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Make table cell expand if string is bigger than label size
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
-        
-        //Firebase
-//        firebaseReference = FIRDatabase.database().reference()
-//        dataBaseHandler = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observe(.childAdded, with: { (snapshot) in
-//            if let item = snapshot.value as? NSDictionary {
-//                let firebaseRow = GroceryItem()
-//                firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
-//                firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
-//                firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
-//                firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
-//                self.groceryItems.append(firebaseRow)
-//                self.tableView.reloadData()
-//            }
-//        })
-
-        
+    
         updateScreenUI()
     }
     
@@ -258,19 +243,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     func addItemViewController(didFinishAdding item: GroceryItem) {
         let newRowIndex = groceryItems.count
         groceryItems.append(item)
-        
-        //Firebase
-        firebaseReference = FIRDatabase.database().reference()
-        dataBaseHandler = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observe(.childAdded, with: { (snapshot) in
-            if let item = snapshot.value as? NSDictionary {
-                let firebaseRow = GroceryItem()
-                firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
-                firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
-                firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
-                firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
-                self.groceryItems.append(firebaseRow)
-            }
-        })
         
         let indexPath = IndexPath(row: newRowIndex, section: 0)
         let indexPaths = [indexPath]

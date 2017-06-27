@@ -70,16 +70,16 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             item.name = nameTextField.text!
             item.store = storeName.text!
             
-//            //saving data to firebase
-//            let refForGroceryDataValue = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot)
-//            let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
-//            refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store])
+            //saving data to firebase
+            let refForGroceryDataValue = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot)
+            let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
+            refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store])
            
-//            // saving keys to firebase
-//            let refKeys = firebaseReference?.child(Constants.Firebase.ParentGroceryKeyRoot)
-//            refForGroceryDataValue?.observeSingleEvent(of: .value, with: { (snapshot) in
-//                refKeys?.childByAutoId().setValue([refChildByAutoId?.key])
-//                })
+            // saving keys to firebase
+            let refKeys = firebaseReference?.child(Constants.Firebase.ParentGroceryKeyRoot)
+            refForGroceryDataValue?.observeSingleEvent(of: .value, with: { (snapshot) in
+                refKeys?.childByAutoId().setValue([refChildByAutoId?.key])
+                })
             delegate?.addItemViewController(didFinishAdding: item)
         }
         // If using "Modal" then dismiss
