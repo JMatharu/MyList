@@ -21,8 +21,8 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Make table cell expand if string is bigger than label size
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
-    
-        updateScreenUI()
+        updateDataSourceWithNewItemFromFireBase()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +63,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             self.groceryItems.remove(at: indexPath.row)
             let indexPaths = [indexPath]
             tableView.deleteRows(at: indexPaths, with: .automatic)
-            self.updateScreenUI()
+            self.updateTitle()
         })
         edit.backgroundColor = UIColor.orange
         delete.backgroundColor = UIColor.red
@@ -96,7 +96,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         amountLabel.text = item.amount
     }
     
-    func updateScreenUI() {
+    func updateTitle() {
         if groceryItems.count > 0 {
             self.title = String(groceryItems.count) + Constants.Titles.Items
         } else {
@@ -108,15 +108,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     //MARK: - Add Item View Controller delegate
     func addItemViewController(didFinishAdding item: GroceryItem) {
-        let newRowIndex = groceryItems.count
-        groceryItems.append(item)
         
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
-                
-        updateScreenUI()
-        self.tableView.reloadData()
     }
     
     func addItemViewControllerDidCancel() {
@@ -149,6 +141,23 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             childItem = item
         }
         return childItem
+    }
+    
+    func updateDataSourceWithNewItemFromFireBase() {
+        //Firebase
+        firebaseReference = FIRDatabase.database().reference()
+        dataBaseHandler = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observe(.childAdded, with: { (snapshot) in
+            if let item = snapshot.value as? NSDictionary {
+                let firebaseRow = GroceryItem()
+                firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
+                firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
+                firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
+                firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
+                self.groceryItems.append(firebaseRow)
+            }
+            self.tableView.reloadData()
+            self.updateTitle()
+        })
     }
 }
 
