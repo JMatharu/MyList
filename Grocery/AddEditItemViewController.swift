@@ -75,11 +75,6 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
             refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store])
            
-            // saving keys to firebase
-            let refKeys = firebaseReference?.child(Constants.Firebase.ParentGroceryKeyRoot)
-            refForGroceryDataValue?.observeSingleEvent(of: .value, with: { (snapshot) in
-                refKeys?.childByAutoId().setValue([refChildByAutoId?.key])
-                })
             delegate?.addItemViewController(didFinishAdding: item)
         }
         // If using "Modal" then dismiss

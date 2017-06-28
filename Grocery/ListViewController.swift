@@ -155,7 +155,9 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                 firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
                 self.groceryItems.append(firebaseRow)
             }
+            //Reload table after getting the new item from firebase cloud
             self.tableView.reloadData()
+            //Update title depending on items in datasource
             self.updateTitle()
         })
     }
