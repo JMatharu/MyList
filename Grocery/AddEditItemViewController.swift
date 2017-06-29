@@ -11,7 +11,7 @@ import UIColor_Hex_Swift
 import FirebaseDatabase
 
 protocol AddEditItemViewControllerDelegate: class {
-    func addItemViewController(didFinishAdding item: GroceryItem, firebaseKey fireKey:String)
+    func addItemViewController(didFinishAdding item: GroceryItem)
     func addItemViewController(didFinishEditing item: GroceryItem)
     func addItemViewControllerDidCancel()
 }
@@ -76,12 +76,13 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
             refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store])
            
-            // Passing keys
-            if let key = refChildByAutoId?.key {
-                fireKey = key
-            }
+
+            //            // Passing keys
+//            if let key = refChildByAutoId?.key {
+//                fireKey = key
+//            }
             
-            delegate?.addItemViewController(didFinishAdding: item, firebaseKey: fireKey)
+            delegate?.addItemViewController(didFinishAdding: item)
         }
         // If using "Modal" then dismiss
         dismiss(animated: true, completion: nil)

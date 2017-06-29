@@ -23,7 +23,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
         updateDataSourceWithNewItemFromFireBase()
-        
+        print(self.groceryItemKeys)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,8 +115,8 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     // MARK: - IBAction
     
     //MARK: - Add Item View Controller delegate
-    func addItemViewController(didFinishAdding item: GroceryItem, firebaseKey fireKey: String) {
-        groceryItemKeys.append(fireKey)
+    func addItemViewController(didFinishAdding item: GroceryItem) {
+
     }
     
     func addItemViewControllerDidCancel() {
@@ -164,6 +164,8 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                 firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
                 self.groceryItems.append(firebaseRow)
             }
+            // Save keys to groceryItemKeys array
+            self.groceryItemKeys.append(snapshot.key)
             //Reload table after getting the new item from firebase cloud
             self.tableView.reloadData()
             //Update title depending on items in datasource
