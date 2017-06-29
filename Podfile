@@ -9,4 +9,5 @@ target 'Grocery' do
   pod 'UIColor_Hex_Swift', '~> 3.0.2'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'SwiftSpinner'
 end

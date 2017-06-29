@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+ import SwiftSpinner
 
 class ListViewController: UITableViewController, AddEditItemViewControllerDelegate {
     var groceryItems: [GroceryItem] = []
@@ -154,10 +155,11 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         //Firebase
         firebaseReference = FIRDatabase.database().reference()
         // Spinner
-        let spinner:UIActivityIndicatorView = UIActivityIndicatorView.init(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
-        spinner.color = UIColor.blue
-        spinner.startAnimating()
-        self.view.addSubview(spinner)
+        SwiftSpinner.setTitleFont(UIFont(name: "Futura", size: 22.0))
+        SwiftSpinner.show("Please wait \nwhile we get your Lists...").addTapHandler({
+            SwiftSpinner.hide()
+        }, subtitle: "Tap to hide while connecting! This will affect only the current operation.")
+        
         firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
             // This code block is async block
             guard let snap = snapshot.value as? NSDictionary else {
@@ -179,7 +181,8 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             self.tableView.reloadData()
             //Update title depending on items in datasource
             self.updateTitle()
-            spinner.stopAnimating()
+            //Stop Spinner
+            SwiftSpinner.hide()
         })
     }
 }
