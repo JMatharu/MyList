@@ -22,8 +22,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Make table cell expand if string is bigger than label size
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
-        updateDataSourceWithNewItemFromFireBase()
-        print(self.groceryItemKeys)
+        updateDataSourceWithItemsFromFireBase()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +56,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionEdit, handler: {
             action, index in
-            self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: self.groceryItems[indexPath.row])
+            self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: self.groceryItemKeys[indexPath.row])
         })
         let delete = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionDelete, handler: {
             action, index in
@@ -151,25 +150,36 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         return childItem
     }
     
-    func updateDataSourceWithNewItemFromFireBase() {
+    func updateDataSourceWithItemsFromFireBase() {
         //Firebase
         firebaseReference = FIRDatabase.database().reference()
-        dataBaseHandler = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observe(.childAdded, with: { (snapshot) in
-            // This code bloack is async block
-            if let item = snapshot.value as? NSDictionary {
-                let firebaseRow = GroceryItem()
-                firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
-                firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
-                firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
-                firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
-                self.groceryItems.append(firebaseRow)
+        // Spinner
+        let spinner:UIActivityIndicatorView = UIActivityIndicatorView.init(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        spinner.color = UIColor.blue
+        spinner.startAnimating()
+        self.view.addSubview(spinner)
+        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
+            // This code block is async block
+            guard let snap = snapshot.value as? NSDictionary else {
+                return
             }
-            // Save keys to groceryItemKeys array
-            self.groceryItemKeys.append(snapshot.key)
+            for (_, value) in snap {
+                if let item = value as? NSDictionary {
+                    let firebaseRow = GroceryItem()
+                    firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
+                    firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
+                    firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
+                    firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
+                    self.groceryItems.append(firebaseRow)
+                    // Save keys to groceryItemKeys array
+                    self.groceryItemKeys.append(snapshot.key)
+                }
+            }
             //Reload table after getting the new item from firebase cloud
             self.tableView.reloadData()
             //Update title depending on items in datasource
             self.updateTitle()
+            spinner.stopAnimating()
         })
     }
 }
