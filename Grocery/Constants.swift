@@ -52,4 +52,8 @@ struct Constants {
         static let ChildStore = "store"
         static let ParentGroceryKeyRoot = "groceryKeysList"
     }
+    
+    struct XIB {
+        static let GroceryTableHeader = "GroceryTableHeader"
+    }
 }

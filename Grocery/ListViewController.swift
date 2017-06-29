@@ -11,6 +11,7 @@ import FirebaseDatabase
 
 class ListViewController: UITableViewController, AddEditItemViewControllerDelegate {
     var groceryItems: [GroceryItem] = []
+    var groceryItemKeys: [String] = []
     let heightOfHeader: CGFloat = 40
     var firebaseReference: FIRDatabaseReference?
     var dataBaseHandler: FIRDatabaseHandle?
@@ -64,6 +65,13 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             let indexPaths = [indexPath]
             tableView.deleteRows(at: indexPaths, with: .automatic)
             self.updateTitle()
+            
+            //Delete from firebase
+            self.firebaseReference = FIRDatabase.database().reference()
+            self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.groceryItemKeys[indexPath.row]).removeValue()
+            
+            // Delete from local array
+            self.groceryItemKeys.remove(at: indexPath.row)
         })
         edit.backgroundColor = UIColor.orange
         delete.backgroundColor = UIColor.red
@@ -79,7 +87,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = Bundle.main.loadNibNamed("GroceryTableHeader", owner: self, options: nil)?.first as! GroceryTableHeader
+        let headerView = Bundle.main.loadNibNamed(Constants.XIB.GroceryTableHeader, owner: self, options: nil)?.first as! GroceryTableHeader
         return headerView.contentView
     }
     
@@ -107,8 +115,8 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     // MARK: - IBAction
     
     //MARK: - Add Item View Controller delegate
-    func addItemViewController(didFinishAdding item: GroceryItem) {
-        
+    func addItemViewController(didFinishAdding item: GroceryItem, firebaseKey fireKey: String) {
+        groceryItemKeys.append(fireKey)
     }
     
     func addItemViewControllerDidCancel() {
@@ -147,6 +155,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         //Firebase
         firebaseReference = FIRDatabase.database().reference()
         dataBaseHandler = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observe(.childAdded, with: { (snapshot) in
+            // This code bloack is async block
             if let item = snapshot.value as? NSDictionary {
                 let firebaseRow = GroceryItem()
                 firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
