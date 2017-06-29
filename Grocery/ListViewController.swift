@@ -68,7 +68,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             
             //Delete from firebase
             self.firebaseReference = FIRDatabase.database().reference()
-            print(self.groceryItemKeys[indexPath.row])
             self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.groceryItemKeys[indexPath.row]).removeValue()
             
             // Delete from local array
