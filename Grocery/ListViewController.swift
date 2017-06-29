@@ -68,6 +68,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             
             //Delete from firebase
             self.firebaseReference = FIRDatabase.database().reference()
+            print(self.groceryItemKeys[indexPath.row])
             self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.groceryItemKeys[indexPath.row]).removeValue()
             
             // Delete from local array
@@ -165,7 +166,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             guard let snap = snapshot.value as? NSDictionary else {
                 return
             }
-            for (_, value) in snap {
+            for (key, value) in snap {
                 if let item = value as? NSDictionary {
                     let firebaseRow = GroceryItem()
                     firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
@@ -173,8 +174,10 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                     firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
                     firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
                     self.groceryItems.append(firebaseRow)
+                }
+                if let key = key as? String {
                     // Save keys to groceryItemKeys array
-                    self.groceryItemKeys.append(snapshot.key)
+                    self.groceryItemKeys.append(key)
                 }
             }
             //Reload table after getting the new item from firebase cloud
