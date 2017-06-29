@@ -13,4 +13,8 @@ class AppColor {
     func navigationBarColor() -> UIColor {
         return UIColor(Constants.Color.NavigationBarColor)
     }
+    
+    func spinnerFont() -> UIFont {
+        return UIFont(name: "Futura", size: 22.0)!
+    }
 }

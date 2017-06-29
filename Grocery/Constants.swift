@@ -56,4 +56,9 @@ struct Constants {
     struct XIB {
         static let GroceryTableHeader = "GroceryTableHeader"
     }
+    
+    struct Spinner {
+        static let Title = "Please wait \nwhile we get your Lists..."
+        static let SubTitle = "Tap to hide while connecting! This will affect only the current operation."
+    }
 }

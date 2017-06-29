@@ -155,10 +155,10 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         //Firebase
         firebaseReference = FIRDatabase.database().reference()
         // Spinner
-        SwiftSpinner.setTitleFont(UIFont(name: "Futura", size: 22.0))
-        SwiftSpinner.show("Please wait \nwhile we get your Lists...").addTapHandler({
+        SwiftSpinner.setTitleFont(AppColor().spinnerFont())
+        SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
             SwiftSpinner.hide()
-        }, subtitle: "Tap to hide while connecting! This will affect only the current operation.")
+        }, subtitle: Constants.Spinner.SubTitle)
         
         firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
             // This code block is async block
