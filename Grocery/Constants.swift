@@ -50,7 +50,7 @@ struct Constants {
         static let ChildName = "name"
         static let ChildAmount = "amount"
         static let ChildStore = "store"
-        static let ParentGroceryKeyRoot = "groceryKeysList"
+        static let ChildDate = "date"
     }
     
     struct XIB {

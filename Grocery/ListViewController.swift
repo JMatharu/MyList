@@ -162,21 +162,27 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         
         firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
             // This code block is async block
-            guard let snap = snapshot.value as? NSDictionary else {
+            if snapshot.childrenCount == 0 {
+                SwiftSpinner.hide()
                 return
-            }
-            for (key, value) in snap {
-                if let item = value as? NSDictionary {
-                    let firebaseRow = GroceryItem()
-                    firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
-                    firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
-                    firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
-                    firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
-                    self.groceryItems.append(firebaseRow)
+            } else {
+                guard let snap = snapshot.value as? NSDictionary else {
+                    return
                 }
-                if let key = key as? String {
-                    // Save keys to groceryItemKeys array
-                    self.groceryItemKeys.append(key)
+                
+                for (key, value) in snap {
+                    if let item = value as? NSDictionary {
+                        let firebaseRow = GroceryItem()
+                        firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
+                        firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
+                        firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
+                        firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
+                        self.groceryItems.append(firebaseRow)
+                    }
+                    if let key = key as? String {
+                        // Save keys to groceryItemKeys array
+                        self.groceryItemKeys.append(key)
+                    }
                 }
             }
             //Reload table after getting the new item from firebase cloud

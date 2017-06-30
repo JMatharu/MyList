@@ -74,7 +74,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             //saving data to firebase
             let refForGroceryDataValue = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot)
             let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
-            refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store])
+            refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store, Constants.Firebase.ChildDate : self.getCurrentDateWithTime()])
             
             delegate?.addItemViewController(didFinishAdding: item)
         }
@@ -198,6 +198,38 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     
     func updateTableUI() {
         tableView.tableHeaderView = UIView(frame: CGRect(x: CGFloat(0.0), y: CGFloat(0.0), width: CGFloat(tableView.bounds.size.width), height: Constants.UIDimentions.NavigationBarHeight))
+    }
+    
+    func getCurrentDateWithTime() -> String {
+        let date = Date()
+        let calender = Calendar.current
+        let hour = calender.component(.hour, from: date)
+        let minute = calender.component(.minute, from: date)
+        let sec = calender.component(.second, from: date)
+        let dateInDigit = calender.component(.day, from: date)
+        let month = calender.component(.month, from: date)
+        let year = calender.component(.year, from: date)
+        let weekday = calender.component(.weekday, from: date)
+        var weekdayString: String
+        switch weekday {
+        case 1:
+            weekdayString = "Sunday"
+        case 2:
+            weekdayString = "Monday"
+        case 3:
+            weekdayString = "Tuesday"
+        case 4:
+            weekdayString = "Wednesday"
+        case 5:
+            weekdayString = "Thursday"
+        case 6:
+            weekdayString = "Friday"
+        case 7:
+            weekdayString = "Saturday"
+        default:
+            weekdayString = "nil"
+        }
+        return "\(hour):\(minute):\(sec) on \(weekdayString) \(dateInDigit)/\(month)/\(year)"
     }
     
 }
