@@ -23,6 +23,9 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Make table cell expand if string is bigger than label size
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
+        
+        // Firebase reference
+        firebaseReference = FIRDatabase.database().reference()
         updateDataSourceWithItemsFromFireBase()
     }
     
@@ -67,7 +70,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             self.updateTitle()
             
             //Delete from firebase
-            self.firebaseReference = FIRDatabase.database().reference()
+            //self.firebaseReference = FIRDatabase.database().reference()
             self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.groceryItemKeys[indexPath.row]).removeValue()
             
             // Delete from local array
@@ -116,7 +119,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     //MARK: - Add Item View Controller delegate
     func addItemViewController(didFinishAdding item: GroceryItem) {
-
+//        updateDataSourceWithNewItemFromFireBase()
     }
     
     func addItemViewControllerDidCancel() {
@@ -152,8 +155,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     }
     
     func updateDataSourceWithItemsFromFireBase() {
-        //Firebase
-        firebaseReference = FIRDatabase.database().reference()
         // Spinner
         SwiftSpinner.setTitleFont(AppColor().spinnerFont())
         SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
@@ -193,5 +194,65 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             SwiftSpinner.hide()
         })
     }
+    
+    func updateDataSourceWithNewItemFromFireBase() {
+//        var tempKey: [String] = []
+//        // var newItemKeyList: [String] = [] Why this never works here when called outside of first block
+//        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
+//            guard let snap = snapshot.value as? NSDictionary else {
+//                return
+//            }
+//            for(key, _) in snap {
+//                tempKey.append(key as! String)
+//            }
+//            for i in 0..<tempKey.count {
+//                if (!self.groceryItemKeys.contains(tempKey[i])) {
+//                    self.newItemKeyList.append(tempKey[i])
+//                }
+//            }
+//            print(self.newItemKeyList)
+//        })
+//        print(self.newItemKeyList)
+        
+        
+        
+//        self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(newItemKeyList[0]).observe(.value, with: { (snapshotChild) in
+//            guard let snapChild = snapshotChild.value as? NSDictionary else {
+//                return
+//            }
+//            let firebaseRow = GroceryItem()
+//            firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: snapChild)
+//            firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: snapChild)
+//            firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: snapChild)
+//            firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: snapChild)
+//            self.groceryItems.append(firebaseRow)
+//            print(self.groceryItems)
+//        })    
+        
+        self.tableView.reloadData()
+        self.updateTitle()
+    }
+//    
+//    func getAllNewElement() -> [String] {
+//        var tempKey: [String] = []
+//        var newItemKeyList: [String] = []
+//        // var newItemKeyList: [String] = [] Why this never works here when called outside of first block
+//        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
+//            guard let snap = snapshot.value as? NSDictionary else {
+//                return
+//            }
+//            for(key, _) in snap {
+//                tempKey.append(key as! String)
+//            }
+//            for i in 0..<tempKey.count {
+//                if (!self.groceryItemKeys.contains(tempKey[i])) {
+//                    newItemKeyList.append(tempKey[i])
+//                }
+//            }
+//            return self.newItemKeyList
+//            print(self.newItemKeyList)
+//        })
+//        //        print(self.newItemKeyList)
+//    }
 }
 

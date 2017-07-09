@@ -19,6 +19,7 @@
 		D19E345E1EF08C18006455DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19E345C1EF08C18006455DD /* Main.storyboard */; };
 		D19E34601EF08C18006455DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D19E345F1EF08C18006455DD /* Assets.xcassets */; };
 		D19E34631EF08C18006455DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19E34611EF08C18006455DD /* LaunchScreen.storyboard */; };
+		D1CB3B441F07F9A200AE136C /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CB3B431F07F9A200AE136C /* FirebaseService.swift */; };
 		E5904D1807F9CA5E6B09DD4E /* Pods_Grocery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C89294A66988F301F9BC91C /* Pods_Grocery.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		D19E345F1EF08C18006455DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D19E34621EF08C18006455DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D19E34641EF08C18006455DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1CB3B431F07F9A200AE136C /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 		D19E34571EF08C18006455DD /* Grocery */ = {
 			isa = PBXGroup;
 			children = (
+				D1CB3B421F07F98C00AE136C /* Service */,
 				D15E339A1EF2059F004D8B2E /* Helpers */,
 				D19E34581EF08C18006455DD /* AppDelegate.swift */,
 				D15E339E1EF2C4C9004D8B2E /* Feature */,
@@ -171,6 +174,14 @@
 				D15E33991EF2058F004D8B2E /* Others */,
 			);
 			path = Grocery;
+			sourceTree = "<group>";
+		};
+		D1CB3B421F07F98C00AE136C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D1CB3B431F07F9A200AE136C /* FirebaseService.swift */,
+			);
+			name = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 			files = (
 				D15E33A91EF32808004D8B2E /* AddEditItemViewController.swift in Sources */,
 				D19E345B1EF08C18006455DD /* ListViewController.swift in Sources */,
+				D1CB3B441F07F9A200AE136C /* FirebaseService.swift in Sources */,
 				D19E34591EF08C18006455DD /* AppDelegate.swift in Sources */,
 				D14DEA361EFDDB5A000ECE78 /* AppColours.swift in Sources */,
 				D14DEA331EFD9847000ECE78 /* GroceryTableHeader.swift in Sources */,
