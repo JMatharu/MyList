@@ -28,22 +28,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let fbLoginButton = FBSDKLoginButton()
-        self.view.addSubview(fbLoginButton)
-
-        let topConstraint = NSLayoutConstraint(item: fbLoginButton, attribute: .top, relatedBy: .equal, toItem: logoLabel, attribute: .bottom, multiplier: 1, constant: 30)
-        let leftConstraint = NSLayoutConstraint(item: fbLoginButton, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 20)
-        let rightConstraint = NSLayoutConstraint(item: fbLoginButton, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: -20)
-        let heightConstraint = NSLayoutConstraint(item: fbLoginButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 40)
         
-        self.view.addConstraints([topConstraint, leftConstraint, rightConstraint, heightConstraint])
-        self.view.updateConstraints()
-        fbLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        createSignUpButton(loginButton: fbLoginButton)
         
         fbLoginButton.delegate = self
-        fbLoginButton.readPermissions = ["email", "public_profile"]
+        fbLoginButton.readPermissions = [Constants.UserPermissions.Email, Constants.UserPermissions.PublicProfile]
 
     }
     
+    // MARK: - Facebook Login
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error)
@@ -56,7 +49,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         SwiftSpinner.setTitleFont(AppColor().spinnerFont())
         SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
             SwiftSpinner.hide()
-        }, subtitle: Constants.Spinner.SubTitle)
+        })
 
     }
 
@@ -64,6 +57,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("Did logout!!!")
     }
     
+    // MARK: - Firebase Login
     func loginToFirebase() {
         let accessToken = FBSDKAccessToken.current()
         guard let accessTokenString = accessToken?.tokenString else {
@@ -86,7 +80,23 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             SwiftSpinner.hide()
             
             // To push controller with segue
-            self.performSegue(withIdentifier: "LoginToList", sender: nil)
+            self.performSegue(withIdentifier: Constants.Segue.LoginToList, sender: nil)
         })
+    }
+    
+    func createSignUpButton(loginButton: Any)  {
+        if let fbLoginButton = loginButton as? FBSDKLoginButton {
+            self.view.addSubview(fbLoginButton)
+            
+            let topConstraint = NSLayoutConstraint(item: fbLoginButton, attribute: .top, relatedBy: .equal, toItem: logoLabel, attribute: .bottom, multiplier: 1, constant: Constants.UIDimentions.ButtonTopPadding)
+            let leftConstraint = NSLayoutConstraint(item: fbLoginButton, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: Constants.UIDimentions.ButtonLeftPadding)
+            let rightConstraint = NSLayoutConstraint(item: fbLoginButton, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: Constants.UIDimentions.ButtonRightPadding)
+            let heightConstraint = NSLayoutConstraint(item: fbLoginButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: Constants.UIDimentions.ButtonHeight)
+            
+            self.view.addConstraints([topConstraint, leftConstraint, rightConstraint, heightConstraint])
+            self.view.updateConstraints()
+            fbLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        }
+
     }
 }

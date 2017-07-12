@@ -120,7 +120,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     //MARK: - Add Item View Controller delegate
     func addItemViewController(didFinishAdding item: GroceryItem) {
-//        updateDataSourceWithNewItemFromFireBase()
+    //  updateDataSourceWithNewItemFromFireBase()
     }
     
     func addItemViewControllerDidCancel() {

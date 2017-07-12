@@ -27,6 +27,10 @@ struct Constants {
         static let PaddingWidth: CGFloat = 5
         static let EstimatedRowHeightForTableCell: CGFloat = 40
         static let NavigationBarHeight: CGFloat = 60
+        static let ButtonHeight: CGFloat = 40
+        static let ButtonLeftPadding: CGFloat = 20
+        static let ButtonRightPadding: CGFloat = -20
+        static let ButtonTopPadding: CGFloat = 30
     }
     
     struct Titles {
@@ -38,6 +42,7 @@ struct Constants {
     
     struct Segue {
         static let AddItem = "AddItem"
+        static let LoginToList = "LoginToList"
     }
     
     struct Color {
@@ -60,5 +65,10 @@ struct Constants {
     struct Spinner {
         static let Title = "Please wait \nwhile we get your Lists..."
         static let SubTitle = "Tap to hide while connecting! This will affect only the current operation."
+    }
+    
+    struct UserPermissions {
+        static let PublicProfile = "public_profile"
+        static let Email = "email"
     }
 }
