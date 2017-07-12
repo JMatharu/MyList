@@ -8,7 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
- import SwiftSpinner
+import SwiftSpinner
 
 class ListViewController: UITableViewController, AddEditItemViewControllerDelegate {
     var groceryItems: [GroceryItem] = []
@@ -31,7 +31,8 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        navigationItem.setHidesBackButton(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {

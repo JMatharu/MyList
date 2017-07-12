@@ -9,11 +9,24 @@
 import Foundation
 import FBSDKLoginKit
 import Firebase
+import SwiftSpinner
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var logoLabel: UILabel!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         let fbLoginButton = FBSDKLoginButton()
         self.view.addSubview(fbLoginButton)
 
@@ -39,6 +52,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
         loginToFirebase()
         print("Successfully Login")
+        // Spinner
+        SwiftSpinner.setTitleFont(AppColor().spinnerFont())
+        SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
+            SwiftSpinner.hide()
+        }, subtitle: Constants.Spinner.SubTitle)
+
     }
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
@@ -59,8 +78,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             if let user = user {
                 print("User is : ", user)
             }
-            let listViewController: ListViewController = self.storyboard?.instantiateViewController(withIdentifier: "GroceryListViewController") as! ListViewController
-            self.navigationController?.pushViewController(listViewController, animated: true)
+            // To push controller in Navigation Controller
+            // let listViewController: ListViewController = self.storyboard?.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+            // self.navigationController?.pushViewController(listViewController, animated: true)
+            
+            //Stop Spinner
+            SwiftSpinner.hide()
+            
+            // To push controller with segue
+            self.performSegue(withIdentifier: "LoginToList", sender: nil)
         })
     }
 }

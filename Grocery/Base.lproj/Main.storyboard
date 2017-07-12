@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tfc-M8-Hzy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="t7U-RA-AR1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Grocery List-->
         <scene sceneID="oxw-Pp-KNv">
             <objects>
-                <tableViewController id="fCD-Yy-lji" customClass="ListViewController" customModule="Grocery" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListViewController" id="fCD-Yy-lji" customClass="ListViewController" customModule="Grocery" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4gQ-Ov-oIx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,7 +79,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Grocery List" id="IA8-4s-1nO">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Uib-0r-vjl">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="AddItem" id="ovf-86-ODz"/>
                             </connections>
@@ -88,7 +88,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUe-h4-Vnp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015.2" y="8.5457271364317844"/>
+            <point key="canvasLocation" x="2954.4000000000001" y="8.5457271364317844"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="OfH-Hd-qDn">
@@ -231,7 +231,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v9d-uv-IRb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2916" y="9"/>
+            <point key="canvasLocation" x="3855.1999999999998" y="8.5457271364317844"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="3tv-Oa-IYL">
@@ -255,36 +255,33 @@
                         </subviews>
                         <color key="backgroundColor" red="0.30588235294117649" green="0.6470588235294118" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ulV-73-YB9"/>
                     <connections>
                         <outlet property="logoLabel" destination="Wjc-pD-mxX" id="IMD-tp-N35"/>
+                        <segue destination="fCD-Yy-lji" kind="show" identifier="LoginToList" id="ERm-gp-Dfg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxU-zz-vN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="96.799999999999997" y="8.5457271364317844"/>
+            <point key="canvasLocation" x="1838" y="9"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="xKl-Nd-XbE">
+        <scene sceneID="6WQ-e8-eSU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qh3-5f-2Hg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BPh-6v-8Dq" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t7U-RA-AR1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Te7-Jm-Qn7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1VC-Kl-Gcf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.31764705882352939" green="0.1764705882352941" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.31764705882352939" green="0.1764705882352941" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="fCD-Yy-lji" kind="relationship" relationship="rootViewController" id="jrV-kU-44p"/>
+                        <segue destination="tfc-M8-Hzy" kind="relationship" relationship="rootViewController" id="n9M-cA-hb4"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="de6-NW-7DN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="8.5457271364317844"/>
+            <point key="canvasLocation" x="96.799999999999997" y="8.5457271364317844"/>
         </scene>
     </scenes>
 </document>
