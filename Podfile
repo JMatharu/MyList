@@ -10,4 +10,8 @@ target 'Grocery' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'SwiftSpinner'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKShareKit'
+  pod 'FBSDKLoginKit'
+  pod 'Firebase/Auth'
 end
