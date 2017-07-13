@@ -29,13 +29,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
         let fbLoginButton = FBSDKLoginButton()
         
-        createSignUpButton(loginButton: fbLoginButton)
-        
-        fbLoginButton.setAttributedTitle(NSAttributedString(string: Constants.Titles.FacebookButton), for: .normal)
-        
-        fbLoginButton.delegate = self
-        fbLoginButton.readPermissions = [Constants.UserPermissions.Email, Constants.UserPermissions.PublicProfile]
-        
+        createSignInButton(loginButton: fbLoginButton)
     }
     
     // MARK: - Facebook Login
@@ -86,7 +80,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         })
     }
     
-    func createSignUpButton(loginButton: Any)  {
+    func createSignInButton(loginButton: Any)  {
         if let fbLoginButton = loginButton as? FBSDKLoginButton {
             self.view.addSubview(fbLoginButton)
             
@@ -98,6 +92,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             self.view.addConstraints([topConstraint, leftConstraint, rightConstraint, heightConstraint])
             self.view.updateConstraints()
             fbLoginButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            fbLoginButton.setAttributedTitle(NSAttributedString(string: Constants.Titles.FacebookButton), for: .normal)
+            
+            fbLoginButton.delegate = self
+            fbLoginButton.readPermissions = [Constants.UserPermissions.Email, Constants.UserPermissions.PublicProfile]
         }
 
     }
