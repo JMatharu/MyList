@@ -31,9 +31,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         createSignUpButton(loginButton: fbLoginButton)
         
+        fbLoginButton.setAttributedTitle(NSAttributedString(string: Constants.Titles.FacebookButton), for: .normal)
+        
         fbLoginButton.delegate = self
         fbLoginButton.readPermissions = [Constants.UserPermissions.Email, Constants.UserPermissions.PublicProfile]
-
+        
     }
     
     // MARK: - Facebook Login

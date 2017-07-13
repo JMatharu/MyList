@@ -30,7 +30,7 @@ struct Constants {
         static let ButtonHeight: CGFloat = 40
         static let ButtonLeftPadding: CGFloat = 20
         static let ButtonRightPadding: CGFloat = -20
-        static let ButtonTopPadding: CGFloat = 30
+        static let ButtonTopPadding: CGFloat = 70
     }
     
     struct Titles {
@@ -38,6 +38,7 @@ struct Constants {
         static let EditItem = "Edit Item"
         static let NoItem = "No Items in List"
         static let Items = " Items"
+        static let FacebookButton = "Sign in with Facebook"
     }
     
     struct Segue {

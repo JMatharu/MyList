@@ -79,7 +79,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Grocery List" id="IA8-4s-1nO">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Uib-0r-vjl">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="AddItem" id="ovf-86-ODz"/>
                             </connections>
@@ -88,7 +88,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUe-h4-Vnp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2954.4000000000001" y="8.5457271364317844"/>
+            <point key="canvasLocation" x="2884" y="9"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="OfH-Hd-qDn">
@@ -231,7 +231,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v9d-uv-IRb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3855.1999999999998" y="8.5457271364317844"/>
+            <point key="canvasLocation" x="3660" y="9"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="3tv-Oa-IYL">
@@ -263,16 +263,20 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxU-zz-vN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1838" y="9"/>
+            <point key="canvasLocation" x="2140" y="9"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6WQ-e8-eSU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t7U-RA-AR1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1VC-Kl-Gcf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1VC-Kl-Gcf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.31764705879999999" green="0.1764705882" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -281,7 +285,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="de6-NW-7DN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="96.799999999999997" y="8.5457271364317844"/>
+            <point key="canvasLocation" x="1404" y="9"/>
         </scene>
     </scenes>
 </document>
