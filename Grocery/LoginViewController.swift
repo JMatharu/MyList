@@ -30,6 +30,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let fbLoginButton = FBSDKLoginButton()
         
         createSignInButton(loginButton: fbLoginButton)
+        
+        print("--------------------------- : ", UserDefaults.standard.bool(forKey: "IsUserLoggedIn"))
+
     }
     
     // MARK: - Facebook Login
@@ -51,6 +54,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Did logout!!!")
+        
+        UserDefaults.standard.set(false, forKey: "IsUserLoggedIn")
     }
     
     // MARK: - Firebase Login
@@ -67,13 +72,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
             if let user = user {
                 print("User is : ", user)
+                
+                UserDefaults.standard.set(true, forKey: "IsUserLoggedIn")
             }
             // To push controller in Navigation Controller
             // let listViewController: ListViewController = self.storyboard?.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
             // self.navigationController?.pushViewController(listViewController, animated: true)
-            
-            //Stop Spinner
-            SwiftSpinner.hide()
             
             // To push controller with segue
             self.performSegue(withIdentifier: Constants.Segue.LoginToList, sender: nil)

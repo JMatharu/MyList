@@ -26,11 +26,12 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         
         // Firebase reference
         firebaseReference = FIRDatabase.database().reference()
-        updateDataSourceWithItemsFromFireBase()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        updateDataSourceWithItemsFromFireBase()
         
         navigationItem.setHidesBackButton(true, animated: false)
     }
@@ -115,8 +116,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             self.title = Constants.Titles.NoItem
         }
     }
-    
-    // MARK: - IBAction
     
     //MARK: - Add Item View Controller delegate
     func addItemViewController(didFinishAdding item: GroceryItem) {

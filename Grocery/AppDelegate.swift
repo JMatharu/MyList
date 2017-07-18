@@ -22,6 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Facebook SDK
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        if UserDefaults.standard.bool(forKey: Constants.UserDefaults.IsUserLoggedIn) {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: Constants.Identifiers.MainStoryBoard, bundle: nil)
+            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.ListItemStoryBoard)
+            let navigationController = UINavigationController(rootViewController: initialStoryBoard)
+            navigationController.navigationBar.barTintColor = AppColor().navigationBarColor()
+            navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
+        }
         return true
     }
     

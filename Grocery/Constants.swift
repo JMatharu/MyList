@@ -21,6 +21,7 @@ struct Constants {
         static let MainStoryBoard = "Main"
         static let AddItemStoryBoard = "AddItemStoryBoard"
         static let AddItemSegue = "AddItem"
+        static let ListItemStoryBoard = "ListViewController"
     }
     
     struct UIDimentions {
@@ -47,7 +48,7 @@ struct Constants {
     }
     
     struct Color {
-        static let NavigationBarColor = "#7A61BD"
+        static let NavigationBarColor = "#512DA8"
     }
     
     struct Firebase {
@@ -71,5 +72,9 @@ struct Constants {
     struct UserPermissions {
         static let PublicProfile = "public_profile"
         static let Email = "email"
+    }
+    
+    struct UserDefaults {
+        static let IsUserLoggedIn = "IsUserLoggedIn"
     }
 }
