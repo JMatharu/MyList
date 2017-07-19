@@ -47,10 +47,6 @@ struct Constants {
         static let LoginToList = "LoginToList"
     }
     
-    struct Color {
-        static let NavigationBarColor = "#512DA8"
-    }
-    
     struct Firebase {
         static let ParentGroceryRoot = "groceryList"
         static let ChildCategory = "category"
