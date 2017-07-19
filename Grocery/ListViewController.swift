@@ -13,6 +13,7 @@ import SwiftSpinner
 class ListViewController: UITableViewController, AddEditItemViewControllerDelegate {
     var groceryItems: [GroceryItem] = []
     var groceryItemKeys: [String] = []
+    var groceryItemUpdateKeys: [String] = []
     let heightOfHeader: CGFloat = 40
     var firebaseReference: FIRDatabaseReference?
     var dataBaseHandler: FIRDatabaseHandle?
@@ -26,12 +27,12 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         
         // Firebase reference
         firebaseReference = FIRDatabase.database().reference()
+        
+        updateDataSourceWithItemsFromFireBase()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        updateDataSourceWithItemsFromFireBase()
         
         navigationItem.setHidesBackButton(true, animated: false)
     }
@@ -119,7 +120,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     //MARK: - Add Item View Controller delegate
     func addItemViewController(didFinishAdding item: GroceryItem) {
-    //  updateDataSourceWithNewItemFromFireBase()
+      updateDataSourceWithNewItemFromFireBase()
     }
     
     func addItemViewControllerDidCancel() {
@@ -196,63 +197,49 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     }
     
     func updateDataSourceWithNewItemFromFireBase() {
-//        var tempKey: [String] = []
-//        // var newItemKeyList: [String] = [] Why this never works here when called outside of first block
-//        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
-//            guard let snap = snapshot.value as? NSDictionary else {
-//                return
-//            }
-//            for(key, _) in snap {
-//                tempKey.append(key as! String)
-//            }
-//            for i in 0..<tempKey.count {
-//                if (!self.groceryItemKeys.contains(tempKey[i])) {
-//                    self.newItemKeyList.append(tempKey[i])
-//                }
-//            }
-//            print(self.newItemKeyList)
-//        })
-//        print(self.newItemKeyList)
+        // Spinner
+        SwiftSpinner.setTitleFont(AppColor().spinnerFont())
+        SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
+            SwiftSpinner.hide()
+        })
         
-        
-        
-//        self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(newItemKeyList[0]).observe(.value, with: { (snapshotChild) in
-//            guard let snapChild = snapshotChild.value as? NSDictionary else {
-//                return
-//            }
-//            let firebaseRow = GroceryItem()
-//            firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: snapChild)
-//            firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: snapChild)
-//            firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: snapChild)
-//            firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: snapChild)
-//            self.groceryItems.append(firebaseRow)
-//            print(self.groceryItems)
-//        })    
-        
-        self.tableView.reloadData()
-        self.updateTitle()
+        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            guard let snap = snapshot.value as? NSDictionary else {
+                return
+            }
+            
+            for(key, _) in snap {
+                if let key = key as? String {
+                    self.groceryItemUpdateKeys.append(key)
+                }
+            }
+            
+            let newElementCount = self.groceryItemUpdateKeys.sorted().count - self.groceryItemKeys.sorted().count
+            if newElementCount > 0 {
+                // get difference , and get thoes element
+                let updatedListCount = self.groceryItemUpdateKeys.sorted().count
+                for newItemReverseIndex in 1...newElementCount {
+                    self.groceryItemKeys.append(self.groceryItemUpdateKeys.sorted()[updatedListCount - newItemReverseIndex])
+                    self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.groceryItemUpdateKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshotInner) in
+                        guard let snapInner = snapshotInner.value as? NSDictionary else {
+                            return
+                        }
+                        
+                        let firebaseRow = GroceryItem()
+                        firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: snapInner)
+                        firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: snapInner)
+                        firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: snapInner)
+                        firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: snapInner)
+                        self.groceryItems.append(firebaseRow)
+                        
+                        self.tableView.reloadData()
+                        self.updateTitle()
+                        SwiftSpinner.hide()
+                    })
+                }
+            }
+            self.groceryItemUpdateKeys.removeAll()
+        })
     }
-//    
-//    func getAllNewElement() -> [String] {
-//        var tempKey: [String] = []
-//        var newItemKeyList: [String] = []
-//        // var newItemKeyList: [String] = [] Why this never works here when called outside of first block
-//        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
-//            guard let snap = snapshot.value as? NSDictionary else {
-//                return
-//            }
-//            for(key, _) in snap {
-//                tempKey.append(key as! String)
-//            }
-//            for i in 0..<tempKey.count {
-//                if (!self.groceryItemKeys.contains(tempKey[i])) {
-//                    newItemKeyList.append(tempKey[i])
-//                }
-//            }
-//            return self.newItemKeyList
-//            print(self.newItemKeyList)
-//        })
-//        //        print(self.newItemKeyList)
-//    }
 }
 

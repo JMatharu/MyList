@@ -30,9 +30,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         let fbLoginButton = FBSDKLoginButton()
         
         createSignInButton(loginButton: fbLoginButton)
-        
-        print("--------------------------- : ", UserDefaults.standard.bool(forKey: "IsUserLoggedIn"))
-
     }
     
     // MARK: - Facebook Login
