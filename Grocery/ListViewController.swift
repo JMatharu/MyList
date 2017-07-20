@@ -201,7 +201,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     func updateDataSourceWithNewItemFromFireBase() {
         // Spinner
         SwiftSpinner.setTitleFont(UIFont.spinnerFont)
-        SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
+        SwiftSpinner.show(Constants.Spinner.TitleAfterUpdate).addTapHandler({
             SwiftSpinner.hide()
         })
         
