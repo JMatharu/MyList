@@ -13,4 +13,5 @@ class GroceryItem: NSObject {
     var category = ""
     var name = ""
     var amount = ""
+    var timestamp = ""
 }

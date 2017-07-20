@@ -171,7 +171,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                 guard let snap = snapshot.value as? NSDictionary else {
                     return
                 }
-                
                 for (key, value) in snap {
                     if let item = value as? NSDictionary {
                         let firebaseRow = GroceryItem()
@@ -179,6 +178,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                         firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
                         firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
                         firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
+                        firebaseRow.timestamp = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildDate, withDictionary: item)
                         self.groceryItems.append(firebaseRow)
                     }
                     if let key = key as? String {
@@ -186,6 +186,8 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                         self.groceryItemKeys.append(key)
                     }
                 }
+                // Sorting groceryItem array by timestamp
+                self.groceryItems.sort(by: { Int($0.0.timestamp)! < Int($0.1.timestamp)!})
             }
             //Reload table after getting the new item from firebase cloud
             self.tableView.reloadData()
@@ -216,7 +218,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             
             let newElementCount = self.groceryItemUpdateKeys.sorted().count - self.groceryItemKeys.sorted().count
             if newElementCount > 0 {
-                // get difference , and get thoes element
+                // get difference , and get those element
                 let updatedListCount = self.groceryItemUpdateKeys.sorted().count
                 for newItemReverseIndex in 1...newElementCount {
                     self.groceryItemKeys.append(self.groceryItemUpdateKeys.sorted()[updatedListCount - newItemReverseIndex])

@@ -53,7 +53,7 @@ struct Constants {
         static let ChildName = "name"
         static let ChildAmount = "amount"
         static let ChildStore = "store"
-        static let ChildDate = "date"
+        static let ChildDate = "timestamp"
     }
     
     struct XIB {

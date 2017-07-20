@@ -10,6 +10,10 @@ import UIKit
 import UIColor_Hex_Swift
 import FirebaseDatabase
 
+struct AddItemVCConstants {
+    static let DateFormat = "yyyyMMddHHmmss"
+}
+
 protocol AddEditItemViewControllerDelegate: class {
     func addItemViewController(didFinishAdding item: GroceryItem)
     func addItemViewController(didFinishEditing item: GroceryItem)
@@ -75,9 +79,6 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             let refForGroceryDataValue = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot)
             let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
             refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store, Constants.Firebase.ChildDate : self.getCurrentDateWithTime()])
-//            var newItemKey: String = ""
-//            if let key = refChildByAutoId?.key {
-//                newItemKey = key
 //            }
             delegate?.addItemViewController(didFinishAdding: item)
         }
@@ -204,35 +205,10 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     }
     
     func getCurrentDateWithTime() -> String {
-        let date = Date()
-        let calender = Calendar.current
-        let hour = calender.component(.hour, from: date)
-        let minute = calender.component(.minute, from: date)
-        let sec = calender.component(.second, from: date)
-        let dateInDigit = calender.component(.day, from: date)
-        let month = calender.component(.month, from: date)
-        let year = calender.component(.year, from: date)
-        let weekday = calender.component(.weekday, from: date)
-        var weekdayString: String
-        switch weekday {
-        case 1:
-            weekdayString = "Sunday"
-        case 2:
-            weekdayString = "Monday"
-        case 3:
-            weekdayString = "Tuesday"
-        case 4:
-            weekdayString = "Wednesday"
-        case 5:
-            weekdayString = "Thursday"
-        case 6:
-            weekdayString = "Friday"
-        case 7:
-            weekdayString = "Saturday"
-        default:
-            weekdayString = "nil"
-        }
-        return "\(hour):\(minute):\(sec) on \(weekdayString) \(dateInDigit)/\(month)/\(year)"
+        let date = NSDate()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = AddItemVCConstants.DateFormat
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")! as TimeZone
+        return dateFormatter.string(from: date as Date)
     }
-    
 }
