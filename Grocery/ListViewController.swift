@@ -156,13 +156,19 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     }
     
     func updateDataSourceWithItemsFromFireBase() {
+        
         // Spinner
         SwiftSpinner.setTitleFont(UIFont.spinnerFont)
         SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
             SwiftSpinner.hide()
         }, subtitle: Constants.Spinner.SubTitle)
         
-        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: .value, with: { (snapshot) in
+        var uidAsString = ""
+        if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
+            uidAsString = uid
+        }
+        
+        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).observeSingleEvent(of: .value, with: { (snapshot) in
             // This code block is async block
             if snapshot.childrenCount == 0 {
                 SwiftSpinner.hide()
@@ -205,7 +211,12 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             SwiftSpinner.hide()
         })
         
-        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        var uidAsString = ""
+        if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
+            uidAsString = uid
+        }
+        
+        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             guard let snap = snapshot.value as? NSDictionary else {
                 return
             }
@@ -222,7 +233,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                 let updatedListCount = self.groceryItemUpdateKeys.sorted().count
                 for newItemReverseIndex in 1...newElementCount {
                     self.groceryItemKeys.append(self.groceryItemUpdateKeys.sorted()[updatedListCount - newItemReverseIndex])
-                    self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.groceryItemUpdateKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshotInner) in
+                    self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).child(self.groceryItemUpdateKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshotInner) in
                         guard let snapInner = snapshotInner.value as? NSDictionary else {
                             return
                         }
