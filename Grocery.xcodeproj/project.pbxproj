@@ -16,6 +16,7 @@
 		D15E33A71EF31050004D8B2E /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15E33A61EF31050004D8B2E /* GroceryItem.swift */; };
 		D15E33A91EF32808004D8B2E /* AddEditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */; };
 		D173EECB1F1FB0200053A18C /* MyListFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D173EECA1F1FB0200053A18C /* MyListFonts.swift */; };
+		D19ABF5E1F2162ED006EFD57 /* MyListAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19ABF5D1F2162ED006EFD57 /* MyListAlert.swift */; };
 		D19E34591EF08C18006455DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19E34581EF08C18006455DD /* AppDelegate.swift */; };
 		D19E345B1EF08C18006455DD /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19E345A1EF08C18006455DD /* ListViewController.swift */; };
 		D19E345E1EF08C18006455DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19E345C1EF08C18006455DD /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		D15E33A61EF31050004D8B2E /* GroceryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditItemViewController.swift; sourceTree = "<group>"; };
 		D173EECA1F1FB0200053A18C /* MyListFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListFonts.swift; sourceTree = "<group>"; };
+		D19ABF5D1F2162ED006EFD57 /* MyListAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListAlert.swift; sourceTree = "<group>"; };
 		D19E34551EF08C18006455DD /* Grocery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grocery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D19E34581EF08C18006455DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D19E345A1EF08C18006455DD /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				D15E339B1EF205BA004D8B2E /* Constants.swift */,
 				D14DEA351EFDDB5A000ECE78 /* MyListColours.swift */,
 				D173EECA1F1FB0200053A18C /* MyListFonts.swift */,
+				D19ABF5D1F2162ED006EFD57 /* MyListAlert.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				D19E345B1EF08C18006455DD /* ListViewController.swift in Sources */,
 				D1CB3B441F07F9A200AE136C /* FirebaseService.swift in Sources */,
 				D19E34591EF08C18006455DD /* AppDelegate.swift in Sources */,
+				D19ABF5E1F2162ED006EFD57 /* MyListAlert.swift in Sources */,
 				D14DEA361EFDDB5A000ECE78 /* MyListColours.swift in Sources */,
 				D173EECB1F1FB0200053A18C /* MyListFonts.swift in Sources */,
 				D14DEA331EFD9847000ECE78 /* GroceryTableHeader.swift in Sources */,

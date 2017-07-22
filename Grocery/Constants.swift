@@ -75,4 +75,9 @@ struct Constants {
         static let IsUserLoggedIn = "IsUserLoggedIn"
         static let UID = "uid"
     }
+    
+    struct Alert {
+        static let IncompleteInformationTitle = "Incomplete Information!"
+        static let IncompleteInformationDescription = "Make sure all the fields are filled before you proceed further"
+    }
 }

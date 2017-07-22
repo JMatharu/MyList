@@ -9,6 +9,7 @@
 import UIKit
 import UIColor_Hex_Swift
 import FirebaseDatabase
+import PMAlertController
 
 struct AddItemVCConstants {
     static let DateFormat = "yyyyMMddHHmmss"
@@ -20,7 +21,7 @@ protocol AddEditItemViewControllerDelegate: class {
     func addItemViewControllerDidCancel()
 }
 
-class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var storeName: UITextField!
     @IBOutlet weak var amount: UITextField!
@@ -62,6 +63,25 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     
     func done() {
         firebaseReference = FIRDatabase.database().reference()
+        
+        guard
+            let store = storeName.text,
+            !store.isEmpty,
+            let amo = amount.text,
+            !amo.isEmpty,
+            let cat = categoryTextField.text,
+            !cat.isEmpty,
+            let name = nameTextField.text,
+            !name.isEmpty
+            else {
+            let alertVC = PMAlertController(withTitle: Constants.Alert.IncompleteInformationTitle, withDescription: Constants.Alert.IncompleteInformationDescription)
+            alertVC.addAction(PMAlertAction(title: "OK", style: PMAlertActionStyle.default, action: { 
+                alertVC.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alertVC, animated: true, completion: nil)
+            return
+        }
+        
         if let item = itemToEdit {
             item.amount = amount.text!
             item.store = storeName.text!
@@ -83,7 +103,6 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             let refForGroceryDataValue = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString)
             let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
             refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store, Constants.Firebase.ChildDate : self.getCurrentDateWithTime()])
-//            }
             delegate?.addItemViewController(didFinishAdding: item)
         }
         // If using "Modal" then dismiss
@@ -129,19 +148,6 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             return pickerCategoryData[row]
         }
     }
-    
-    //MARK: - Textfield Delegate
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let oldText = textField.text! as NSString
-//        let newText = oldText.replacingCharacters(in: range, with: string) as NSString
-//        
-//        if newText.length > 0 {
-//            doneBarButton.isEnabled = true
-//        } else {
-//            doneBarButton.isEnabled = false
-//        }
-//        return true
-//    }
     
     //MARK: - Methods
     private func addPadding(textField: UITextField) {
