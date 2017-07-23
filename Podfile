@@ -18,4 +18,5 @@ target 'Grocery' do
   pod 'FBSDKLoginKit'
   pod 'Firebase/Auth'
   pod 'PMAlertController'
+  pod 'EasyNotificationBadge'
 end

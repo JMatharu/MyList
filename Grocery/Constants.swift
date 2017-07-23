@@ -18,6 +18,7 @@ struct Constants {
         static let AmountTagIdentifier = 52
         static let NameTagIdentifier = 53
         static let AllListLabelTagIdentifier = 11
+        static let AllListBadgeTagIdentifier = 12
         static let TableViewRowActionEdit = "Edit"
         static let TableViewRowActionDelete = "Delete"
         static let MainStoryBoard = "Main"
@@ -48,6 +49,7 @@ struct Constants {
     struct Segue {
         static let AddItem = "AddItem"
         static let LoginToList = "LoginToList"
+        static let GroceryList = "GrocerySegue"
     }
     
     struct Firebase {

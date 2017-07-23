@@ -29,12 +29,8 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         firebaseReference = FIRDatabase.database().reference()
         
         updateDataSourceWithItemsFromFireBase()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {

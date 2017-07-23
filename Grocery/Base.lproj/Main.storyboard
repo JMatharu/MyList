@@ -88,7 +88,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUe-h4-Vnp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2949" y="796"/>
+            <point key="canvasLocation" x="2923" y="7"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="OfH-Hd-qDn">
@@ -266,7 +266,6 @@
                     <connections>
                         <outlet property="logoLabel" destination="Wjc-pD-mxX" id="IMD-tp-N35"/>
                         <segue destination="pts-at-4PZ" kind="show" action="showDetailViewController:sender:" id="ERk-aR-WKv"/>
-                        <segue destination="fCD-Yy-lji" kind="show" id="kd2-Ap-Bls"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxU-zz-vN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -286,21 +285,33 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ru-Hr-ViQ" id="S3N-F2-gkj">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-kc-7Cv">
-                                            <rect key="frame" x="8" y="8" width="304" height="27.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wdI-k2-C5v">
+                                            <rect key="frame" x="5" y="0.0" width="310" height="43.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-kc-7Cv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view tag="12" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ks-jF-YL2">
+                                                    <rect key="frame" x="270" y="0.0" width="40" height="43.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="vbd-bm-u8N"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Gam-kc-7Cv" secondAttribute="trailing" id="JbB-yY-XOl"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Gam-kc-7Cv" secondAttribute="bottom" id="PvA-6L-sHI"/>
-                                        <constraint firstItem="Gam-kc-7Cv" firstAttribute="top" secondItem="S3N-F2-gkj" secondAttribute="topMargin" id="WML-CG-N06"/>
-                                        <constraint firstItem="Gam-kc-7Cv" firstAttribute="leading" secondItem="S3N-F2-gkj" secondAttribute="leadingMargin" id="t9d-nk-BEm"/>
+                                        <constraint firstItem="wdI-k2-C5v" firstAttribute="leading" secondItem="S3N-F2-gkj" secondAttribute="leading" constant="5" id="G3w-cI-Sry"/>
+                                        <constraint firstItem="wdI-k2-C5v" firstAttribute="top" secondItem="S3N-F2-gkj" secondAttribute="top" id="Gmz-cK-CQX"/>
+                                        <constraint firstAttribute="bottom" secondItem="wdI-k2-C5v" secondAttribute="bottom" id="TKC-eg-zDh"/>
+                                        <constraint firstAttribute="trailing" secondItem="wdI-k2-C5v" secondAttribute="trailing" constant="5" id="vDe-ao-WVh"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -320,10 +331,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="fCD-Yy-lji" kind="show" identifier="GrocerySegue" id="imA-HI-Tsz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGp-BV-rAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2046" y="8"/>
+            <point key="canvasLocation" x="2045.625" y="7.394366197183099"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6WQ-e8-eSU">
