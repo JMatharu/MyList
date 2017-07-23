@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UserDefaults.standard.bool(forKey: Constants.UserDefaults.IsUserLoggedIn) {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: Constants.Identifiers.MainStoryBoard, bundle: nil)
-            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.ListItemStoryBoard)
+//            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.ListItemStoryBoard)
+            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.AllListStoryBoard)
             let navigationController = UINavigationController(rootViewController: initialStoryBoard)
             navigationController.navigationBar.barTintColor = UIColor.navigationBarColor
             navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]

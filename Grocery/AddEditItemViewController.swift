@@ -75,7 +75,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             !name.isEmpty
             else {
             let alertVC = PMAlertController(withTitle: Constants.Alert.IncompleteInformationTitle, withDescription: Constants.Alert.IncompleteInformationDescription)
-            alertVC.addAction(PMAlertAction(title: "OK", style: PMAlertActionStyle.default, action: { 
+            alertVC.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
                 alertVC.dismiss(animated: true, completion: nil)
             }))
             self.present(alertVC, animated: true, completion: nil)

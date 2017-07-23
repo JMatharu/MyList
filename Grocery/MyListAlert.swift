@@ -18,5 +18,9 @@ extension PMAlertController {
     convenience init(withTitle title: String, withDescription description:String) {
         self.init(title: title, description: description, image: nil, style: .alert)
     }
+    
+    convenience init(withDescription description: String) {
+        self.init(title: Constants.Common.EmptyString, description: description, image: nil, style: .alert)
+    }
 
 }

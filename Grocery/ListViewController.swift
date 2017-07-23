@@ -99,10 +99,10 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     // MARK: - Methods
     func configureText(for cell: UITableViewCell, with item: GroceryItem) {
-        let storeLabel = cell.viewWithTag(Constants.Identifiers.StoreIdentifier) as! UILabel
-        let categoryLabel = cell.viewWithTag(Constants.Identifiers.CategoryIdentifier) as! UILabel
-        let nameLabel = cell.viewWithTag(Constants.Identifiers.NameIdentifier) as! UILabel
-        let amountLabel = cell.viewWithTag(Constants.Identifiers.AmountIdentifier) as! UILabel
+        let storeLabel = cell.viewWithTag(Constants.Identifiers.StoreTagIdentifier) as! UILabel
+        let categoryLabel = cell.viewWithTag(Constants.Identifiers.CategoryTagIdentifier) as! UILabel
+        let nameLabel = cell.viewWithTag(Constants.Identifiers.NameTagIdentifier) as! UILabel
+        let amountLabel = cell.viewWithTag(Constants.Identifiers.AmountTagIdentifier) as! UILabel
         
         storeLabel.text = item.store
         categoryLabel.text = item.category

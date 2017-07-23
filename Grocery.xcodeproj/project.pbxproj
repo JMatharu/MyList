@@ -23,6 +23,8 @@
 		D19E34601EF08C18006455DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D19E345F1EF08C18006455DD /* Assets.xcassets */; };
 		D19E34631EF08C18006455DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19E34611EF08C18006455DD /* LaunchScreen.storyboard */; };
 		D1CB3B441F07F9A200AE136C /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CB3B431F07F9A200AE136C /* FirebaseService.swift */; };
+		D1DDFD491F238758009AB318 /* AllListScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD481F238758009AB318 /* AllListScreenViewController.swift */; };
+		D1DDFD4D1F238957009AB318 /* AllListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD4C1F238957009AB318 /* AllListItem.swift */; };
 		E5904D1807F9CA5E6B09DD4E /* Pods_Grocery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C89294A66988F301F9BC91C /* Pods_Grocery.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,8 @@
 		D19E34621EF08C18006455DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D19E34641EF08C18006455DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1CB3B431F07F9A200AE136C /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		D1DDFD481F238758009AB318 /* AllListScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListScreenViewController.swift; sourceTree = "<group>"; };
+		D1DDFD4C1F238957009AB318 /* AllListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 		D15E339E1EF2C4C9004D8B2E /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				D1DDFD471F238741009AB318 /* AllList */,
 				D10F1A111F13027400AD81C6 /* Login */,
 				D14DEA2A1EFD2C4A000ECE78 /* Common */,
 				D15E339D1EF2C4BF004D8B2E /* GroceryList */,
@@ -199,6 +204,31 @@
 				D1CB3B431F07F9A200AE136C /* FirebaseService.swift */,
 			);
 			name = Service;
+			sourceTree = "<group>";
+		};
+		D1DDFD471F238741009AB318 /* AllList */ = {
+			isa = PBXGroup;
+			children = (
+				D1DDFD4B1F238941009AB318 /* Model */,
+				D1DDFD4A1F238930009AB318 /* Controller */,
+			);
+			name = AllList;
+			sourceTree = "<group>";
+		};
+		D1DDFD4A1F238930009AB318 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D1DDFD481F238758009AB318 /* AllListScreenViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D1DDFD4B1F238941009AB318 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D1DDFD4C1F238957009AB318 /* AllListItem.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,8 +359,10 @@
 			files = (
 				D10F1A131F13028E00AD81C6 /* LoginViewController.swift in Sources */,
 				D15E33A91EF32808004D8B2E /* AddEditItemViewController.swift in Sources */,
+				D1DDFD4D1F238957009AB318 /* AllListItem.swift in Sources */,
 				D19E345B1EF08C18006455DD /* ListViewController.swift in Sources */,
 				D1CB3B441F07F9A200AE136C /* FirebaseService.swift in Sources */,
+				D1DDFD491F238758009AB318 /* AllListScreenViewController.swift in Sources */,
 				D19E34591EF08C18006455DD /* AppDelegate.swift in Sources */,
 				D19ABF5E1F2162ED006EFD57 /* MyListAlert.swift in Sources */,
 				D14DEA361EFDDB5A000ECE78 /* MyListColours.swift in Sources */,

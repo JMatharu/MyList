@@ -12,16 +12,19 @@ import UIKit
 struct Constants {
     struct Identifiers {
         static let ListViewControllerTableCellIdentifier = "ListItem"
-        static let StoreIdentifier = 50
-        static let CategoryIdentifier = 51
-        static let AmountIdentifier = 52
-        static let NameIdentifier = 53
+        static let AllListViewControllerTableCellIdentifier = "AllListItem"
+        static let StoreTagIdentifier = 50
+        static let CategoryTagIdentifier = 51
+        static let AmountTagIdentifier = 52
+        static let NameTagIdentifier = 53
+        static let AllListLabelTagIdentifier = 11
         static let TableViewRowActionEdit = "Edit"
         static let TableViewRowActionDelete = "Delete"
         static let MainStoryBoard = "Main"
         static let AddItemStoryBoard = "AddItemStoryBoard"
         static let AddItemSegue = "AddItem"
         static let ListItemStoryBoard = "ListViewController"
+        static let AllListStoryBoard = "AllListViewController"
     }
     
     struct UIDimentions {
@@ -79,5 +82,12 @@ struct Constants {
     struct Alert {
         static let IncompleteInformationTitle = "Incomplete Information!"
         static let IncompleteInformationDescription = "Make sure all the fields are filled before you proceed further"
+        static let Ok = "Ok"
+        static let AddListAlertDescription = "Add List Item"
+        static let AddListAlertTextViewPlaceHolder = "Enter Item"
+    }
+    
+    struct Common {
+        static let EmptyString = ""
     }
 }
