@@ -88,6 +88,7 @@ struct Constants {
         static let AddListAlertTextViewPlaceHolder = "Enter Item"
         static let AddListAlertDeleteTitle = "Are you sure you want to delete this item?"
         static let AddListAlertDeleteDescription = "This action will delete item and its corresponding list."
+        static let AddListAlertEditDescription = "Edit List Item"
     }
     
     struct Common {

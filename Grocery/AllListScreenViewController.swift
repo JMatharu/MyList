@@ -40,9 +40,11 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
                     self.allListItem.append(newItem)
                     alert.dismiss(animated: true, completion: nil)
                     self.tableView.reloadData()
+                    //TODO
                     print("I am Good")
                 } else {
                     print("I am empty")
+                    // TODO
                     textField?.placeholder = "jlkajslkaj"
                 }
             }
@@ -75,6 +77,24 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         let item = allListItem[indexPath.row]
         let edit = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: Constants.Identifiers.TableViewRowActionEdit) { (action, indexPath) in
             print("Clicked Edit")
+            let alertEdit = PMAlertController(withDescription: Constants.Alert.AddListAlertEditDescription)
+            alertEdit.addTextField({ (textField) in
+                textField?.becomeFirstResponder()
+                textField?.text = item.itemName
+            })
+            alertEdit.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
+                let textField = alertEdit.textFields.first
+                if let text = textField?.text {
+                    item.itemName = text
+                }
+                self.dismiss(animated: true, completion: nil)
+                self.tableView.reloadData()
+            }))
+            alertEdit.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.cancel, action: { 
+                self.dismiss(animated: true, completion: nil)
+                self.tableView.reloadData()
+            }))
+            self.present(alertEdit, animated: true, completion: nil)
         }
         let delete = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: Constants.Identifiers.TableViewRowActionDelete) { (action, indexPath) in
             let alertDelete = PMAlertController(withTitle: Constants.Alert.AddListAlertDeleteTitle, withDescription: Constants.Alert.AddListAlertDeleteDescription)
