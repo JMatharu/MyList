@@ -83,8 +83,11 @@ struct Constants {
         static let IncompleteInformationTitle = "Incomplete Information!"
         static let IncompleteInformationDescription = "Make sure all the fields are filled before you proceed further"
         static let Ok = "Ok"
+        static let Cancel = "Cancel"
         static let AddListAlertDescription = "Add List Item"
         static let AddListAlertTextViewPlaceHolder = "Enter Item"
+        static let AddListAlertDeleteTitle = "Are you sure you want to delete this item?"
+        static let AddListAlertDeleteDescription = "This action will delete item and its corresponding list."
     }
     
     struct Common {

@@ -9,7 +9,7 @@
 import UIKit
 import PMAlertController
 
-class AllListViewController: UITableViewController {
+class AllListViewController: UITableViewController, UIAlertViewDelegate {
     
     var allListItem: [AllListItem] = []
     
@@ -25,7 +25,6 @@ class AllListViewController: UITableViewController {
     }
     
     // MARK: - Button Methods
-    
     @IBAction func addItem(_ sender: Any) {
         let alert = PMAlertController(withDescription: Constants.Alert.AddListAlertDescription)
         alert.addTextField { (textField) in
@@ -33,11 +32,25 @@ class AllListViewController: UITableViewController {
             textField?.becomeFirstResponder()
         }
         alert.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
+            let textField = alert.textFields.first
+            let newItem = AllListItem()
+            if let txt = textField?.text {
+                if !txt.isEmpty {
+                    newItem.itemName = txt
+                    self.allListItem.append(newItem)
+                    alert.dismiss(animated: true, completion: nil)
+                    self.tableView.reloadData()
+                    print("I am Good")
+                } else {
+                    print("I am empty")
+                    textField?.placeholder = "jlkajslkaj"
+                }
+            }
+        }))
+        alert.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.cancel, action: {
             alert.dismiss(animated: true, completion: nil)
         }))
-        alert.addAction(PMAlertAction(title: "Cancel", style: PMAlertActionStyle.cancel, action: { 
-            alert.dismiss(animated: true, completion: nil)
-        }))
+        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -47,7 +60,7 @@ class AllListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,5 +69,26 @@ class AllListViewController: UITableViewController {
         let item = allListItem[indexPath.row]
         cellLabel.text = item.itemName
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let item = allListItem[indexPath.row]
+        let edit = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: Constants.Identifiers.TableViewRowActionEdit) { (action, indexPath) in
+            print("Clicked Edit")
+        }
+        let delete = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: Constants.Identifiers.TableViewRowActionDelete) { (action, indexPath) in
+            let alertDelete = PMAlertController(withTitle: Constants.Alert.AddListAlertDeleteTitle, withDescription: Constants.Alert.AddListAlertDeleteDescription)
+            alertDelete.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: { 
+                self.allListItem.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            }))
+            alertDelete.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.cancel, action: {
+                self.tableView.reloadData()
+            }))
+            self.present(alertDelete, animated: true, completion: nil)
+        }
+        edit.backgroundColor = UIColor.orange
+        delete.backgroundColor = UIColor.red
+        return [edit, delete]
     }
 }
