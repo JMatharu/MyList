@@ -91,43 +91,5 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let item = allListItem[indexPath.row]
-//        let edit = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: Constants.Identifiers.TableViewRowActionEdit) { (action, indexPath) in
-//            let alertEdit = PMAlertController(withDescription: Constants.Alert.AddListAlertEditDescription)
-//            alertEdit.addTextField({ (textField) in
-//                textField?.becomeFirstResponder()
-//                textField?.text = item.itemName
-//            })
-//            alertEdit.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
-//                let textField = alertEdit.textFields.first
-//                if let text = textField?.text {
-//                    item.itemName = text
-//                }
-//                self.dismiss(animated: true, completion: nil)
-//                self.tableView.reloadData()
-//            }))
-//            alertEdit.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.cancel, action: { 
-//                self.dismiss(animated: true, completion: nil)
-//                self.tableView.reloadData()
-//            }))
-//            self.present(alertEdit, animated: true, completion: nil)
-//        }
-//        let delete = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: Constants.Identifiers.TableViewRowActionDelete) { (action, indexPath) in
-//            let alertDelete = PMAlertController(withTitle: Constants.Alert.AddListAlertDeleteTitle, withDescription: Constants.Alert.AddListAlertDeleteDescription)
-//            alertDelete.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: { 
-//                self.allListItem.remove(at: indexPath.row)
-//                self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-//            }))
-//            alertDelete.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.cancel, action: {
-//                self.tableView.reloadData()
-//            }))
-//            self.present(alertDelete, animated: true, completion: nil)
-//        }
-//        edit.backgroundColor = UIColor.orange
-//        delete.backgroundColor = UIColor.red
-//        return [edit, delete]
-//    }
-    
     //MARK: - Methods
 }
