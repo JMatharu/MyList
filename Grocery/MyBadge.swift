@@ -10,7 +10,7 @@ import Foundation
 import EasyNotificationBadge
 
 extension BadgeAppearnce {
-    func createBadge(badgeView view: UIView, badgeText text: String, badgeColor color:UIColor) {
+    init(badgeView view: UIView, badgeText text: String, badgeColor color:UIColor) {
         var appearnce = BadgeAppearnce()
         appearnce.backgroundColor = color
         appearnce.textColor = UIColor.white
@@ -22,5 +22,6 @@ extension BadgeAppearnce {
         appearnce.borderColor = .blue
         appearnce.borderWidth = 1
         view.badge(text: text, appearnce: appearnce)
+        self.init()
     }
 }
