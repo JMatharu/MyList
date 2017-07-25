@@ -9,6 +9,8 @@
 import UIKit
 import PMAlertController
 import EasyNotificationBadge
+import FirebaseDatabase
+import SwiftSpinner
 
 private struct AllListConstants {
     static let Item1 = "Grocery"
@@ -17,10 +19,12 @@ private struct AllListConstants {
 
 class AllListViewController: UITableViewController, UIAlertViewDelegate {
     
+    var firebaseReference: FIRDatabaseReference?
     var allListItem: [AllListItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firebaseReference = FIRDatabase.database().reference()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -86,7 +90,14 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         let item = allListItem[indexPath.row]
         
         let badgeView = cell.viewWithTag(Constants.Identifiers.AllListBadgeTagIdentifier)!
-        BadgeAppearnce().createBadge(badgeView: badgeView, badgeText: "99", badgeColor: UIColor.blue)
+        
+        //Get child number of parent node
+         _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
+        MyListFirebase().getBadgeCount(closure: { (badgeCount) in
+            BadgeAppearnce().createBadge(badgeView: badgeView, badgeText: String(badgeCount), badgeColor: UIColor.blue)
+            SwiftSpinner.hide()
+        })
+        
         cellLabel.text = item.itemName
         return cell
     }

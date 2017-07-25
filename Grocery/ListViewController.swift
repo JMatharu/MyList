@@ -154,10 +154,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     func updateDataSourceWithItemsFromFireBase() {
         
         // Spinner
-        SwiftSpinner.setTitleFont(UIFont.spinnerFont)
-        SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
-            SwiftSpinner.hide()
-        }, subtitle: Constants.Spinner.SubTitle)
+        _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
         
         var uidAsString = ""
         if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
@@ -202,10 +199,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     func updateDataSourceWithNewItemFromFireBase() {
         // Spinner
-        SwiftSpinner.setTitleFont(UIFont.spinnerFont)
-        SwiftSpinner.show(Constants.Spinner.TitleAfterUpdate).addTapHandler({
-            SwiftSpinner.hide()
-        })
+        _ = SwiftSpinner.init(title: Constants.Spinner.TitleAfterUpdate)
         
         var uidAsString = ""
         if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {

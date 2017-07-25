@@ -6,5 +6,21 @@
 //  Copyright © 2017 Jagdeep Matharu. All rights reserved.
 //
 
-import Foundation
 import FirebaseDatabase
+
+class MyListFirebase {
+    
+    var firebaseReference: FIRDatabaseReference? = FIRDatabase.database().reference()
+    
+    func getBadgeCount(closure:@escaping (UInt) -> ()) {
+        var uidAsString = ""
+        if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
+            uidAsString = uid
+        }
+            var returnUInt: UInt = 0
+            self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                returnUInt = snapshot.childrenCount
+                closure(returnUInt)
+        })
+    }
+}

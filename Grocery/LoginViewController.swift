@@ -42,10 +42,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         loginToFirebase()
         print("Successfully Login")
         // Spinner
-        SwiftSpinner.setTitleFont(UIFont.spinnerFont)
-        SwiftSpinner.show(Constants.Spinner.Title).addTapHandler({
-            SwiftSpinner.hide()
-        })
+        _ = SwiftSpinner.init(title: Constants.Spinner.Title)
 
     }
 

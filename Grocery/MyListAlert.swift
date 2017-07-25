@@ -6,7 +6,6 @@
 //  Copyright © 2017 Jagdeep Matharu. All rights reserved.
 //
 
-import Foundation
 import PMAlertController
 
 extension PMAlertController {
