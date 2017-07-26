@@ -90,7 +90,7 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         
         //Get child number of parent node
          _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
-        MyListFirebase().getBadgeCount(closure: { (badgeCount) in
+        FirebaseService().getBadgeCount(closure: { (badgeCount) in
             _ = BadgeAppearnce.init(badgeView: badgeView, badgeText: String(badgeCount), badgeColor: UIColor.blue)
             SwiftSpinner.hide()
         })
