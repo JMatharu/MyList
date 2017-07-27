@@ -96,4 +96,8 @@ struct Constants {
     struct Common {
         static let EmptyString = ""
     }
+    
+    struct Feature {
+        static var Grocery = "Grocery"
+    }
 }

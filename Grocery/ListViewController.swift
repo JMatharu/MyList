@@ -156,46 +156,21 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Spinner
         _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
         
-        var uidAsString = ""
-        if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
-            uidAsString = uid
-        }
-        
-        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).observeSingleEvent(of: .value, with: { (snapshot) in
-            // This code block is async block
-            if snapshot.childrenCount == 0 {
-                SwiftSpinner.hide()
-                return
-            } else {
-                guard let snap = snapshot.value as? NSDictionary else {
-                    return
-                }
-                for (key, value) in snap {
-                    if let item = value as? NSDictionary {
-                        let firebaseRow = GroceryItem()
-                        firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: item)
-                        firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: item)
-                        firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: item)
-                        firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: item)
-                        firebaseRow.timestamp = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildDate, withDictionary: item)
-                        self.groceryItems.append(firebaseRow)
-                    }
-                    if let key = key as? String {
-                        // Save keys to groceryItemKeys array
-                        self.groceryItemKeys.append(key)
-                    }
-                }
-                // Sorting groceryItem array by timestamp
-                self.groceryItems.sort(by: { Int($0.0.timestamp)! < Int($0.1.timestamp)!})
-            }
+        // Get all items from service level
+        FirebaseService().getAllDataInSingleEvent(modalName: Constants.Feature.Grocery) { (groceryItem, groceryItemKeys) in
+            self.groceryItems = groceryItem
+            self.groceryItemKeys = groceryItemKeys
+            
+            // Sorting groceryItem array by timestamp
+            self.groceryItems.sort(by: { Int($0.0.timestamp)! < Int($0.1.timestamp)!})
             //Reload table after getting the new item from firebase cloud
             self.tableView.reloadData()
             //Update title depending on items in datasource
             self.updateTitle()
             //Stop Spinner
             SwiftSpinner.hide()
-        })
-    }
+        }
+}
     
     func updateDataSourceWithNewItemFromFireBase() {
         // Spinner
