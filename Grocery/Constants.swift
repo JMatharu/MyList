@@ -101,4 +101,9 @@ struct Constants {
         static var Grocery = "Grocery"
         static var Shopping = "Shopping"
     }
+    
+    struct FABButton {
+        static var AddItem = "Add"
+        static var CalculateItem = "Calculate"
+    }
 }
