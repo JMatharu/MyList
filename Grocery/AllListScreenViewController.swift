@@ -24,6 +24,10 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         let allItemRow1 = AllListItem()
         allItemRow1.itemName = AllListConstants.Item1
