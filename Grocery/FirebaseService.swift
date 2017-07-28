@@ -7,6 +7,7 @@
 //
 
 import FirebaseDatabase
+import SwiftSpinner
 
 class FirebaseService {
     
@@ -24,7 +25,8 @@ class FirebaseService {
         var itemsKeys: [String] = []
         firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.getUid()).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             if snapshot.childrenCount == 0 {
-                //Spinner.hide()
+                //Stop Spinner
+                SwiftSpinner.hide()
             } else {
                 guard let snap = snapshot.value as? NSDictionary else { return }
                 for(key ,value) in snap {
