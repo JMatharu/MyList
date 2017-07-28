@@ -69,8 +69,11 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             self.updateTitle()
             
             //Delete from firebase
-            //self.firebaseReference = FIRDatabase.database().reference()
-            self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.groceryItemKeys[indexPath.row]).removeValue()
+            var uidAsString = ""
+            if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
+                uidAsString = uid
+            }
+            self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).child(self.groceryItemKeys[indexPath.row]).removeValue()
             
             // Delete from local array
             self.groceryItemKeys.remove(at: indexPath.row)
@@ -176,48 +179,14 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Spinner
         _ = SwiftSpinner.init(title: Constants.Spinner.TitleAfterUpdate)
         
-        var uidAsString = ""
-        if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
-            uidAsString = uid
+        FirebaseService().getUpdatedDataInSingleEvent(modalName: Constants.Feature.Grocery, itemsKeys: self.groceryItemKeys) { (gItems, gItemsKeys) in
+            self.groceryItems.append(contentsOf: gItems)
+            self.groceryItemKeys.append(contentsOf: gItemsKeys)
+            self.tableView.reloadData()
+            self.updateTitle()
+            SwiftSpinner.hide()
         }
-        
-        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            guard let snap = snapshot.value as? NSDictionary else {
-                return
-            }
-            
-            for(key, _) in snap {
-                if let key = key as? String {
-                    self.groceryItemUpdateKeys.append(key)
-                }
-            }
-            
-            let newElementCount = self.groceryItemUpdateKeys.sorted().count - self.groceryItemKeys.sorted().count
-            if newElementCount > 0 {
-                // get difference , and get those element
-                let updatedListCount = self.groceryItemUpdateKeys.sorted().count
-                for newItemReverseIndex in 1...newElementCount {
-                    self.groceryItemKeys.append(self.groceryItemUpdateKeys.sorted()[updatedListCount - newItemReverseIndex])
-                    self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).child(self.groceryItemUpdateKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshotInner) in
-                        guard let snapInner = snapshotInner.value as? NSDictionary else {
-                            return
-                        }
-                        
-                        let firebaseRow = GroceryItem()
-                        firebaseRow.amount = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildAmount, withDictionary: snapInner)
-                        firebaseRow.category = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildCategory, withDictionary: snapInner)
-                        firebaseRow.name = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildName, withDictionary: snapInner)
-                        firebaseRow.store = self.getFirebaseChildValueWithKey(Constants.Firebase.ChildStore, withDictionary: snapInner)
-                        self.groceryItems.append(firebaseRow)
-                        
-                        self.tableView.reloadData()
-                        self.updateTitle()
-                        SwiftSpinner.hide()
-                    })
-                }
-            }
-            self.groceryItemUpdateKeys.removeAll()
-        })
+
     }
 }
 
