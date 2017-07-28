@@ -99,5 +99,6 @@ struct Constants {
     
     struct Feature {
         static var Grocery = "Grocery"
+        static var Shopping = "Shopping"
     }
 }

@@ -96,14 +96,31 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
          _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
         
         // Update Badge count from retrieving value from service layer
-        FirebaseService().getBadgeCount(completion: { (badgeCount) in
-            _ = BadgeAppearnce.init(badgeView: badgeView, badgeText: String(badgeCount), badgeColor: UIColor.blue)
-            SwiftSpinner.hide()
-        })
+        switch item.itemName {
+        case Constants.Feature.Grocery:
+            FirebaseService().getBadgeCount(modalName: Constants.Feature.Grocery,completion: { (badgeCount) in
+                self.setBadge(badgeView: badgeView, badgeCount: badgeCount)
+            })
+        case Constants.Feature.Shopping:
+            FirebaseService().getBadgeCount(modalName: Constants.Feature.Shopping,completion: { (badgeCount) in
+                self.setBadge(badgeView: badgeView, badgeCount: badgeCount)
+            })
+        default:
+            print("Selected feature is not valid")
+        }
         
         cellLabel.text = item.itemName
         return cell
     }
     
     //MARK: - Methods
+    func setBadge(badgeView:UIView, badgeCount:UInt) {
+        if badgeCount == 0 {
+            _ = BadgeAppearnce.init(badgeView: badgeView, badgeText: String(badgeCount), badgeColor: UIColor.red)
+        } else {
+            _ = BadgeAppearnce.init(badgeView: badgeView, badgeText: String(badgeCount), badgeColor: UIColor.blue)
+            //TODO: - Need to change this logic
+            SwiftSpinner.hide()
+        }
+    }
 }

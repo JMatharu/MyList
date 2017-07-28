@@ -14,10 +14,15 @@ class FirebaseService {
     fileprivate var firebaseReference: FIRDatabaseReference? = FIRDatabase.database().reference()
     fileprivate var itemsUpdatedKeys: [String] = []
     
-    func getBadgeCount(completion:@escaping (UInt) -> ()) {
+    func getBadgeCount(modalName:String ,completion:@escaping (UInt) -> ()) {
+        switch modalName {
+        case Constants.Feature.Grocery:
             self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.getUid()).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                 completion(snapshot.childrenCount)
-        })
+            })
+        default:
+            completion(0)
+        }
     }
     
     func getAllDataInSingleEvent(modalName:String ,completion:@escaping ([GroceryItem], [String]) -> ()) {
