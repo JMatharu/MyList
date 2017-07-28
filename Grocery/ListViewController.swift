@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftSpinner
+import KCFloatingActionButton
 
 class ListViewController: UITableViewController, AddEditItemViewControllerDelegate {
     var groceryItems: [GroceryItem] = []
@@ -17,6 +18,9 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Create FAB button
+        createFABButton()
         
         // Make table cell expand if string is bigger than label size
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -105,6 +109,25 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         } else {
             self.title = Constants.Titles.NoItem
         }
+    }
+    
+    func createFABButton() {
+        let floaty = KCFloatingActionButton()
+        floaty.sticky = true
+        floaty.openAnimationType = .slideLeft
+        floaty.buttonColor = UIColor.FabButtonColor
+        floaty.itemButtonColor = UIColor.FabButtonSecendoryColor
+        floaty.itemTitleColor = UIColor.FabButtonItemTitleColor
+        floaty.itemShadowColor = UIColor.clear
+        floaty.addItem("Add", icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
+            self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: nil)
+        }
+        floaty.addItem("Calculate", icon: #imageLiteral(resourceName: "calculate")) { (fabButtonItem) in
+            
+        }
+        
+        floaty.buttonImage = #imageLiteral(resourceName: "addItem")
+        self.view.addSubview(floaty)
     }
     
     //MARK: - Add Item View Controller delegate

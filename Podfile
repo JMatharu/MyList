@@ -19,4 +19,5 @@ target 'Grocery' do
   pod 'Firebase/Auth'
   pod 'PMAlertController'
   pod 'EasyNotificationBadge'
+  pod 'KCFloatingActionButton'
 end

@@ -77,14 +77,10 @@
                             <outlet property="delegate" destination="fCD-Yy-lji" id="SnA-SS-H52"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Grocery List" id="IA8-4s-1nO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Uib-0r-vjl">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="AddItem" id="ovf-86-ODz"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Grocery List" id="IA8-4s-1nO"/>
+                    <connections>
+                        <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="AddItem" id="eam-af-YY0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUe-h4-Vnp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -231,7 +227,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v9d-uv-IRb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3913" y="795"/>
+            <point key="canvasLocation" x="3947" y="6"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="3tv-Oa-IYL">
