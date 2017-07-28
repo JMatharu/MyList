@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseDatabase
 import SwiftSpinner
 
 class ListViewController: UITableViewController, AddEditItemViewControllerDelegate {
@@ -15,8 +14,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     var groceryItemKeys: [String] = []
     var groceryItemUpdateKeys: [String] = []
     let heightOfHeader: CGFloat = 40
-    var firebaseReference: FIRDatabaseReference?
-    var dataBaseHandler: FIRDatabaseHandle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +21,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Make table cell expand if string is bigger than label size
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
-        
-        // Firebase reference
-        firebaseReference = FIRDatabase.database().reference()
         
         updateDataSourceWithItemsFromFireBase()
         
@@ -69,11 +63,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             self.updateTitle()
             
             //Delete from firebase
-            var uidAsString = ""
-            if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
-                uidAsString = uid
-            }
-            self.firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString).child(self.groceryItemKeys[indexPath.row]).removeValue()
+            FirebaseService().removeItemFrmFirebase(modalName: Constants.Feature.Grocery, itemKeys: self.groceryItemKeys, index: indexPath.row)
             
             // Delete from local array
             self.groceryItemKeys.remove(at: indexPath.row)

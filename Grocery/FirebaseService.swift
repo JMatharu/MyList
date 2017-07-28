@@ -58,28 +58,43 @@ class FirebaseService {
     func getUpdatedDataInSingleEvent(modalName: String, itemsKeys:[String], completion:@escaping([GroceryItem], [String]) -> ()) {
         let innerItems: [GroceryItem] = []
         var innerItemKeys: [String] = []
-        firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.getUid()).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            guard let snap = snapshot.value as? NSDictionary else { return }
-            for(key, _) in snap {
-                if let key = key as? String {
-                    self.itemsUpdatedKeys.append(key)
+        switch modalName {
+        case Constants.Feature.Grocery:
+            firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.getUid()).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                guard let snap = snapshot.value as? NSDictionary else { return }
+                for(key, _) in snap {
+                    if let key = key as? String {
+                        self.itemsUpdatedKeys.append(key)
+                    }
                 }
-            }
-            
-            let newElementCount = self.itemsUpdatedKeys.sorted().count - itemsKeys.sorted().count
-            if newElementCount > 0 {
-                // get difference , and get those element
-                let updatedListCount = self.itemsUpdatedKeys.sorted().count
-                for newItemReverseIndex in 1...newElementCount {
-                    innerItemKeys.append(self.itemsUpdatedKeys.sorted()[updatedListCount - newItemReverseIndex])
-                    
-                    // inner firebasecall
-                    self.getDifferentElementFromUpdatedList(updatedItemKeys: self.itemsUpdatedKeys, items: innerItems, updatedListCount: updatedListCount, newItemReverseIndex: newItemReverseIndex, completion: { (groceryItem) in
-                        completion(groceryItem, innerItemKeys)
-                    })
+                
+                let newElementCount = self.itemsUpdatedKeys.sorted().count - itemsKeys.sorted().count
+                if newElementCount > 0 {
+                    // get difference , and get those element
+                    let updatedListCount = self.itemsUpdatedKeys.sorted().count
+                    for newItemReverseIndex in 1...newElementCount {
+                        innerItemKeys.append(self.itemsUpdatedKeys.sorted()[updatedListCount - newItemReverseIndex])
+                        
+                        // inner firebasecall
+                        self.getDifferentElementFromUpdatedList(updatedItemKeys: self.itemsUpdatedKeys, items: innerItems, updatedListCount: updatedListCount, newItemReverseIndex: newItemReverseIndex, completion: { (groceryItem) in
+                            completion(groceryItem, innerItemKeys)
+                        })
+                    }
                 }
-            }
-        })
+            })
+        default:
+            print("Selected feature is not valid")
+        }
+        
+    }
+    
+    func removeItemFrmFirebase(modalName: String, itemKeys: [String], index: Int) {
+        switch modalName {
+        case Constants.Feature.Grocery:
+            firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(self.getUid()).child(itemKeys[index]).removeValue()
+        default:
+            print("Selected feature is not valid")
+        }
     }
     
     private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {
