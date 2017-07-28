@@ -39,39 +39,6 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         super.init(coder: aDecoder)
     }
     
-    // MARK: - Button Methods
-    @IBAction func addItem(_ sender: Any) {
-        let alert = PMAlertController(withDescription: Constants.Alert.AddListAlertDescription)
-        alert.addTextField { (textField) in
-            textField?.placeholder = Constants.Alert.AddListAlertTextViewPlaceHolder
-            textField?.becomeFirstResponder()
-        }
-        alert.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
-            let textField = alert.textFields.first
-            let newItem = AllListItem()
-            if let txt = textField?.text {
-                if !txt.isEmpty {
-                    newItem.itemName = txt
-                    self.allListItem.append(newItem)
-                    alert.dismiss(animated: true, completion: nil)
-                    self.tableView.reloadData()
-                    //TODO
-                    print("I am Good")
-                    alert.dismiss(animated: true, completion: nil)
-                } else {
-                    print("I am empty")
-                    // TODO
-                    textField?.placeholder = "jlkajslkaj"
-                }
-            }
-        }))
-        alert.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.cancel, action: {
-            self.dismiss(animated: true, completion: nil)
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     // MARK: - Table View Delegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allListItem.count

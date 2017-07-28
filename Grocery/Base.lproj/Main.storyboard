@@ -322,14 +322,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="My All Lists" id="8Xa-wU-wA1">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5Ry-Zh-ioL">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="addItem:" destination="pts-at-4PZ" id="LIq-UA-aEK"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="My All Lists" id="8Xa-wU-wA1"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="fCD-Yy-lji" kind="show" identifier="GrocerySegue" id="imA-HI-Tsz"/>
