@@ -118,7 +118,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         floaty.buttonColor = UIColor.FabButtonColor
         floaty.itemButtonColor = UIColor.FabButtonSecendoryColor
         floaty.itemTitleColor = UIColor.FabButtonItemTitleColor
-        floaty.itemShadowColor = UIColor.clear
+        floaty.itemShadowColor = UIColor.blue
         floaty.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
             self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: nil)
         }

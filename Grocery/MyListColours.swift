@@ -10,8 +10,8 @@ import UIColor_Hex_Swift
 
 private struct Color {
     static let NavigationBarColor = "#512DA8"
-    static let FabButtonColor = "#8BC34A"
-    static let FabBottonSecColor = "#FF5722"
+    static let FabButtonColor = "#9C27B0"
+    static let FabBottonSecColor = "#9C27B0"
     static let FabButtonItemTitleColor = "#303F9F"
 }
 

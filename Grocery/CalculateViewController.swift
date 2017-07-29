@@ -11,6 +11,10 @@ import UIKit
 class CalculateViewController: UIViewController {
     override func viewDidLoad() {
         //Setup Nav Bar
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
         setNavigationBar()
     }
     
@@ -19,15 +23,15 @@ class CalculateViewController: UIViewController {
         self.view.addSubview(navigationBar)
         let navItem: UINavigationItem
         navItem = UINavigationItem(title: Constants.Titles.Result)
-        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: nil, action: #selector(CalculateViewController.cancel))
-        navItem.leftBarButtonItem = cancelBarButton
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: nil, action: #selector(AddEditItemViewController.done))
+        navItem.rightBarButtonItem = doneBarButton
         navigationBar.setItems([navItem], animated: true)
         navigationBar.barTintColor = UIColor.navigationBarColor
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         navigationBar.tintColor = UIColor.white
     }
     
-    func cancel() {
+    func done() {
         dismiss(animated: true, completion: nil)
     }
 }
