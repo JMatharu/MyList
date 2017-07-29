@@ -44,12 +44,14 @@ struct Constants {
         static let NoItem = "No Items in List"
         static let Items = " Items"
         static let FacebookButton = "Sign in with Facebook"
+        static let Result = "Result"
     }
     
     struct Segue {
         static let AddItem = "AddItem"
         static let LoginToList = "LoginToList"
         static let GroceryList = "GrocerySegue"
+        static let CalculateGroceryList = "calculateItems"
     }
     
     struct Firebase {

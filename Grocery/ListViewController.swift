@@ -123,11 +123,11 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: nil)
         }
         floaty.addItem(Constants.FABButton.CalculateItem, icon: #imageLiteral(resourceName: "calculate")) { (fabButtonItem) in
-            
+            self.performSegue(withIdentifier: Constants.Segue.CalculateGroceryList, sender: nil)
         }
         
         floaty.buttonImage = #imageLiteral(resourceName: "addItem")
-        self.view.addSubview(floaty)
+        self.tableView.addSubview(floaty)
     }
     
     //MARK: - Add Item View Controller delegate

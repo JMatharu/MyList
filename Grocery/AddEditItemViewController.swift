@@ -45,11 +45,6 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         setDelegateAndDataSourceForPicker()
         addPaddingOnUITextFields()
         setDataforEditScreen()
-        
-//        doneBarButton.isEnabled = false
-        
-//        storeName.addTarget(self, action: #selector(textFieldIsNotEmpty), for: .allEvents)
-//        amount.addTarget(self, action: #selector(textFieldIsNotEmpty), for: .allEvents)
     }
  
     // MARK: - IBAction

@@ -19,7 +19,7 @@ extension BadgeAppearnce {
         appearnce.distenceFromCenterX = view.frame.width * 0.01
         appearnce.distenceFromCenterY = view.frame.height * 0.01
         appearnce.allowShadow = true
-        appearnce.borderColor = .blue
+        appearnce.borderColor = color
         appearnce.borderWidth = 1
         view.badge(text: text, appearnce: appearnce)
         self.init()

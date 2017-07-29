@@ -27,6 +27,7 @@
 		D1DDFD4D1F238957009AB318 /* AllListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD4C1F238957009AB318 /* AllListItem.swift */; };
 		D1DDFD511F24F1C8009AB318 /* MyBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD501F24F1C8009AB318 /* MyBadge.swift */; };
 		D1DDFD531F27C9B5009AB318 /* MySpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD521F27C9B5009AB318 /* MySpinner.swift */; };
+		D1DDFD571F2C02F0009AB318 /* CalculateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD561F2C02F0009AB318 /* CalculateViewController.swift */; };
 		E5904D1807F9CA5E6B09DD4E /* Pods_Grocery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C89294A66988F301F9BC91C /* Pods_Grocery.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		D1DDFD4C1F238957009AB318 /* AllListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListItem.swift; sourceTree = "<group>"; };
 		D1DDFD501F24F1C8009AB318 /* MyBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBadge.swift; sourceTree = "<group>"; };
 		D1DDFD521F27C9B5009AB318 /* MySpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySpinner.swift; sourceTree = "<group>"; };
+		D1DDFD561F2C02F0009AB318 /* CalculateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 			children = (
 				D19E345A1EF08C18006455DD /* ListViewController.swift */,
 				D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */,
+				D1DDFD561F2C02F0009AB318 /* CalculateViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				D1DDFD4D1F238957009AB318 /* AllListItem.swift in Sources */,
 				D19E345B1EF08C18006455DD /* ListViewController.swift in Sources */,
 				D1DDFD531F27C9B5009AB318 /* MySpinner.swift in Sources */,
+				D1DDFD571F2C02F0009AB318 /* CalculateViewController.swift in Sources */,
 				D1CB3B441F07F9A200AE136C /* FirebaseService.swift in Sources */,
 				D1DDFD491F238758009AB318 /* AllListScreenViewController.swift in Sources */,
 				D19E34591EF08C18006455DD /* AppDelegate.swift in Sources */,
