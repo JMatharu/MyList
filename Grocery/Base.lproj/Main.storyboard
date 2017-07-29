@@ -80,7 +80,7 @@
                     <navigationItem key="navigationItem" title="Grocery List" id="IA8-4s-1nO"/>
                     <connections>
                         <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="AddItem" id="eam-af-YY0"/>
-                        <segue destination="ENC-tB-RvR" kind="presentation" identifier="calculateItems" id="jda-Lw-84v"/>
+                        <segue destination="ENC-tB-RvR" kind="show" identifier="calculateItems" id="jda-Lw-84v"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUe-h4-Vnp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -103,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I3t-9V-cAu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3904" y="-255"/>
+            <point key="canvasLocation" x="4671" y="-325"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="OfH-Hd-qDn">

@@ -112,22 +112,22 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     }
     
     func createFABButton() {
-        let floaty = KCFloatingActionButton()
-        floaty.sticky = true
-        floaty.openAnimationType = .slideLeft
-        floaty.buttonColor = UIColor.FabButtonColor
-        floaty.itemButtonColor = UIColor.FabButtonSecendoryColor
-        floaty.itemTitleColor = UIColor.FabButtonItemTitleColor
-        floaty.itemShadowColor = UIColor.blue
-        floaty.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
+//        var floaty: KCFloatingActionButton
+//        _ = floaty.init(itemTitle: "Add", itemImage: #imageLiteral(resourceName: "add"), view: self.view, completionHandler: {
+//            self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: nil)
+//        })
+//        _ = floaty.init(itemTitle: "Calculate", itemImage: #imageLiteral(resourceName: "calculate"), view: self.view, completionHandler: {
+//            self.performSegue(withIdentifier: Constants.Segue.CalculateGroceryList, sender: nil)
+//        })
+        
+        let fabButton = KCFloatingActionButton().createFabButton()
+        fabButton.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
             self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: nil)
         }
-        floaty.addItem(Constants.FABButton.CalculateItem, icon: #imageLiteral(resourceName: "calculate")) { (fabButtonItem) in
+        fabButton.addItem(Constants.FABButton.CalculateItem, icon: #imageLiteral(resourceName: "calculate")) { (fabButtonItem) in
             self.performSegue(withIdentifier: Constants.Segue.CalculateGroceryList, sender: nil)
         }
-        
-        floaty.buttonImage = #imageLiteral(resourceName: "addItem")
-        self.tableView.addSubview(floaty)
+        self.tableView.addSubview(fabButton)
     }
     
     //MARK: - Add Item View Controller delegate
