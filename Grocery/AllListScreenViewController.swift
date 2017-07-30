@@ -12,8 +12,7 @@ import EasyNotificationBadge
 import SwiftSpinner
 
 private struct AllListConstants {
-    static let Item1 = "Grocery"
-    static let Item2 = "Shopping"
+    static let ItemArray = ["Grocery", "Shopping"]
 }
 
 class AllListViewController: UITableViewController, UIAlertViewDelegate {
@@ -35,10 +34,10 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         let allItemRow1 = AllListItem()
-        allItemRow1.itemName = AllListConstants.Item1
+        allItemRow1.itemName = AllListConstants.ItemArray[0]
         allListItem.append(allItemRow1)
         let allItemRow2 = AllListItem()
-        allItemRow2.itemName = AllListConstants.Item2
+        allItemRow2.itemName = AllListConstants.ItemArray[1]
         allListItem.append(allItemRow2)
         
         super.init(coder: aDecoder)
@@ -50,8 +49,8 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if allListItem[indexPath.row].itemName == AllListConstants.Item1 {
-            if itemBadgeCountDict[AllListConstants.Item1] == 0 {
+        if allListItem[indexPath.row].itemName == AllListConstants.ItemArray[0] {
+            if itemBadgeCountDict[AllListConstants.ItemArray[0]] == 0 {
                 self.performSegue(withIdentifier: Constants.Segue.NewGroceryListIdentifier, sender: nil)
             } else {
                 self.performSegue(withIdentifier: Constants.Segue.GroceryList, sender: nil)
@@ -75,12 +74,14 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         case Constants.Feature.Grocery:
             FirebaseService().getBadgeCount(modalName: Constants.Feature.Grocery,completion: { (badgeCount) in
                 self.setBadge(badgeView: badgeView, badgeCount: badgeCount)
-                self.itemBadgeCountDict[AllListConstants.Item1] = badgeCount
+                self.itemBadgeCountDict[AllListConstants.ItemArray[0]] = badgeCount
+                self.removeSpinnerAfterBadgeUpdate()
             })
         case Constants.Feature.Shopping:
             FirebaseService().getBadgeCount(modalName: Constants.Feature.Shopping,completion: { (badgeCount) in
                 self.setBadge(badgeView: badgeView, badgeCount: badgeCount)
-                self.itemBadgeCountDict[AllListConstants.Item2] = badgeCount
+                self.itemBadgeCountDict[AllListConstants.ItemArray[1]] = badgeCount
+                self.removeSpinnerAfterBadgeUpdate()
             })
         default:
             print("Selected feature is not valid")
@@ -97,7 +98,12 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         } else {
             _ = BadgeAppearnce.init(badgeView: badgeView, badgeText: String(badgeCount), badgeColor: UIColor.blue)
         }
-        //TODO: - Need to change this logic
-        SwiftSpinner.hide()
+    }
+    
+    func removeSpinnerAfterBadgeUpdate() {
+        if itemBadgeCountDict.count == AllListConstants.ItemArray.count
+        {
+            SwiftSpinner.hide()
+        }
     }
 }
