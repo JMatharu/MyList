@@ -1,25 +1,19 @@
 //
-//  CalculateViewController.swift
+//  NewGroceryListViewController.swift
 //  Grocery
 //
-//  Created by Jagdeep Matharu on 2017-07-28.
+//  Created by Jagdeep Matharu on 2017-07-29.
 //  Copyright © 2017 Jagdeep Matharu. All rights reserved.
 //
 
 import UIKit
-import SwiftSpinner
+import Foundation
 
-class CalculateViewController: UIViewController {
+class NewGroceryListViewController: UITableViewController {
     
-    @IBOutlet weak var totalAmount: UILabel!
-    var groceryItems:[GroceryItem] = []
     override func viewDidLoad() {
-        getTotalAmountSpent()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        //Setup Nav Bar
         setNavigationBar()
+        tableView.tableHeaderView = UIView(frame: CGRect(x: CGFloat(0.0), y: CGFloat(0.0), width: CGFloat(tableView.bounds.size.width), height: Constants.UIDimentions.NavigationBarHeight))
     }
     
     private func setNavigationBar() {
@@ -33,14 +27,6 @@ class CalculateViewController: UIViewController {
         navigationBar.barTintColor = UIColor.navigationBarColor
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         navigationBar.tintColor = UIColor.white
-    }
-    
-    func getTotalAmountSpent() {
-        var totalItem: Int = 0
-        for item in groceryItems {
-            totalItem += Int(item.amount)!
-        }
-        totalAmount.text = String(totalItem)
     }
     
     func done() {

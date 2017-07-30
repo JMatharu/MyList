@@ -155,6 +155,9 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             let controller = segue.destination as! AddEditItemViewController
             controller.delegate = self
             controller.itemToEdit = sender as? GroceryItem
+        } else if segue.identifier == Constants.Segue.CalculateGroceryList {
+            let controller = segue.destination as! CalculateViewController
+            controller.groceryItems = groceryItems
         }
     }
     

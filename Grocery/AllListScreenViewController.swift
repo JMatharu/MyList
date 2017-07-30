@@ -19,6 +19,7 @@ private struct AllListConstants {
 class AllListViewController: UITableViewController, UIAlertViewDelegate {
     
     var allListItem: [AllListItem] = []
+    var itemBadgeCountDict: [String:UInt] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,10 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print(itemBadgeCountDict)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,7 +51,11 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if allListItem[indexPath.row].itemName == AllListConstants.Item1 {
-            self.performSegue(withIdentifier: Constants.Segue.GroceryList, sender: nil)
+            if itemBadgeCountDict[AllListConstants.Item1] == 0 {
+                self.performSegue(withIdentifier: Constants.Segue.NewGroceryListIdentifier, sender: nil)
+            } else {
+                self.performSegue(withIdentifier: Constants.Segue.GroceryList, sender: nil)
+            }
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -58,7 +67,6 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         let item = allListItem[indexPath.row]
         
         let badgeView = cell.viewWithTag(Constants.Identifiers.AllListBadgeTagIdentifier)!
-        
         //Get child number of parent node
          _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
         
@@ -67,10 +75,12 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
         case Constants.Feature.Grocery:
             FirebaseService().getBadgeCount(modalName: Constants.Feature.Grocery,completion: { (badgeCount) in
                 self.setBadge(badgeView: badgeView, badgeCount: badgeCount)
+                self.itemBadgeCountDict[AllListConstants.Item1] = badgeCount
             })
         case Constants.Feature.Shopping:
             FirebaseService().getBadgeCount(modalName: Constants.Feature.Shopping,completion: { (badgeCount) in
                 self.setBadge(badgeView: badgeView, badgeCount: badgeCount)
+                self.itemBadgeCountDict[AllListConstants.Item2] = badgeCount
             })
         default:
             print("Selected feature is not valid")
@@ -86,8 +96,8 @@ class AllListViewController: UITableViewController, UIAlertViewDelegate {
             _ = BadgeAppearnce.init(badgeView: badgeView, badgeText: String(badgeCount), badgeColor: UIColor.red)
         } else {
             _ = BadgeAppearnce.init(badgeView: badgeView, badgeText: String(badgeCount), badgeColor: UIColor.blue)
-            //TODO: - Need to change this logic
-            SwiftSpinner.hide()
         }
+        //TODO: - Need to change this logic
+        SwiftSpinner.hide()
     }
 }
