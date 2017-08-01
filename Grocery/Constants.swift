@@ -19,6 +19,7 @@ struct Constants {
         static let NameTagIdentifier = 53
         static let AllListLabelTagIdentifier = 11
         static let AllListBadgeTagIdentifier = 12
+        static let NameListTagIdentifier = 21
         static let TableViewRowActionEdit = "Edit"
         static let TableViewRowActionDelete = "Delete"
         static let MainStoryBoard = "Main"
@@ -26,6 +27,10 @@ struct Constants {
         static let AddItemSegue = "AddItem"
         static let ListItemStoryBoard = "ListViewController"
         static let AllListStoryBoard = "AllListViewController"
+        static let CategoryCell = "categoryCell"
+        static let NameCell = "nameCell"
+        static let NameVC = "NameViewController"
+        static let CatVC = "CategoryViewController"
     }
     
     struct UIDimentions {
@@ -45,6 +50,7 @@ struct Constants {
         static let Items = " Items"
         static let FacebookButton = "Sign in with Facebook"
         static let Result = "Result"
+        static let EnterNameAndCatagory = "Enter Name and Category"
     }
     
     struct Segue {
@@ -62,6 +68,8 @@ struct Constants {
         static let ChildAmount = "amount"
         static let ChildStore = "store"
         static let ChildDate = "timestamp"
+        static let ChildNameList = "nameList"
+        static let ChildCategoryList = "categoryList"
     }
     
     struct XIB {
