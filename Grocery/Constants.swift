@@ -59,6 +59,7 @@ struct Constants {
         static let GroceryList = "GrocerySegue"
         static let CalculateGroceryList = "calculateItems"
         static let NewGroceryListIdentifier = "NewGroceryListIdentifier"
+        static let NewToGroceryList = "NewToGroceryList"
     }
     
     struct Firebase {

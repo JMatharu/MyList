@@ -104,11 +104,13 @@ class FirebaseService {
         }
     }
     
-    func saveNameOrCategoryToFirebase(type:String, text: String) {
-        if type == "name" {
-            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(text)
-        } else {
-            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(text)
+    func saveNameOrCategoryToFirebase(type:String, textList: [String]) {
+        for text in textList {
+            if type == "name" {
+                firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(text)
+            } else {
+                firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(text)
+            }
         }
     }
     

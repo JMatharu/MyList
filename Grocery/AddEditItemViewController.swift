@@ -29,8 +29,8 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
-    var pickerNameData = ["A", "B", "C"]
-    var pickerCategoryData = ["one", "two", "three", "seven", "fifteen"]
+    var pickerNameData:[String] = []
+    var pickerCategoryData:[String] = []
     var namePicker = UIPickerView()
     var categoryPicker = UIPickerView()
     weak var delegate: AddEditItemViewControllerDelegate?
@@ -42,6 +42,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         setNavigationBar()
         updateTableUI()
         storeName.becomeFirstResponder()
+        loadNameAndCategory()
         setDelegateAndDataSourceForPicker()
         addPaddingOnUITextFields()
         setDataforEditScreen()
@@ -215,5 +216,28 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         dateFormatter.dateFormat = AddItemVCConstants.DateFormat
         dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")! as TimeZone
         return dateFormatter.string(from: date as Date)
+    }
+    
+    func loadNameAndCategory() {
+        let paths = FileManager.default.urls(for: .documentDirectory,in: .userDomainMask)
+        let path = paths[0].appendingPathComponent("NameAndCategory.plist")
+        if let data = try? Data(contentsOf: path) {
+            let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+            let nameItems = unarchiver.decodeInt32(forKey: "NameItems")
+            for index in 0..<nameItems {
+                if let name = unarchiver.decodeObject(forKey: "NameItem\(index)") as? String {
+                    pickerNameData.append(name)
+                    pickerNameData.sort(by: <)
+                }
+            }
+            let catItems = unarchiver.decodeInt32(forKey: "CategoryItems")
+            for index in 0..<catItems {
+                if let category = unarchiver.decodeObject(forKey: "CategoryItems\(index)") as? String {
+                    pickerCategoryData.append(category)
+                    pickerCategoryData.sort(by: <)
+                }
+            }
+            unarchiver.finishDecoding()
+        }
     }
 }

@@ -17,14 +17,13 @@ class NewGroceryListViewController: UITableViewController {
     var nameItems: [String] = []
     var tempNameItems: [String] = []
     var categoryItems: [String] = []
-    var fabButton = KCFloatingActionButton().createFabButton()
-    var fabButton2 = KCFloatingActionButton().createFabButton()
+    let fabButton = KCFloatingActionButton().createFabButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "Enter Name"
-        createFABButton(type: "name")
+        createFABButton()
 
     }
     
@@ -52,51 +51,44 @@ class NewGroceryListViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-            self.fabButton2.removeFromSuperview()
             self.leftBarButton.title = "Cancel"
             self.navigationItem.title = "Enter Name"
-            self.createFABButton(type: "name")
-//            _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
-//            FirebaseService().getNameOrCategoryFromFirebase(completion: { (names) in
-//                for name in names {
-//                    if name != "" {
-//                        self.nameItems.removeAll()
-//                        self.nameItems.append(name)
-//                        self.tableView.reloadData()
-//                    }
-//                }
-//                self.leftBarButton.title = "Cancel"
-//                self.navigationItem.title = "Enter Name"
-//                SwiftSpinner.hide()
-//            })
-            
         }
     }
     
     @IBAction func done(_ sender: Any) {
         if isCurrentVCNameVC() {
-            //TODO Chnage back to 2
-            if nameItems.count < 0 {
+            if nameItems.count < 2 {
                 let alert = PMAlertController.init(withTitle: "Enter at least 2 names", withDescription: "Please enter minimum 2 names to start")
                 alert.addAction(PMAlertAction(title: "Ok", style: .default, action: { 
                     alert.dismiss(animated: true, completion: nil)
                 }))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                for item in nameItems {
-                    //Save this locally
-//                    FirebaseService().saveNameOrCategoryToFirebase(type: "name", text: item)
-                }
                 //refresh table view and title
                 tempNameItems = nameItems
                 nameItems.removeAll()
-                fabButton.removeFromSuperview()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
                 navigationItem.title = "Enter Category"
                 leftBarButton.title = "Back"
-                createFABButton(type: "Category")
+            }
+        } else {
+            if categoryItems.count < 1 {
+                let alert = PMAlertController.init(withTitle: "Enter at least 1 category", withDescription: "Please enter minimum 1 category to start")
+                alert.addAction(PMAlertAction(title: "Ok", style: .default, action: {
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                FirebaseService().saveNameOrCategoryToFirebase(type: "name", textList: tempNameItems)
+                FirebaseService().saveNameOrCategoryToFirebase(type: "category", textList: categoryItems)
+                //Save this list locally as well
+                saveItems(nItems: tempNameItems, cItems: categoryItems)
+                tempNameItems.removeAll()
+                categoryItems.removeAll()
+                self.performSegue(withIdentifier: Constants.Segue.NewToGroceryList, sender: nil)
             }
         }
     }
@@ -109,68 +101,35 @@ class NewGroceryListViewController: UITableViewController {
         }
     }
     
-    func createFABButton(type: String) {
+    func createFABButton() {
 //        let fabButton = KCFloatingActionButton().createFabButton()
-        var alertTitle = ""
-        var alertDescription = ""
-        if type == "name" {
-            alertTitle = "Enter Name"
-            alertDescription = "Name you would like to enter"
-            fabButton.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
-                let alertVC = PMAlertController.init(withTitle: alertTitle, withDescription: alertDescription)
-                alertVC.addTextField({ (textField) in
-                    textField?.becomeFirstResponder()
-                })
-                alertVC.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
-                    let textField = alertVC.textFields[0]
-                    if let t = textField.text {
-                        if self.isCurrentVCNameVC() {
-                            self.nameItems.append(t)
-                        } else {
-                            self.categoryItems.append(t)
-                        }
+        let alertTitle = "Enter Item"
+        let alertDescription = "For Name: Enter name of person\nFor Category: Enter category like Movies, Grocery, Gas ..."
+        fabButton.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
+            let alertVC = PMAlertController.init(withTitle: alertTitle, withDescription: alertDescription)
+            alertVC.addTextField({ (textField) in
+                textField?.becomeFirstResponder()
+            })
+            alertVC.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
+                let textField = alertVC.textFields[0]
+                if let t = textField.text {
+                    if self.isCurrentVCNameVC() {
+                        self.nameItems.append(t)
+                    } else {
+                        self.categoryItems.append(t)
                     }
-                    alertVC.dismiss(animated: true, completion: nil)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }))
-                alertVC.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.default, action: {
-                    alertVC.dismiss(animated: true, completion: nil)
-                }))
-                self.present(alertVC, animated: true, completion: nil)
-            }
-            self.tableView.addSubview(fabButton)
-        } else {
-            alertTitle = "Enter Category"
-            alertDescription = "Category you would like to enter"
-            fabButton2.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
-                let alertVC = PMAlertController.init(withTitle: alertTitle, withDescription: alertDescription)
-                alertVC.addTextField({ (textField) in
-                    textField?.becomeFirstResponder()
-                })
-                alertVC.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
-                    let textField = alertVC.textFields[0]
-                    if let t = textField.text {
-                        if self.isCurrentVCNameVC() {
-                            self.nameItems.append(t)
-                        } else {
-                            self.categoryItems.append(t)
-                        }
-                    }
-                    alertVC.dismiss(animated: true, completion: nil)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }))
-                alertVC.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.default, action: {
-                    alertVC.dismiss(animated: true, completion: nil)
-                }))
-                self.present(alertVC, animated: true, completion: nil)
-            }
-            self.tableView.addSubview(fabButton2)
+                }
+                alertVC.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }))
+            alertVC.addAction(PMAlertAction(title: Constants.Alert.Cancel, style: PMAlertActionStyle.default, action: {
+                alertVC.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alertVC, animated: true, completion: nil)
         }
-        
+        self.tableView.addSubview(fabButton)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -179,6 +138,29 @@ class NewGroceryListViewController: UITableViewController {
         } else {
             return categoryItems.count
         }
+    }
+    
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory,in: .userDomainMask)
+        return paths[0]
+    }
+    func dataFilePath() -> URL {
+        return documentsDirectory().appendingPathComponent("NameAndCategory.plist")
+    }
+    
+    func saveItems(nItems: [String], cItems:[String]) {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWith: data)
+        for index in 0..<nItems.count {
+            archiver.encode(nItems[index], forKey: "NameItem\(index)")
+        }
+        for index in 0..<cItems.count {
+            archiver.encode(cItems[index], forKey: "CategoryItems\(index)")
+        }
+        archiver.encode(nItems.count, forKey: "NameItems")
+        archiver.encode(cItems.count, forKey: "CategoryItems")
+        archiver.finishEncoding()
+        data.write(to: dataFilePath(), atomically: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -196,5 +178,62 @@ class NewGroceryListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: Constants.Identifiers.TableViewRowActionDelete) { (action, index) in
+            if self.isCurrentVCNameVC() {
+                if !self.nameItems.isEmpty {
+                    self.nameItems.remove(at: indexPath.row)
+                } else {
+                    self.tempNameItems.remove(at: indexPath.row)
+                }
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            } else {
+                self.categoryItems.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+        let edit = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionEdit) { (action, index) in
+            let editAlert = PMAlertController(withTitle: "Edit Item", withDescription: "You can edit the item")
+            editAlert.addTextField({ (textField) in
+                textField?.becomeFirstResponder()
+                if self.isCurrentVCNameVC() {
+                    if !self.nameItems.isEmpty {
+                        textField?.text = self.nameItems[indexPath.row]
+                    } else {
+                        textField?.text = self.tempNameItems[indexPath.row]
+                    }
+                } else {
+                    textField?.text = self.categoryItems[indexPath.row]
+                }
+            })
+            editAlert.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: { 
+                editAlert.dismiss(animated: true, completion: nil)
+            }))
+            editAlert.addAction(PMAlertAction(title: "Ok", style: .default, action: {
+                let textField = editAlert.textFields[0]
+                if let textFieldText = textField.text {
+                    if self.isCurrentVCNameVC() {
+                        if !self.nameItems.isEmpty {
+                            self.nameItems.remove(at: indexPath.row)
+                            self.nameItems.insert(textFieldText, at: indexPath.row)
+                        } else {
+                            self.tempNameItems.remove(at: indexPath.row)
+                            self.tempNameItems.insert(textFieldText, at: indexPath.row)
+                        }
+                    } else {
+                        self.categoryItems.remove(at: indexPath.row)
+                        self.categoryItems.insert(textFieldText, at: indexPath.row)
+                    }
+                }
+                self.tableView.reloadData()
+            }))
+            self.present(editAlert, animated: true, completion: nil)
+        }
+        
+        edit.backgroundColor = UIColor.orange
+        delete.backgroundColor = UIColor.red
+        return [edit, delete]
     }
 }
