@@ -134,6 +134,10 @@ class FirebaseService {
         })
     }
     
+    func saveGroceryList(dictionaryOfData:[String:String]) {
+        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ParentGroceryRoot).childByAutoId().setValue(dictionaryOfData)
+    }
+    
     private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {
         var itemsAsVar = items
         firebaseReference?.child(self.getUid()).child(Constants.Firebase.ParentGroceryRoot).child(updatedItemKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in

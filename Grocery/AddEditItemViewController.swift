@@ -8,7 +8,6 @@
 
 import UIKit
 import UIColor_Hex_Swift
-import FirebaseDatabase
 import PMAlertController
 
 struct AddItemVCConstants {
@@ -35,7 +34,6 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     var categoryPicker = UIPickerView()
     weak var delegate: AddEditItemViewControllerDelegate?
     var itemToEdit: GroceryItem?
-    var firebaseReference: FIRDatabaseReference?
     var fireKey: String = ""
     
     override func viewDidLoad() {
@@ -58,8 +56,6 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     }
     
     func done() {
-        firebaseReference = FIRDatabase.database().reference()
-        
         guard
             let store = storeName.text,
             !store.isEmpty,
@@ -92,13 +88,8 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             item.store = storeName.text!
             
             //saving data to firebase
-            var uidAsString = ""
-            if let uid = UserDefaults.standard.string(forKey: Constants.UserDefaults.UID) {
-                uidAsString = uid
-            }
-            let refForGroceryDataValue = firebaseReference?.child(Constants.Firebase.ParentGroceryRoot).child(uidAsString)
-            let refChildByAutoId = refForGroceryDataValue?.childByAutoId()
-            refChildByAutoId?.setValue([Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store, Constants.Firebase.ChildDate : self.getCurrentDateWithTime()])
+            let dataToBeSaved = [Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store, Constants.Firebase.ChildDate : self.getCurrentDateWithTime()]
+            FirebaseService().saveGroceryList(dictionaryOfData: dataToBeSaved)
             delegate?.addItemViewController(didFinishAdding: item)
         }
         // If using "Modal" then dismiss
