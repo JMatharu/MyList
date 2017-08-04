@@ -145,6 +145,7 @@
                         <outlet property="leftBarButton" destination="Yd8-fb-kWT" id="Iq8-Qw-MqL"/>
                         <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="AddItem" id="eam-af-YY0"/>
                         <segue destination="ENC-tB-RvR" kind="presentation" identifier="calculateItems" id="jda-Lw-84v"/>
+                        <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="EditItem" id="emE-sk-kia"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUe-h4-Vnp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -464,5 +465,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="I5E-Ji-VfY"/>
+        <segue reference="emE-sk-kia"/>
     </inferredMetricsTieBreakers>
 </document>

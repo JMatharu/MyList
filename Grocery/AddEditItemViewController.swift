@@ -34,7 +34,9 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     var categoryPicker = UIPickerView()
     weak var delegate: AddEditItemViewControllerDelegate?
     var itemToEdit: GroceryItem?
+    var tempItemToEdit: [String:GroceryItem?] = [:]
     var fireKey: String = ""
+    var editKey: String = ""
     
     override func viewDidLoad() {
         setNavigationBar()
@@ -79,6 +81,8 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             item.store = storeName.text!
             item.category = categoryTextField.text!
             item.name = nameTextField.text!
+            let dataToBeSavedAfterEdit = [Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store, Constants.Firebase.ChildDate : self.getCurrentDateWithTime()]
+            FirebaseService().saveEditedGroceryList(key: editKey, dictionaryOfData: dataToBeSavedAfterEdit)
             delegate?.addItemViewController(didFinishEditing: item)
         } else {
             let item = GroceryItem()
@@ -169,12 +173,16 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     }
     
     private func setDataforEditScreen() {
-        if let item = itemToEdit {
-            storeName.text = item.store
-            amount.text = item.amount
-            categoryTextField.text = item.category
-            nameTextField.text = item.name
-            doneBarButton.isEnabled = true
+        for (key, value) in tempItemToEdit {
+            if let item = value {
+                title = "Edit Item"
+                storeName.text = item.store
+                amount.text = item.amount
+                categoryTextField.text = item.category
+                nameTextField.text = item.name
+                doneBarButton.isEnabled = true
+            }
+            editKey = key
         }
     }
     

@@ -61,7 +61,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionEdit, handler: {
             action, index in
-            self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: self.groceryItemKeys[indexPath.row])
+            self.performSegue(withIdentifier: Constants.Segue.EditItem, sender: indexPath.row)
         })
         let delete = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionDelete, handler: {
             action, index in
@@ -115,14 +115,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     }
     
     func createFABButton() {
-//        var floaty: KCFloatingActionButton
-//        _ = floaty.init(itemTitle: "Add", itemImage: #imageLiteral(resourceName: "add"), view: self.view, completionHandler: {
-//            self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: nil)
-//        })
-//        _ = floaty.init(itemTitle: "Calculate", itemImage: #imageLiteral(resourceName: "calculate"), view: self.view, completionHandler: {
-//            self.performSegue(withIdentifier: Constants.Segue.CalculateGroceryList, sender: nil)
-//        })
-        
         let fabButton = KCFloatingActionButton().createFabButton()
         fabButton.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
             self.performSegue(withIdentifier: Constants.Segue.AddItem, sender: nil)
@@ -157,10 +149,16 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         if segue.identifier == Constants.Identifiers.AddItemSegue {
             let controller = segue.destination as! AddEditItemViewController
             controller.delegate = self
-            controller.itemToEdit = sender as? GroceryItem
         } else if segue.identifier == Constants.Segue.CalculateGroceryList {
             let controller = segue.destination as! CalculateViewController
             controller.groceryItems = groceryItems
+        } else if segue.identifier == Constants.Segue.EditItem {
+            let controller = segue.destination as! AddEditItemViewController
+            controller.delegate = self
+            if let index = sender as? Int {
+                controller.itemToEdit = groceryItems[index]
+                controller.tempItemToEdit = [groceryItemKeys[index]:groceryItems[index]]
+            }
         }
     }
     

@@ -55,6 +55,7 @@ struct Constants {
     
     struct Segue {
         static let AddItem = "AddItem"
+        static let EditItem = "EditItem"
         static let LoginToList = "LoginToList"
         static let GroceryList = "GrocerySegue"
         static let CalculateGroceryList = "calculateItems"
