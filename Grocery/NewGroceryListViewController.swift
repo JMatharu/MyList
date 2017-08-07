@@ -16,15 +16,16 @@ class NewGroceryListViewController: UITableViewController {
     @IBOutlet weak var leftBarButton: UIBarButtonItem!
     var nameItems: [String] = []
     var tempNameItems: [String] = []
+    var nameKey:[String] = []
     var categoryItems: [String] = []
+    var categoryKey:[String] = []
     let fabButton = KCFloatingActionButton().createFabButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        updateListFromFirebase()
         navigationItem.title = "Enter Name"
         createFABButton()
-
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -82,8 +83,6 @@ class NewGroceryListViewController: UITableViewController {
                 }))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                FirebaseService().saveNameOrCategoryToFirebase(type: "name", textList: tempNameItems)
-                FirebaseService().saveNameOrCategoryToFirebase(type: "category", textList: categoryItems)
                 //Save this list locally as well
                 saveItems(nItems: tempNameItems, cItems: categoryItems)
                 tempNameItems.removeAll()
@@ -102,7 +101,6 @@ class NewGroceryListViewController: UITableViewController {
     }
     
     func createFABButton() {
-//        let fabButton = KCFloatingActionButton().createFabButton()
         let alertTitle = "Enter Item"
         let alertDescription = "For Name: Enter name of person\nFor Category: Enter category like Movies, Grocery, Gas ..."
         fabButton.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
@@ -115,8 +113,10 @@ class NewGroceryListViewController: UITableViewController {
                 if let t = textField.text {
                     if self.isCurrentVCNameVC() {
                         self.nameItems.append(t)
+                        FirebaseService().saveNameOrCategoryToFirebase(type: "name", text: t)
                     } else {
                         self.categoryItems.append(t)
+                        FirebaseService().saveNameOrCategoryToFirebase(type: "category", text: t)
                     }
                 }
                 alertVC.dismiss(animated: true, completion: nil)
@@ -184,14 +184,24 @@ class NewGroceryListViewController: UITableViewController {
         let delete = UITableViewRowAction(style: .destructive, title: Constants.Identifiers.TableViewRowActionDelete) { (action, index) in
             if self.isCurrentVCNameVC() {
                 if !self.nameItems.isEmpty {
-                    self.nameItems.remove(at: indexPath.row)
+                    if self.nameKey[indexPath.row].characters.count > 7 {
+                        FirebaseService().deleteNameOrCategoryFromFirebase(type: "name", itemKey: self.nameKey[indexPath.row])
+                        self.nameItems.remove(at: indexPath.row)
+                        self.nameKey.remove(at: indexPath.row)
+                    } else {
+                        self.nameItems.remove(at: indexPath.row)
+                        self.nameKey.remove(at: indexPath.row)
+                    }
                 } else {
                     self.tempNameItems.remove(at: indexPath.row)
+                    self.nameKey.remove(at: indexPath.row)
                 }
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             } else {
                 self.categoryItems.remove(at: indexPath.row)
+                self.categoryKey.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                FirebaseService().deleteNameOrCategoryFromFirebase(type: "category", itemKey: self.categoryKey[indexPath.row])
             }
         }
         let edit = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionEdit) { (action, index) in
@@ -234,6 +244,37 @@ class NewGroceryListViewController: UITableViewController {
         
         edit.backgroundColor = UIColor.orange
         delete.backgroundColor = UIColor.red
-        return [edit, delete]
+        return [delete]
+    }
+    
+    func updateListFromFirebase() {
+        // Spinner
+        _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
+        FirebaseService().getNameOrCategoryFromFirebase(type: "name") { (nameDictionary) in
+            var keys:[String] = []
+            var items:[String] = []
+            for(key, value) in nameDictionary {
+                if !(key == "" && value == "") {
+                    keys.append(key)
+                    items.append(value)
+                }
+            }
+            self.nameKey = keys.sorted(by: <)
+            self.nameItems = items.sorted(by: <)
+        }
+        FirebaseService().getNameOrCategoryFromFirebase(type: "category") { (catgoryDictionary) in
+            var keys:[String] = []
+            var items:[String] = []
+            for(key, value) in catgoryDictionary {
+                if !(key == "" && value == "") {
+                    keys.append(key)
+                    items.append(value)
+                }
+            }
+            self.categoryItems = items.sorted(by: <)
+            self.categoryKey = keys.sorted(by: <)
+            self.tableView.reloadData()
+            SwiftSpinner.hide()
+        }
     }
 }

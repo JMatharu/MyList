@@ -104,34 +104,85 @@ class FirebaseService {
         }
     }
     
-    func saveNameOrCategoryToFirebase(type:String, textList: [String]) {
-        for text in textList {
-            if type == "name" {
-                firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(text)
-            } else {
-                firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(text)
+    func saveNameOrCategoryToFirebase(type:String, text: String) {
+        if type == "name" {
+            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(text)
+        } else {
+            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(text)
+        }
+    }
+    
+    func saveNameOrCategoryToFirebase(type:String, textList: [String:String]) {
+        for(key, value) in textList {
+//            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).removeValue()
+            if key.characters.count < 7 {
+                if type == "name" {
+                    firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(value)
+                } else {
+                    firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(value)
+                }
             }
         }
     }
     
-    func removeNameOrCategoryFromFirebase() {
-        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).removeValue()
+    func deleteNameOrCategoryFromFirebase(type:String, itemKey:String) {
+        if type == "name" {
+            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).child(itemKey).removeValue()
+        } else {
+            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).child(itemKey).removeValue()
+        }
+
     }
     
-    func getNameOrCategoryFromFirebase(completion:@escaping([String])->()) {
+    func getNameOrCategoryFromFirebase(type:String, completion:@escaping([String:String])->()) {
         var names:[String] = []
-        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let snap = snapshot.value as? NSDictionary else {
-                completion([""])
-                return
-            }
-            for(_, value) in snap {
-                if let name = value as? String {
-                    names.append(name)
+        var nameKeys:[String] = []
+        var nameDictionary:[String:String] = [:]
+        var categories:[String] = []
+        var categoriesKeys:[String] = []
+        var categoryDictionary:[String:String] = [:]
+        switch type {
+        case "name":
+            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let snap = snapshot.value as? NSDictionary else {
+                    completion(["":""])
+                    return
                 }
-            }
-            completion(names)
-        })
+                for(key, value) in snap {
+                    if let name = value as? String {
+                        names.append(name)
+                    }
+                    if let key = key as? String {
+                        nameKeys.append(key)
+                    }
+                }
+                for index in 0..<names.count {
+                    nameDictionary.updateValue(names[index], forKey: nameKeys[index])
+                }
+                completion(nameDictionary)
+            })
+        case "category":
+            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let snap = snapshot.value as? NSDictionary else {
+                    completion(["":""])
+                    return
+                }
+                for(key, value) in snap {
+                    if let category = value as? String {
+                        categories.append(category)
+                    }
+                    if let key = key as? String {
+                        categoriesKeys.append(key)
+                    }
+                }
+                for index in 0..<categories.count {
+                    categoryDictionary.updateValue(categories[index], forKey: categoriesKeys[index])
+                }
+                completion(categoryDictionary)
+            })
+        default:
+            print("Not a valid type.....")
+        }
     }
     
     func saveGroceryList(dictionaryOfData:[String:String]) {
