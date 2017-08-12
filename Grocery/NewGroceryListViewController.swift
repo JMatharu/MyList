@@ -15,8 +15,9 @@ class NewGroceryListViewController: UITableViewController {
 
     @IBOutlet weak var leftBarButton: UIBarButtonItem!
     var nameItems: [String] = []
-    var tempNameItems: [String] = []
-    var nameKey:[String] = []
+//    var tempNameItems: [String] = []
+    var nameKeys:[String] = []
+    var nameDic:[String:String] = [:]
     var categoryItems: [String] = []
     var categoryKey:[String] = []
     let fabButton = KCFloatingActionButton().createFabButton()
@@ -35,7 +36,7 @@ class NewGroceryListViewController: UITableViewController {
                 alert.addAction(PMAlertAction(title: "Ok", style: .default, action: {
                     //Remode all list
                     self.nameItems.removeAll()
-                    self.tempNameItems.removeAll()
+//                    self.tempNameItems.removeAll()
                     self.categoryItems.removeAll()
                     self.navigationController?.popViewController(animated: true)
                 }))
@@ -48,7 +49,7 @@ class NewGroceryListViewController: UITableViewController {
             }
         } else {
             //Display nameItems data
-            nameItems = tempNameItems
+//            nameItems = tempNameItems
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -67,8 +68,12 @@ class NewGroceryListViewController: UITableViewController {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 //refresh table view and title
-                tempNameItems = nameItems
+//                tempNameItems = nameItems
+                for(_,value) in nameDic {
+                    FirebaseService().saveNameOrCategoryToFirebase(type: "name", text: value)
+                }
                 nameItems.removeAll()
+                nameDic.removeAll()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -84,8 +89,8 @@ class NewGroceryListViewController: UITableViewController {
                 self.present(alert, animated: true, completion: nil)
             } else {
                 //Save this list locally as well
-                saveItems(nItems: tempNameItems, cItems: categoryItems)
-                tempNameItems.removeAll()
+//                saveItems(nItems: tempNameItems, cItems: categoryItems)
+//                tempNameItems.removeAll()
                 categoryItems.removeAll()
                 self.performSegue(withIdentifier: Constants.Segue.NewToGroceryList, sender: nil)
             }
@@ -113,7 +118,7 @@ class NewGroceryListViewController: UITableViewController {
                 if let t = textField.text {
                     if self.isCurrentVCNameVC() {
                         self.nameItems.append(t)
-                        FirebaseService().saveNameOrCategoryToFirebase(type: "name", text: t)
+                        self.nameDic.updateValue(t, forKey: String(self.nameItems.count - 1))
                     } else {
                         self.categoryItems.append(t)
                         FirebaseService().saveNameOrCategoryToFirebase(type: "category", text: t)
@@ -183,26 +188,15 @@ class NewGroceryListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: Constants.Identifiers.TableViewRowActionDelete) { (action, index) in
             if self.isCurrentVCNameVC() {
-                if !self.nameItems.isEmpty {
-                    if self.nameKey[indexPath.row].characters.count > 7 {
-                        FirebaseService().deleteNameOrCategoryFromFirebase(type: "name", itemKey: self.nameKey[indexPath.row])
-                        self.nameItems.remove(at: indexPath.row)
-                        self.nameKey.remove(at: indexPath.row)
-                    } else {
-                        self.nameItems.remove(at: indexPath.row)
-                        self.nameKey.remove(at: indexPath.row)
-                    }
-                } else {
-                    self.tempNameItems.remove(at: indexPath.row)
-                    self.nameKey.remove(at: indexPath.row)
-                }
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.nameDic.removeValue(forKey: String(indexPath.row))
+                self.nameItems.remove(at: indexPath.row)
             } else {
                 self.categoryItems.remove(at: indexPath.row)
                 self.categoryKey.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 FirebaseService().deleteNameOrCategoryFromFirebase(type: "category", itemKey: self.categoryKey[indexPath.row])
             }
+            self.tableView.reloadData()
         }
         let edit = UITableViewRowAction(style: .normal, title: Constants.Identifiers.TableViewRowActionEdit) { (action, index) in
             let editAlert = PMAlertController(withTitle: "Edit Item", withDescription: "You can edit the item")
@@ -212,7 +206,7 @@ class NewGroceryListViewController: UITableViewController {
                     if !self.nameItems.isEmpty {
                         textField?.text = self.nameItems[indexPath.row]
                     } else {
-                        textField?.text = self.tempNameItems[indexPath.row]
+//                        textField?.text = self.tempNameItems[indexPath.row]
                     }
                 } else {
                     textField?.text = self.categoryItems[indexPath.row]
@@ -229,8 +223,8 @@ class NewGroceryListViewController: UITableViewController {
                             self.nameItems.remove(at: indexPath.row)
                             self.nameItems.insert(textFieldText, at: indexPath.row)
                         } else {
-                            self.tempNameItems.remove(at: indexPath.row)
-                            self.tempNameItems.insert(textFieldText, at: indexPath.row)
+//                            self.tempNameItems.remove(at: indexPath.row)
+//                            self.tempNameItems.insert(textFieldText, at: indexPath.row)
                         }
                     } else {
                         self.categoryItems.remove(at: indexPath.row)
@@ -259,7 +253,7 @@ class NewGroceryListViewController: UITableViewController {
                     items.append(value)
                 }
             }
-            self.nameKey = keys.sorted(by: <)
+            self.nameKeys = keys.sorted(by: <)
             self.nameItems = items.sorted(by: <)
         }
         FirebaseService().getNameOrCategoryFromFirebase(type: "category") { (catgoryDictionary) in

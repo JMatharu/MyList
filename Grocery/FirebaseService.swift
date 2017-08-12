@@ -104,6 +104,7 @@ class FirebaseService {
         }
     }
     
+    //Remove this method while removing NewGroceryListVC
     func saveNameOrCategoryToFirebase(type:String, text: String) {
         if type == "name" {
             firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(text)
@@ -111,17 +112,74 @@ class FirebaseService {
             firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(text)
         }
     }
+    //-------
     
     func saveNameOrCategoryToFirebase(type:String, textList: [String:String]) {
-        for(key, value) in textList {
-//            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).removeValue()
-            if key.characters.count < 7 {
-                if type == "name" {
-                    firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(value)
+        getAllKeysInNameAndCategory(type: type) { (keyList) in
+            var localKeyList:[String] = []
+            for(key, value) in textList {
+                // When new item is added this IF block is used
+                localKeyList.append(key)
+                if keyList.contains(key) {
+                    //                    print("Yes i am existing")
                 } else {
-                    firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(value)
+                    //                    print("I am new with value: \(value)")
+                    if type == "name" {
+                        self.firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(value)
+                    } else {
+                        self.firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(value)
+                    }
                 }
             }
+            //When any key is deleted
+            //Find difference between keyList and textList and then delete from firebase if item is not in textList and is there in keyList
+            if keyList.count == 1 && keyList[0] == "" {
+                return
+            }
+            for item in keyList {
+                if localKeyList.contains(item) {
+                    print("I am avaliable in both places")
+                } else {
+                    print("I am not avaliable in firebase \(item)")
+                    if type == "name" {
+                        self.firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).child(item).removeValue()
+                    } else {
+                        self.firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).child(item).removeValue()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func getAllKeysInNameAndCategory(type:String, completion:@escaping([String])->()) {
+        if type == "name" {
+            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.childrenCount == 0 {
+                    completion([""])
+                }
+                guard let snap = snapshot.value as? NSDictionary else { return }
+                var keyList:[String] = []
+                for(key,_) in snap {
+                    if let k = key as? String {
+                        keyList.append(k)
+                    }
+                }
+                completion(keyList)
+            })
+        } else {
+            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.childrenCount == 0 {
+                    completion([""])
+                }
+                guard let snap = snapshot.value as? NSDictionary else { return }
+                var keyList:[String] = []
+                for(key,_) in snap {
+                    if let k = key as? String {
+                        keyList.append(k)
+                    }
+                }
+                completion(keyList)
+            })
         }
     }
     

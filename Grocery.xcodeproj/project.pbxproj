@@ -30,6 +30,7 @@
 		D1DDFD531F27C9B5009AB318 /* MySpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD521F27C9B5009AB318 /* MySpinner.swift */; };
 		D1DDFD571F2C02F0009AB318 /* CalculateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD561F2C02F0009AB318 /* CalculateViewController.swift */; };
 		D1DDFD591F2CBFD6009AB318 /* MyFabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD581F2CBFD6009AB318 /* MyFabButton.swift */; };
+		D1FD1CD11F3902E6002BE2E2 /* NameCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FD1CD01F3902E6002BE2E2 /* NameCategoryListViewController.swift */; };
 		E5904D1807F9CA5E6B09DD4E /* Pods_Grocery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C89294A66988F301F9BC91C /* Pods_Grocery.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		D1DDFD521F27C9B5009AB318 /* MySpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySpinner.swift; sourceTree = "<group>"; };
 		D1DDFD561F2C02F0009AB318 /* CalculateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateViewController.swift; sourceTree = "<group>"; };
 		D1DDFD581F2CBFD6009AB318 /* MyFabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFabButton.swift; sourceTree = "<group>"; };
+		D1FD1CD01F3902E6002BE2E2 /* NameCategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCategoryListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 				D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */,
 				D1DDFD561F2C02F0009AB318 /* CalculateViewController.swift */,
 				D10CED141F2FCC1A007FA380 /* NewGroceryListViewController.swift */,
+				D1FD1CD01F3902E6002BE2E2 /* NameCategoryListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				D19ABF5E1F2162ED006EFD57 /* MyListAlert.swift in Sources */,
 				D14DEA361EFDDB5A000ECE78 /* MyListColours.swift in Sources */,
 				D1DDFD511F24F1C8009AB318 /* MyBadge.swift in Sources */,
+				D1FD1CD11F3902E6002BE2E2 /* NameCategoryListViewController.swift in Sources */,
 				D173EECB1F1FB0200053A18C /* MyListFonts.swift in Sources */,
 				D10CED151F2FCC1A007FA380 /* NewGroceryListViewController.swift in Sources */,
 				D14DEA331EFD9847000ECE78 /* GroceryTableHeader.swift in Sources */,

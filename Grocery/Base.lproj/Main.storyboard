@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--New Grocery List View Controller-->
+        <!--Name Category List View Controller-->
         <scene sceneID="ZzH-Tr-Gc3">
             <objects>
-                <tableViewController id="90W-ae-YgF" customClass="NewGroceryListViewController" customModule="Grocery" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="90W-ae-YgF" customClass="NameCategoryListViewController" customModule="Grocery" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Ow-be-fs7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,18 +52,18 @@
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="52l-q0-Wec">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="cancel:" destination="90W-ae-YgF" id="aFJ-ps-zYi"/>
+                                <action selector="cancel:" destination="90W-ae-YgF" id="OSz-q3-t65"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="mhK-SL-VD0">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="done:" destination="90W-ae-YgF" id="78g-7t-KiO"/>
+                                <action selector="done:" destination="90W-ae-YgF" id="MWH-mF-mh7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="leftBarButton" destination="52l-q0-Wec" id="F2b-hJ-MQB"/>
+                        <outlet property="leftBarButton" destination="52l-q0-Wec" id="NZA-bX-yQr"/>
                         <segue destination="fCD-Yy-lji" kind="show" identifier="NewToGroceryList" id="I5E-Ji-VfY"/>
                     </connections>
                 </tableViewController>
