@@ -126,7 +126,6 @@ class NameCategoryListViewController: UITableViewController {
     
     @IBAction func cancel(_ sender: Any) {
         if isCurrentVCNameVC() {
-            // TODO : check if new element is added or removed , if yes then show alert else no alert
             var isNewItemAdded:Bool = false
             var isItemDeleted:Bool = false
             for itemKey in nameKeys {

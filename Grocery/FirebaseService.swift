@@ -104,16 +104,6 @@ class FirebaseService {
         }
     }
     
-    //Remove this method while removing NewGroceryListVC
-    func saveNameOrCategoryToFirebase(type:String, text: String) {
-        if type == "name" {
-            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).childByAutoId().setValue(text)
-        } else {
-            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).childByAutoId().setValue(text)
-        }
-    }
-    //-------
-    
     func saveNameOrCategoryToFirebase(type:String, textList: [String:String]) {
         getAllKeysInNameAndCategory(type: type) { (keyList) in
             var localKeyList:[String] = []
