@@ -117,7 +117,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         } else {
             self.tabBarController?.navigationItem.title = Constants.Titles.NoItem
         }
-//        self.tabBarController?.navigationItem.title = "asdasd"
     }
     
     func createFABButton() {

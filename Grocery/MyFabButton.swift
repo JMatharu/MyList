@@ -34,6 +34,7 @@ extension KCFloatingActionButton {
         floaty.itemTitleColor = UIColor.FabButtonItemTitleColor
         floaty.itemShadowColor = UIColor.blue
         floaty.buttonImage = #imageLiteral(resourceName: "addItem")
+        floaty.customShift = 50
         return floaty
     }
 }
