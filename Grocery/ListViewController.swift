@@ -32,8 +32,13 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         updateDataSourceWithItemsFromFireBase()
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-}
+        updateTitle()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -108,10 +113,11 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     func updateTitle() {
         if groceryItems.count > 0 {
-            self.title = String(groceryItems.count) + Constants.Titles.Items
+            self.tabBarController?.navigationItem.title = String(groceryItems.count) + Constants.Titles.Items
         } else {
-            self.title = Constants.Titles.NoItem
+            self.tabBarController?.navigationItem.title = Constants.Titles.NoItem
         }
+//        self.tabBarController?.navigationItem.title = "asdasd"
     }
     
     func createFABButton() {

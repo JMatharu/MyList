@@ -138,6 +138,7 @@
                             <outlet property="delegate" destination="fCD-Yy-lji" id="SnA-SS-H52"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="" id="8qS-2s-SRP"/>
                     <navigationItem key="navigationItem" title="Grocery List" id="IA8-4s-1nO">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="Yd8-fb-kWT"/>
                     </navigationItem>
@@ -372,7 +373,8 @@
                     <navigationItem key="navigationItem" id="ulV-73-YB9"/>
                     <connections>
                         <outlet property="logoLabel" destination="Wjc-pD-mxX" id="IMD-tp-N35"/>
-                        <segue destination="pts-at-4PZ" kind="show" identifier="LoginToList" action="showDetailViewController:sender:" id="ERk-aR-WKv"/>
+                        <segue destination="pts-at-4PZ" kind="show" identifier="" action="showDetailViewController:sender:" id="ERk-aR-WKv"/>
+                        <segue destination="g45-L7-N1l" kind="push" identifier="LoginToList" id="5QM-AT-c0J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxU-zz-vN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -440,26 +442,7 @@
             </objects>
             <point key="canvasLocation" x="1346" y="5"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="SXc-Dl-9ZM">
-            <objects>
-                <viewController id="QHO-ac-Bis" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zx6-uz-bgF"/>
-                        <viewControllerLayoutGuide type="bottom" id="9dc-XK-sqf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HTd-oC-wOh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="0an-xc-qcJ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DZE-uX-CKN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1407" y="1062"/>
-        </scene>
-        <!--Item 1-->
+        <!--View Controller-->
         <scene sceneID="QmH-UJ-Xh9">
             <objects>
                 <viewController id="YIq-ip-AaA" sceneMemberID="viewController">
@@ -472,16 +455,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="H8g-vN-nOy"/>
+                    <tabBarItem key="tabBarItem" title="" id="H8g-vN-nOy"/>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vR4-rW-kc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2053" y="682"/>
+            <point key="canvasLocation" x="1971" y="664"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Home View Controller-->
         <scene sceneID="HMA-K1-2l0">
             <objects>
-                <tabBarController id="g45-L7-N1l" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="GroceryListTabBarHomeView" id="g45-L7-N1l" customClass="HomeViewController" customModule="Grocery" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="6Se-D9-0Ah"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ZqZ-ls-8ff">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -489,12 +475,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="YIq-ip-AaA" kind="relationship" relationship="viewControllers" id="2vQ-jo-lB0"/>
-                        <segue destination="QHO-ac-Bis" kind="relationship" relationship="viewControllers" id="kfp-H9-dh2"/>
+                        <segue destination="fCD-Yy-lji" kind="relationship" relationship="viewControllers" id="Egf-oo-IvY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0oX-Uw-9Ze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="395" y="731"/>
+            <point key="canvasLocation" x="919" y="737"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6WQ-e8-eSU">
@@ -520,7 +506,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="imA-HI-Tsz"/>
+        <segue reference="Egf-oo-IvY"/>
         <segue reference="emE-sk-kia"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: Constants.Identifiers.MainStoryBoard, bundle: nil)
 //            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.ListItemStoryBoard)
-            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.AllListStoryBoard)
+            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.GroceryListTabBarHomeView)
             let navigationController = UINavigationController(rootViewController: initialStoryBoard)
             navigationController.navigationBar.barTintColor = UIColor.navigationBarColor
             navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]

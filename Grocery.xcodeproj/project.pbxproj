@@ -12,6 +12,7 @@
 		D14DEA341EFD9847000ECE78 /* GroceryTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14DEA321EFD9847000ECE78 /* GroceryTableHeader.xib */; };
 		D14DEA361EFDDB5A000ECE78 /* MyListColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14DEA351EFDDB5A000ECE78 /* MyListColours.swift */; };
 		D14DEA381EFEB9A9000ECE78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D14DEA371EFEB9A9000ECE78 /* GoogleService-Info.plist */; };
+		D1594F0E1F40A760000DD413 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1594F0D1F40A760000DD413 /* HomeViewController.swift */; };
 		D15E339C1EF205BA004D8B2E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15E339B1EF205BA004D8B2E /* Constants.swift */; };
 		D15E33A71EF31050004D8B2E /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15E33A61EF31050004D8B2E /* GroceryItem.swift */; };
 		D15E33A91EF32808004D8B2E /* AddEditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */; };
@@ -42,6 +43,7 @@
 		D14DEA321EFD9847000ECE78 /* GroceryTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroceryTableHeader.xib; sourceTree = "<group>"; };
 		D14DEA351EFDDB5A000ECE78 /* MyListColours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListColours.swift; sourceTree = "<group>"; };
 		D14DEA371EFEB9A9000ECE78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1594F0D1F40A760000DD413 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D15E339B1EF205BA004D8B2E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D15E33A61EF31050004D8B2E /* GroceryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		D15E33A81EF32808004D8B2E /* AddEditItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditItemViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,29 @@
 			name = Header;
 			sourceTree = "<group>";
 		};
+		D1594F0B1F4002EB000DD413 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Dashboard;
+			sourceTree = "<group>";
+		};
+		D1594F0C1F40A746000DD413 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D1594F0F1F40AC18000DD413 /* Controller */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		D1594F0F1F40AC18000DD413 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D1594F0D1F40A760000DD413 /* HomeViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		D15E33991EF2058F004D8B2E /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +188,8 @@
 		D15E339E1EF2C4C9004D8B2E /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				D1594F0C1F40A746000DD413 /* Home */,
+				D1594F0B1F4002EB000DD413 /* Dashboard */,
 				D1DDFD471F238741009AB318 /* AllList */,
 				D10F1A111F13027400AD81C6 /* Login */,
 				D14DEA2A1EFD2C4A000ECE78 /* Common */,
@@ -382,6 +409,7 @@
 			files = (
 				D10F1A131F13028E00AD81C6 /* LoginViewController.swift in Sources */,
 				D15E33A91EF32808004D8B2E /* AddEditItemViewController.swift in Sources */,
+				D1594F0E1F40A760000DD413 /* HomeViewController.swift in Sources */,
 				D1DDFD4D1F238957009AB318 /* AllListItem.swift in Sources */,
 				D19E345B1EF08C18006455DD /* ListViewController.swift in Sources */,
 				D1DDFD531F27C9B5009AB318 /* MySpinner.swift in Sources */,
