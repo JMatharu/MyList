@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UserDefaults.standard.bool(forKey: Constants.UserDefaults.IsUserLoggedIn) {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: Constants.Identifiers.MainStoryBoard, bundle: nil)
-//            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.ListItemStoryBoard)
+            //TODO: check if there is a plist with data, if yes then ok else show name cat controller
             let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.GroceryListTabBarHomeView)
             let navigationController = UINavigationController(rootViewController: initialStoryBoard)
             navigationController.navigationBar.barTintColor = UIColor.navigationBarColor

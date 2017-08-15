@@ -81,6 +81,7 @@ struct Constants {
     
     struct Spinner {
         static let Title = "Please wait \nwhile we get your Lists..."
+        static let TitleLogin = "Please wait..."
         static let TitleAfterUpdate = "Please wait \nwhile we update your Lists..."
         static let SubTitle = "Tap to hide while connecting! This will affect only the current operation."
     }

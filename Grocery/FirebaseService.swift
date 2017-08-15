@@ -103,6 +103,7 @@ class FirebaseService {
             print("Selected feature is not valid")
         }
     }
+
     
     func saveNameOrCategoryToFirebase(type:String, textList: [String:String]) {
         getAllKeysInNameAndCategory(type: type) { (keyList) in
@@ -139,6 +140,19 @@ class FirebaseService {
                 }
             }
         }
+    }
+    
+    func getCountOfNameAndCat(completion:@escaping(Bool) -> ()) {
+        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.childrenCount > 0 {
+                self.firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).observeSingleEvent(of: .value, with: { (snapCat) in
+                    if snapCat.childrenCount > 0 {
+                        completion(true)
+                    }
+                })
+            }
+            completion(false)
+        })
     }
     
     private func getAllKeysInNameAndCategory(type:String, completion:@escaping([String])->()) {

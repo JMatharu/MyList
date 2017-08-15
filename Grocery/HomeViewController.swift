@@ -12,7 +12,14 @@ import UIKit
 class HomeViewController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         setTabs()
-    }   
+        self.delegate = self
+    }
+    
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        if tabBarController.selectedIndex == 1 {
+//            performSegue(withIdentifier: "NewGroceryListIdentifier", sender: nil)
+//        }
+//    }
     
     private func setTabs() {
         tabBar.items?[0].title = "Dashboard"

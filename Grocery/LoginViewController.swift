@@ -42,7 +42,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         loginToFirebase()
         print("Successfully Login")
         // Spinner
-        _ = SwiftSpinner.init(title: Constants.Spinner.Title)
+        _ = SwiftSpinner.init(title: Constants.Spinner.TitleLogin)
 
     }
 
@@ -73,7 +73,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             // self.navigationController?.pushViewController(listViewController, animated: true)
             
             // To push controller with segue
-            self.performSegue(withIdentifier: Constants.Segue.LoginToList, sender: nil)
+            FirebaseService().getCountOfNameAndCat(completion: { (bool) in
+                if bool {
+                    self.performSegue(withIdentifier: Constants.Segue.LoginToList, sender: nil)
+                } else {
+                    self.performSegue(withIdentifier: Constants.Segue.NewGroceryListIdentifier, sender: nil)
+                }
+            })
         })
     }
     
