@@ -183,8 +183,8 @@ class NameCategoryListViewController: UITableViewController {
                         self.nameKeys.append(String(self.nameValue.count))
                         self.nameValue.append(t)
                     } else {
-                        self.catDictionary[String(self.nameValue.count)] = t
-                        self.catKeys.append(String(self.nameValue.count))
+                        self.catDictionary[String(self.catValue.count)] = t
+                        self.catKeys.append(String(self.catValue.count))
                         self.catValue.append(t)
                     }
                 }
