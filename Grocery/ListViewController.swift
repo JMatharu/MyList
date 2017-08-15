@@ -237,8 +237,9 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         let paths = FileManager.default.urls(for: .documentDirectory,in: .userDomainMask)
         return paths[0]
     }
-    func dataFilePath() -> URL {
-        return documentsDirectory().appendingPathComponent("NameAndCategory.plist")
+    func dataFilePath(type:String) -> URL {
+        let fileName = type + ".plist"
+        return documentsDirectory().appendingPathComponent(fileName)
     }
     
     func saveItems(type:String, items: [String]) {
@@ -249,14 +250,16 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
                 archiver.encode(items[index], forKey: "NameItem\(index)")
             }
             archiver.encode(items.count, forKey: "NameItems")
+            archiver.finishEncoding()
+            data.write(to: dataFilePath(type: "Name"), atomically: true)
         } else {
             for index in 0..<items.count {
                 archiver.encode(items[index], forKey: "CategoryItems\(index)")
             }
             archiver.encode(items.count, forKey: "CategoryItems")
+            archiver.finishEncoding()
+            data.write(to: dataFilePath(type: "Category"), atomically: true)
         }
-        archiver.finishEncoding()
-        data.write(to: dataFilePath(), atomically: true)
     }
     
 }
