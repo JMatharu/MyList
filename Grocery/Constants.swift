@@ -28,6 +28,7 @@ struct Constants {
         static let ListItemStoryBoard = "ListViewController"
         static let AllListStoryBoard = "AllListViewController"
         static let GroceryListTabBarHomeView = "GroceryListTabBarHomeView"
+        static let NameCategoryListViewController = "NameCategoryListViewController"
         static let CategoryCell = "categoryCell"
         static let NameCell = "nameCell"
         static let NameVC = "NameViewController"
