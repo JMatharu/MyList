@@ -19,6 +19,10 @@ class NameCategoryListViewController: UITableViewController {
     var nameDictionary:[String:String] = [:]
     var initialDictionaryKeys:[String] = []
     
+    var nameInitialValue:[String] = []
+    var nameInitialKeys:[String] = []
+    var nameInitialDictionary:[String:String] = [:]
+    
     var catValue:[String] = []
     var catKeys:[String] = []
     var catDictionary:[String:String] = [:]
@@ -168,24 +172,45 @@ class NameCategoryListViewController: UITableViewController {
     //MARK: - Methods
     private func createFABButton() {
         let fabButton = KCFloatingActionButton().createFabButton()
-        let alertTitle = "Enter Item"
-        let alertDescription = "For Name: Enter name of person\nFor Category: Enter category like Movies, Grocery, Gas ..."
+        let alertTitle = "Enter Information"
         fabButton.addItem(Constants.FABButton.AddItem, icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
-            let alertVC = PMAlertController.init(withTitle: alertTitle, withDescription: alertDescription)
+            let alertVC = PMAlertController.init(withTitle: alertTitle, withDescription: "")
             alertVC.addTextField({ (textField) in
                 textField?.becomeFirstResponder()
             })
+            alertVC.addTextField({ (initialTextField) in
+                
+            })
+            if self.isCurrentVCNameVC() {
+                alertVC.textFields[0].placeholder = "Enter Name"
+                alertVC.textFields[1].placeholder = "Enter Name Initial"
+            } else {
+                alertVC.textFields[0].placeholder = "Enter Category"
+                alertVC.textFields[1].isHidden = true
+            }
             alertVC.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
                 let textField = alertVC.textFields[0]
+                let initialTextField = alertVC.textFields[1]
+                var isFirstTextFieldEmpty:Bool = true
                 if let t = textField.text {
-                    if self.isCurrentVCNameVC() {
-                        self.nameDictionary[String(self.nameValue.count)] = t
-                        self.nameKeys.append(String(self.nameValue.count))
-                        self.nameValue.append(t)
-                    } else {
-                        self.catDictionary[String(self.catValue.count)] = t
-                        self.catKeys.append(String(self.catValue.count))
-                        self.catValue.append(t)
+                    if !(t == "") {
+                        isFirstTextFieldEmpty = false
+                        if self.isCurrentVCNameVC() {
+                            self.nameDictionary[String(self.nameValue.count)] = t
+                            self.nameKeys.append(String(self.nameValue.count))
+                            self.nameValue.append(t)
+                        } else {
+                            self.catDictionary[String(self.catValue.count)] = t
+                            self.catKeys.append(String(self.catValue.count))
+                            self.catValue.append(t)
+                        }
+                    }
+                }
+                if let nameInitials = initialTextField.text {
+                    if !(nameInitials == "" && isFirstTextFieldEmpty) {
+                        self.nameInitialDictionary[String(self.nameInitialValue.count)] = nameInitials
+                        self.nameInitialKeys.append(String(self.nameInitialValue.count))
+                        self.nameInitialValue.append(nameInitials)
                     }
                 }
                 alertVC.dismiss(animated: true, completion: nil)
