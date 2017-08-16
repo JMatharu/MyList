@@ -208,7 +208,7 @@ class NameCategoryListViewController: UITableViewController {
                 }
                 if let nameInitials = initialTextField.text {
                     if !(nameInitials == "" && isFirstTextFieldEmpty) {
-                        self.nameInitialDictionary[String(self.nameInitialValue.count)] = nameInitials
+                        self.nameInitialDictionary[textField.text!] = nameInitials
                         self.nameInitialKeys.append(String(self.nameInitialValue.count))
                         self.nameInitialValue.append(nameInitials)
                     }
