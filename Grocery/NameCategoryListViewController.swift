@@ -178,23 +178,23 @@ class NameCategoryListViewController: UITableViewController {
             alertVC.addTextField({ (textField) in
                 textField?.becomeFirstResponder()
             })
-            alertVC.addTextField({ (initialTextField) in
-                
-            })
+//            alertVC.addTextField({ (initialTextField) in
+//                
+//            })
             if self.isCurrentVCNameVC() {
                 alertVC.textFields[0].placeholder = "Enter Name"
-                alertVC.textFields[1].placeholder = "Enter Name Initials"
+//                alertVC.textFields[1].placeholder = "Enter Name Initials"
             } else {
                 alertVC.textFields[0].placeholder = "Enter Category"
-                alertVC.textFields[1].isHidden = true
+//                alertVC.textFields[1].isHidden = true
             }
             alertVC.addAction(PMAlertAction(title: Constants.Alert.Ok, style: PMAlertActionStyle.default, action: {
                 let textField = alertVC.textFields[0]
-                let initialTextField = alertVC.textFields[1]
-                var isFirstTextFieldEmpty:Bool = true
+//                let initialTextField = alertVC.textFields[1]
+//                var isFirstTextFieldEmpty:Bool = true
                 if let t = textField.text {
                     if !(t == "") {
-                        isFirstTextFieldEmpty = false
+//                        isFirstTextFieldEmpty = false
                         if self.isCurrentVCNameVC() {
                             self.nameDictionary[String(self.nameValue.count)] = t
                             self.nameKeys.append(String(self.nameValue.count))
@@ -206,13 +206,13 @@ class NameCategoryListViewController: UITableViewController {
                         }
                     }
                 }
-                if let nameInitials = initialTextField.text {
-                    if !(nameInitials == "" && isFirstTextFieldEmpty) {
-                        self.nameInitialDictionary[textField.text!] = nameInitials
-                        self.nameInitialKeys.append(String(self.nameInitialValue.count))
-                        self.nameInitialValue.append(nameInitials)
-                    }
-                }
+//                if let nameInitials = initialTextField.text {
+//                    if !(nameInitials == "" && isFirstTextFieldEmpty) {
+//                        self.nameInitialDictionary[textField.text!] = nameInitials
+//                        self.nameInitialKeys.append(String(self.nameInitialValue.count))
+//                        self.nameInitialValue.append(nameInitials)
+//                    }
+//                }
                 alertVC.dismiss(animated: true, completion: nil)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
