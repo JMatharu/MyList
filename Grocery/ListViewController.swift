@@ -110,8 +110,13 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         
         storeLabel.text = item.store
         categoryLabel.text = item.category
-        nameLabel.text = item.name
+        nameLabel.text = nameConversionToCharachers(name: item.name)
         amountLabel.text = item.amount
+    }
+    
+    private func nameConversionToCharachers(name:String) -> String {
+        let index = name.index(name.startIndex, offsetBy: 1)
+        return name.substring(to: index).capitalized
     }
     
     func updateTitle() {
