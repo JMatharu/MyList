@@ -183,7 +183,7 @@ class NameCategoryListViewController: UITableViewController {
             })
             if self.isCurrentVCNameVC() {
                 alertVC.textFields[0].placeholder = "Enter Name"
-                alertVC.textFields[1].placeholder = "Enter Name Initial"
+                alertVC.textFields[1].placeholder = "Enter Name Initials"
             } else {
                 alertVC.textFields[0].placeholder = "Enter Category"
                 alertVC.textFields[1].isHidden = true
