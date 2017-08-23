@@ -218,8 +218,22 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     }
     
     func loadNameAndCategory() {
-        loadFromPlist(type: "name")
-        loadFromPlist(type: "category")
+        NameCategorySharedService.sharedInstance.initializeNamesArray { (nameList) in
+            for name in nameList {
+                self.pickerNameData.append(name)
+            }
+            self.pickerNameData.sort(by: <)
+        }
+        
+        NameCategorySharedService.sharedInstance.initializeCategoryArray { (categoryList) in
+            for category in categoryList {
+                self.pickerCategoryData.append(category)
+            }
+            self.pickerCategoryData.sort(by: <)
+        }
+        
+//        loadFromPlist(type: "name")
+//        loadFromPlist(type: "category")
     }
     
     private func loadFromPlist(type:String) {

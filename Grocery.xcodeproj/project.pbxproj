@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D10F1A131F13028E00AD81C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10F1A121F13028E00AD81C6 /* LoginViewController.swift */; };
+		D11F580F1F45E68B00720D6E /* NameCategorySharedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11F580E1F45E68B00720D6E /* NameCategorySharedService.swift */; };
 		D14DEA331EFD9847000ECE78 /* GroceryTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14DEA311EFD9847000ECE78 /* GroceryTableHeader.swift */; };
 		D14DEA341EFD9847000ECE78 /* GroceryTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14DEA321EFD9847000ECE78 /* GroceryTableHeader.xib */; };
 		D14DEA361EFDDB5A000ECE78 /* MyListColours.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14DEA351EFDDB5A000ECE78 /* MyListColours.swift */; };
@@ -39,6 +40,7 @@
 		47C2A509875A783681BD99AC /* Pods-Grocery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grocery.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Grocery/Pods-Grocery.debug.xcconfig"; sourceTree = "<group>"; };
 		5F0F88E08F0D4A0407A8D3F7 /* Pods-Grocery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grocery.release.xcconfig"; path = "Pods/Target Support Files/Pods-Grocery/Pods-Grocery.release.xcconfig"; sourceTree = "<group>"; };
 		D10F1A121F13028E00AD81C6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D11F580E1F45E68B00720D6E /* NameCategorySharedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCategorySharedService.swift; sourceTree = "<group>"; };
 		D14DEA311EFD9847000ECE78 /* GroceryTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryTableHeader.swift; sourceTree = "<group>"; };
 		D14DEA321EFD9847000ECE78 /* GroceryTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroceryTableHeader.xib; sourceTree = "<group>"; };
 		D14DEA351EFDDB5A000ECE78 /* MyListColours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListColours.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				D1CB3B431F07F9A200AE136C /* FirebaseService.swift */,
+				D11F580E1F45E68B00720D6E /* NameCategorySharedService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				D19ABF5E1F2162ED006EFD57 /* MyListAlert.swift in Sources */,
 				D14DEA361EFDDB5A000ECE78 /* MyListColours.swift in Sources */,
 				D1DDFD511F24F1C8009AB318 /* MyBadge.swift in Sources */,
+				D11F580F1F45E68B00720D6E /* NameCategorySharedService.swift in Sources */,
 				D1FD1CD11F3902E6002BE2E2 /* NameCategoryListViewController.swift in Sources */,
 				D173EECB1F1FB0200053A18C /* MyListFonts.swift in Sources */,
 				D14DEA331EFD9847000ECE78 /* GroceryTableHeader.swift in Sources */,
