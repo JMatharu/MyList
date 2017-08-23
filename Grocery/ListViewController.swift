@@ -34,7 +34,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
-        print(documentsDirectory())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,7 +114,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     }
     
     private func nameConversionToCharachers(name:String) -> String {
-        let index = name.index(name.startIndex, offsetBy: 1)
+        let index = name.index(name.startIndex, offsetBy: 2)
         return name.substring(to: index).capitalized
     }
     
