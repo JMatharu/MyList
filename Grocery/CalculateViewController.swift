@@ -15,6 +15,7 @@ class CalculateViewController: UIViewController {
     var groceryItems:[GroceryItem] = []
     override func viewDidLoad() {
         getTotalAmountSpent()
+        getAmountSpentByEachName()
     }
     
     override func viewWillLayoutSubviews() {
@@ -35,12 +36,20 @@ class CalculateViewController: UIViewController {
         navigationBar.tintColor = UIColor.white
     }
     
-    func getTotalAmountSpent() {
+    private func getTotalAmountSpent() {
         var totalItem: Int = 0
         for item in groceryItems {
             totalItem += Int(item.amount)!
         }
         totalAmount.text = String(totalItem)
+    }
+    
+    func getAmountSpentByEachName() {
+        for item in groceryItems {
+            if item.name == "Jagdeep" {
+                print(item.amount)
+            }
+        }
     }
     
     func done() {
