@@ -30,7 +30,6 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         tableView.estimatedRowHeight = Constants.UIDimentions.EstimatedRowHeightForTableCell
         
         updateDataSourceWithItemsFromFireBase()
-        updateNameCategoryListFromFirebase()
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
@@ -216,55 +215,5 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             SwiftSpinner.hide()
         }
     }
-    
-    //MARK: - Saving Name and Category in local from firebase
-    private func updateNameCategoryListFromFirebase() {
-        // Spinner
-        _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
-        FirebaseService().getNameOrCategoryFromFirebase(type: "name") { (nameDictionary) in
-            var nameArray:[String] = []
-            for (_, value) in nameDictionary {
-                nameArray.append(value)
-            }
-            self.saveItems(type: "name", items: nameArray)
-        }
-        FirebaseService().getNameOrCategoryFromFirebase(type: "category") { (catDictionary) in
-            var catArray:[String] = []
-            for (_, value) in catDictionary {
-                catArray.append(value)
-            }
-            self.saveItems(type: "category", items: catArray)
-        }
-    }
-    
-    func documentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory,in: .userDomainMask)
-        return paths[0]
-    }
-    func dataFilePath(type:String) -> URL {
-        let fileName = type + ".plist"
-        return documentsDirectory().appendingPathComponent(fileName)
-    }
-    
-    func saveItems(type:String, items: [String]) {
-        let data = NSMutableData()
-        let archiver = NSKeyedArchiver(forWritingWith: data)
-        if type == "name" {
-            for index in 0..<items.count {
-                archiver.encode(items[index], forKey: "NameItem\(index)")
-            }
-            archiver.encode(items.count, forKey: "NameItems")
-            archiver.finishEncoding()
-            data.write(to: dataFilePath(type: "Name"), atomically: true)
-        } else {
-            for index in 0..<items.count {
-                archiver.encode(items[index], forKey: "CategoryItems\(index)")
-            }
-            archiver.encode(items.count, forKey: "CategoryItems")
-            archiver.finishEncoding()
-            data.write(to: dataFilePath(type: "Category"), atomically: true)
-        }
-    }
-    
 }
 

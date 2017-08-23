@@ -231,42 +231,5 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             }
             self.pickerCategoryData.sort(by: <)
         }
-        
-//        loadFromPlist(type: "name")
-//        loadFromPlist(type: "category")
-    }
-    
-    private func loadFromPlist(type:String) {
-        let paths = FileManager.default.urls(for: .documentDirectory,in: .userDomainMask)
-        switch type {
-        case "name":
-            let path = paths[0].appendingPathComponent("Name.plist")
-            if let data = try? Data(contentsOf: path) {
-                let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-                let nameItems = unarchiver.decodeInt32(forKey: "NameItems")
-                for index in 0..<nameItems {
-                    if let name = unarchiver.decodeObject(forKey: "NameItem\(index)") as? String {
-                        pickerNameData.append(name)
-                        pickerNameData.sort(by: <)
-                    }
-                }
-                unarchiver.finishDecoding()
-            }
-        case "category":
-            let path = paths[0].appendingPathComponent("Category.plist")
-            if let data = try? Data(contentsOf: path) {
-                let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-                let catItems = unarchiver.decodeInt32(forKey: "CategoryItems")
-                for index in 0..<catItems {
-                    if let category = unarchiver.decodeObject(forKey: "CategoryItems\(index)") as? String {
-                        pickerCategoryData.append(category)
-                        pickerCategoryData.sort(by: <)
-                    }
-                }
-                unarchiver.finishDecoding()
-            }
-        default:
-            print("Some error happns")
-        }
     }
 }
