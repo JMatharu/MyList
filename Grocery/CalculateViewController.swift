@@ -12,6 +12,7 @@ import SwiftSpinner
 class CalculateViewController: UIViewController {
     
     @IBOutlet weak var totalAmount: UILabel!
+    @IBOutlet weak var amountPerName: UILabel!
     var groceryItems:[GroceryItem] = []
     var nameList = [String]()
     
@@ -43,7 +44,7 @@ class CalculateViewController: UIViewController {
         for item in groceryItems {
             totalItem += Int(item.amount)!
         }
-        totalAmount.text = String(totalItem)
+        totalAmount.text = "Total Spent 💰 " + CurrencyFormatter().getLocalCurrency(amount: (totalItem as? NSNumber)!)
     }
     
     func getAmountSpentByEachNameAsArray() -> [String:Int] {
@@ -69,10 +70,14 @@ class CalculateViewController: UIViewController {
     private func getAllNames() {
         NameCategorySharedService.sharedInstance.initializeNamesArray { (nameArray) in
             self.nameList = nameArray
-            print(self.getAmountSpentByEachNameAsArray())
-//            for count in 0..<self.getAmountSpentByEachNameAsArray().count {
-//                print(self.getAmountSpentByEachNameAsArray()[nameArray[count]]!)
-//            }
+            var amountNameString = ""
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.locale = NSLocale.current
+            for count in 0..<self.getAmountSpentByEachNameAsArray().count {
+                amountNameString += nameArray[count] + " spent " + CurrencyFormatter().getLocalCurrency(amount: self.getAmountSpentByEachNameAsArray()[nameArray[count]]! as NSNumber) + "\n"
+            }
+            self.amountPerName.text = amountNameString
             SwiftSpinner.hide()
         }
     }
