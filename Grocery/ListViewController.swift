@@ -163,6 +163,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         } else if segue.identifier == Constants.Segue.CalculateGroceryList {
             let controller = segue.destination as! CalculateViewController
             controller.groceryItems = groceryItems
+            _ = SwiftSpinner.init(title: "as", subTitle: "12")
         } else if segue.identifier == Constants.Segue.EditItem {
             let controller = segue.destination as! AddEditItemViewController
             controller.delegate = self

@@ -13,9 +13,11 @@ class CalculateViewController: UIViewController {
     
     @IBOutlet weak var totalAmount: UILabel!
     var groceryItems:[GroceryItem] = []
+    var nameList = [String]()
+    
     override func viewDidLoad() {
         getTotalAmountSpent()
-        getAmountSpentByEachName()
+        getAllNames()
     }
     
     override func viewWillLayoutSubviews() {
@@ -44,15 +46,34 @@ class CalculateViewController: UIViewController {
         totalAmount.text = String(totalItem)
     }
     
-    func getAmountSpentByEachName() {
+    func getAmountSpentByEachNameAsArray() -> [String:Int] {
+        var amountPerName = [String:Int]()
+        var nameInList = [String]()
         for item in groceryItems {
-            if item.name == "Jagdeep" {
-                print(item.amount)
+            if nameList.contains(item.name) {
+                if nameInList.contains(item.name) {
+                    amountPerName.updateValue(amountPerName[item.name]! + Int(item.amount)!, forKey: item.name)
+                } else {
+                    nameInList.append(item.name)
+                    amountPerName.updateValue(Int(item.amount)!, forKey: item.name)
+                }
             }
         }
+        return amountPerName
     }
     
     func done() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func getAllNames() {
+        NameCategorySharedService.sharedInstance.initializeNamesArray { (nameArray) in
+            self.nameList = nameArray
+            print(self.getAmountSpentByEachNameAsArray())
+//            for count in 0..<self.getAmountSpentByEachNameAsArray().count {
+//                print(self.getAmountSpentByEachNameAsArray()[nameArray[count]]!)
+//            }
+            SwiftSpinner.hide()
+        }
     }
 }
