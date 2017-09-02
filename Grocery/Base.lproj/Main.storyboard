@@ -165,8 +165,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="01L-2z-VPQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="01L-2z-VPQ">
                                 <rect key="frame" x="24" y="155.5" width="272" height="20.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UU-4j-LFp">
+                                <rect key="frame" x="24" y="206" width="272" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -182,6 +188,9 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="laB-Cg-uqR" secondAttribute="trailing" constant="8" id="57l-96-q1D"/>
                             <constraint firstItem="laB-Cg-uqR" firstAttribute="leading" secondItem="laa-Be-7Bq" secondAttribute="leadingMargin" constant="8" id="MPQ-mf-vgr"/>
+                            <constraint firstItem="0UU-4j-LFp" firstAttribute="top" secondItem="01L-2z-VPQ" secondAttribute="bottom" constant="30" id="PIc-h5-hpY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0UU-4j-LFp" secondAttribute="trailing" constant="8" id="UlW-ev-zQh"/>
+                            <constraint firstItem="0UU-4j-LFp" firstAttribute="leading" secondItem="laa-Be-7Bq" secondAttribute="leadingMargin" constant="8" id="Vev-9u-4Qj"/>
                             <constraint firstItem="01L-2z-VPQ" firstAttribute="leading" secondItem="laa-Be-7Bq" secondAttribute="leadingMargin" constant="8" id="amm-xl-tFn"/>
                             <constraint firstItem="laB-Cg-uqR" firstAttribute="top" secondItem="jbo-Po-RLM" secondAttribute="bottom" constant="85" id="dks-0X-mrN"/>
                             <constraint firstItem="01L-2z-VPQ" firstAttribute="top" secondItem="laB-Cg-uqR" secondAttribute="bottom" constant="30" id="rDv-Kj-Wwm"/>
@@ -189,6 +198,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="amountPerHead" destination="0UU-4j-LFp" id="yMm-Sb-0fh"/>
                         <outlet property="amountPerName" destination="01L-2z-VPQ" id="kkt-lk-0jf"/>
                         <outlet property="totalAmount" destination="laB-Cg-uqR" id="Y3R-1a-Zkj"/>
                     </connections>

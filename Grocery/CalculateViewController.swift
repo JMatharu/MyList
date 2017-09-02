@@ -13,10 +13,13 @@ class CalculateViewController: UIViewController {
     
     @IBOutlet weak var totalAmount: UILabel!
     @IBOutlet weak var amountPerName: UILabel!
+    @IBOutlet weak var amountPerHead: UILabel!
     var groceryItems:[GroceryItem] = []
     
     override func viewDidLoad() {
-        totalAmount.text = CalculateModel().getTotalAmountSpent(groceryItems: groceryItems)
+        totalAmount.text = CalculateModel.init(items: groceryItems).getTotalAmountSpent()
+        CalculateModel.init(items: groceryItems).brain()
+        amountPerHead.text = "Total amount per head 💸 " + String(CalculateModel.init(items: groceryItems).amountPerHead())
         getAllNames()
     }
     
@@ -43,7 +46,7 @@ class CalculateViewController: UIViewController {
     }
     
     private func getAllNames() {
-        CalculateModel().getAllNames(groceryItems: groceryItems) { (amountName) in
+        CalculateModel.init(items: groceryItems).getAllNames { (amountName) in
             self.amountPerName.text = amountName
             SwiftSpinner.hide()
         }
