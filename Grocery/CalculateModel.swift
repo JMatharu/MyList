@@ -40,15 +40,25 @@ class CalculateModel {
         }
     }
     
-    func amountPerHead() -> Double {
-        let totalNumberOfPeople = groceryObject.count
-        let amountPerHead = getTotalAmount() / Double(totalNumberOfPeople)
-        return amountPerHead
+    func amountPerHead(completion:@escaping(Double)->()) {
+        NameCategorySharedService.sharedInstance.initializeNamesArray { (nameArray) in
+            self.nameList = nameArray
+            let totalNumberOfPeople = self.getAmountSpentByEachNameAsArray().count
+            let amountPerHead = self.getTotalAmount() / Double(totalNumberOfPeople)
+            completion(amountPerHead)
+        }
     }
     
     func brain() {
-        let amountPerHead = self.amountPerHead()
-        print(amountPerHead)
+        amountPerHead { (amountPerHeadAfterClosure) in
+            NameCategorySharedService.sharedInstance.initializeNamesArray { (nameArray) in
+                self.nameList = nameArray
+                for item in self.getAmountSpentByEachNameAsArray() {
+                    print(item.key)
+                    print(amountPerHeadAfterClosure - Double(item.value))
+                }
+            }
+        }
     }
     
     private func getTotalAmount() -> Double {
