@@ -30,7 +30,11 @@ class CalculateModel {
             formatter.numberStyle = .currency
             formatter.locale = NSLocale.current
             for count in 0..<self.getAmountSpentByEachNameAsArray().count {
-                amountNameString += nameArray[count] + " spent " + CurrencyFormatter().getLocalCurrency(amount: self.getAmountSpentByEachNameAsArray()[nameArray[count]]! as NSNumber) + "\n"
+                if (amountNameString.isEmpty) {
+                    amountNameString += nameArray[count] + " spent " + CurrencyFormatter().getLocalCurrency(amount: self.getAmountSpentByEachNameAsArray()[nameArray[count]]! as NSNumber)
+                } else {
+                    amountNameString += "\n" + nameArray[count] + " spent " + CurrencyFormatter().getLocalCurrency(amount: self.getAmountSpentByEachNameAsArray()[nameArray[count]]! as NSNumber)
+                }
             }
             completion(amountNameString)
         }
