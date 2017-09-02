@@ -19,7 +19,9 @@ class CalculateViewController: UIViewController {
     override func viewDidLoad() {
         totalAmount.text = CalculateModel.init(items: groceryItems).getTotalAmountSpent()
         CalculateModel.init(items: groceryItems).brain()
-        amountPerHead.text = "Total amount per head 💸 " + String(CalculateModel.init(items: groceryItems).amountPerHead())
+        CalculateModel.init(items: groceryItems).amountPerHead(completion: { (amount) in
+            self.amountPerHead.text = "Total amount per head 💸 " + String(amount)
+        })
         getAllNames()
     }
     
