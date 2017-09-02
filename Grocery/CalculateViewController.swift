@@ -14,10 +14,9 @@ class CalculateViewController: UIViewController {
     @IBOutlet weak var totalAmount: UILabel!
     @IBOutlet weak var amountPerName: UILabel!
     var groceryItems:[GroceryItem] = []
-    var nameList = [String]()
     
     override func viewDidLoad() {
-        getTotalAmountSpent()
+        totalAmount.text = CalculateModel().getTotalAmountSpent(groceryItems: groceryItems)
         getAllNames()
     }
     
@@ -39,45 +38,13 @@ class CalculateViewController: UIViewController {
         navigationBar.tintColor = UIColor.white
     }
     
-    private func getTotalAmountSpent() {
-        var totalItem: Int = 0
-        for item in groceryItems {
-            totalItem += Int(item.amount)!
-        }
-        totalAmount.text = "Total Spent 💰 " + CurrencyFormatter().getLocalCurrency(amount: (totalItem as? NSNumber)!)
-    }
-    
-    func getAmountSpentByEachNameAsArray() -> [String:Int] {
-        var amountPerName = [String:Int]()
-        var nameInList = [String]()
-        for item in groceryItems {
-            if nameList.contains(item.name) {
-                if nameInList.contains(item.name) {
-                    amountPerName.updateValue(amountPerName[item.name]! + Int(item.amount)!, forKey: item.name)
-                } else {
-                    nameInList.append(item.name)
-                    amountPerName.updateValue(Int(item.amount)!, forKey: item.name)
-                }
-            }
-        }
-        return amountPerName
-    }
-    
     func done() {
         dismiss(animated: true, completion: nil)
     }
     
     private func getAllNames() {
-        NameCategorySharedService.sharedInstance.initializeNamesArray { (nameArray) in
-            self.nameList = nameArray
-            var amountNameString = ""
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .currency
-            formatter.locale = NSLocale.current
-            for count in 0..<self.getAmountSpentByEachNameAsArray().count {
-                amountNameString += nameArray[count] + " spent " + CurrencyFormatter().getLocalCurrency(amount: self.getAmountSpentByEachNameAsArray()[nameArray[count]]! as NSNumber) + "\n"
-            }
-            self.amountPerName.text = amountNameString
+        CalculateModel().getAllNames(groceryItems: groceryItems) { (amountName) in
+            self.amountPerName.text = amountName
             SwiftSpinner.hide()
         }
     }

@@ -32,6 +32,7 @@
 		D1DDFD571F2C02F0009AB318 /* CalculateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD561F2C02F0009AB318 /* CalculateViewController.swift */; };
 		D1DDFD591F2CBFD6009AB318 /* MyFabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD581F2CBFD6009AB318 /* MyFabButton.swift */; };
 		D1E9F15C1F5AE77400E4B140 /* MyCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E9F15B1F5AE77400E4B140 /* MyCurrency.swift */; };
+		D1E9F15E1F5AF13B00E4B140 /* CalculateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E9F15D1F5AF13B00E4B140 /* CalculateModel.swift */; };
 		D1FD1CD11F3902E6002BE2E2 /* NameCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FD1CD01F3902E6002BE2E2 /* NameCategoryListViewController.swift */; };
 		E5904D1807F9CA5E6B09DD4E /* Pods_Grocery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C89294A66988F301F9BC91C /* Pods_Grocery.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		D1DDFD561F2C02F0009AB318 /* CalculateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateViewController.swift; sourceTree = "<group>"; };
 		D1DDFD581F2CBFD6009AB318 /* MyFabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFabButton.swift; sourceTree = "<group>"; };
 		D1E9F15B1F5AE77400E4B140 /* MyCurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCurrency.swift; sourceTree = "<group>"; };
+		D1E9F15D1F5AF13B00E4B140 /* CalculateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateModel.swift; sourceTree = "<group>"; };
 		D1FD1CD01F3902E6002BE2E2 /* NameCategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCategoryListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				D15E33A61EF31050004D8B2E /* GroceryItem.swift */,
+				D1E9F15D1F5AF13B00E4B140 /* CalculateModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				D1DDFD4D1F238957009AB318 /* AllListItem.swift in Sources */,
 				D19E345B1EF08C18006455DD /* ListViewController.swift in Sources */,
 				D1DDFD531F27C9B5009AB318 /* MySpinner.swift in Sources */,
+				D1E9F15E1F5AF13B00E4B140 /* CalculateModel.swift in Sources */,
 				D1DDFD571F2C02F0009AB318 /* CalculateViewController.swift in Sources */,
 				D1CB3B441F07F9A200AE136C /* FirebaseService.swift in Sources */,
 				D1DDFD491F238758009AB318 /* AllListScreenViewController.swift in Sources */,
