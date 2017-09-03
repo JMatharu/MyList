@@ -15,6 +15,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     var groceryItemKeys: [String] = []
     var groceryItemUpdateKeys: [String] = []
     let heightOfHeader: CGFloat = 40
+    var navTitle: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,9 +117,9 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     
     func updateTitle() {
         if groceryItems.count > 0 {
-            self.tabBarController?.navigationItem.title = String(groceryItems.count) + Constants.Titles.Items
+            self.navigationItem.title = String(groceryItems.count) + Constants.Titles.Items + " (" + navTitle + ")"
         } else {
-            self.tabBarController?.navigationItem.title = Constants.Titles.NoItem
+            self.navigationItem.title = Constants.Titles.NoItem  + " (" + navTitle + ")"
         }
     }
     

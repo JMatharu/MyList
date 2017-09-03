@@ -41,7 +41,16 @@ class HomeViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "mainListToGroceryList", sender: nil)
+        self.performSegue(withIdentifier: "mainListToGroceryList", sender: indexPath.row)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mainListToGroceryList" {
+            let controller = segue.destination as! ListViewController
+            if let index = sender as? Int {
+                controller.navTitle = homeItems[index].itemName
+            }
+        }
     }
     
     @IBAction func addItem(_ sender: Any) {
