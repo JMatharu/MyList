@@ -41,7 +41,7 @@ class HomeViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.performSegue(withIdentifier: "mainListToGroceryList", sender: nil)
     }
     
     @IBAction func addItem(_ sender: Any) {
