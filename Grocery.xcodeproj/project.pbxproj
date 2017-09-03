@@ -24,6 +24,7 @@
 		D19E345E1EF08C18006455DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19E345C1EF08C18006455DD /* Main.storyboard */; };
 		D19E34601EF08C18006455DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D19E345F1EF08C18006455DD /* Assets.xcassets */; };
 		D19E34631EF08C18006455DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19E34611EF08C18006455DD /* LaunchScreen.storyboard */; };
+		D1C4DD5D1F5C8298002730F8 /* HomeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4DD5C1F5C8298002730F8 /* HomeModal.swift */; };
 		D1CB3B441F07F9A200AE136C /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CB3B431F07F9A200AE136C /* FirebaseService.swift */; };
 		D1DDFD491F238758009AB318 /* AllListScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD481F238758009AB318 /* AllListScreenViewController.swift */; };
 		D1DDFD4D1F238957009AB318 /* AllListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDFD4C1F238957009AB318 /* AllListItem.swift */; };
@@ -60,6 +61,7 @@
 		D19E345F1EF08C18006455DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D19E34621EF08C18006455DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D19E34641EF08C18006455DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1C4DD5C1F5C8298002730F8 /* HomeModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModal.swift; sourceTree = "<group>"; };
 		D1CB3B431F07F9A200AE136C /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		D1DDFD481F238758009AB318 /* AllListScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListScreenViewController.swift; sourceTree = "<group>"; };
 		D1DDFD4C1F238957009AB318 /* AllListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListItem.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		D1594F0C1F40A746000DD413 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D1C4DD5B1F5C8288002730F8 /* Modal */,
 				D1594F0F1F40AC18000DD413 /* Controller */,
 			);
 			name = Home;
@@ -254,6 +257,14 @@
 				D15E33991EF2058F004D8B2E /* Others */,
 			);
 			path = Grocery;
+			sourceTree = "<group>";
+		};
+		D1C4DD5B1F5C8288002730F8 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				D1C4DD5C1F5C8298002730F8 /* HomeModal.swift */,
+			);
+			name = Modal;
 			sourceTree = "<group>";
 		};
 		D1CB3B421F07F98C00AE136C /* Service */ = {
@@ -416,6 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C4DD5D1F5C8298002730F8 /* HomeModal.swift in Sources */,
 				D10F1A131F13028E00AD81C6 /* LoginViewController.swift in Sources */,
 				D15E33A91EF32808004D8B2E /* AddEditItemViewController.swift in Sources */,
 				D1594F0E1F40A760000DD413 /* HomeViewController.swift in Sources */,

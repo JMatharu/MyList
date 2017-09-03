@@ -11,27 +11,58 @@ import UIKit
 import PMAlertController
 
 class HomeViewController: UITableViewController {
+    
     @IBOutlet weak var addItem: UINavigationItem!
+    var homeItems: [HomeModal] = []
+    
     override func viewDidLoad() {
         self.title = "Month List"
+        let homeItem1 = HomeModal()
+        homeItem1.itemName = "Hello"
+        homeItems.append(homeItem1)
+        
+        let homeItem2 = HomeModal()
+        homeItem2.itemName = "Hello2"
+        homeItems.append(homeItem2)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.HomeListViewControllerTableCellIdentifier, for: indexPath)
-        cell.textLabel?.text = "Hello"
+        cell.textLabel?.text = homeItems[indexPath.row].itemName
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return homeItems.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
     @IBAction func addItem(_ sender: Any) {
-        let alert = PMAlertController.init(withTitle: "Enter Month and Year", withDescription: "")
-        alert.addAction(<#T##alertAction: PMAlertAction##PMAlertAction#>)
+        let alert = PMAlertController(withTitle: "Enter ", withDescription: "")
+        alert.addTextField { (textField) in
+            textField?.becomeFirstResponder()
+        }
+        alert.addAction(PMAlertAction.init(title: "Ok", style: PMAlertActionStyle.default, action: {
+            if let text = alert.textFields[0].text {
+                if !text.isEmpty {
+                    let homeItem = HomeModal()
+                    homeItem.itemName = text
+                    self.homeItems.append(homeItem)
+                }
+            }
+            self.tableView.reloadData()
+            self.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(PMAlertAction.init(title: "Cancel", style: .cancel, action: { 
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
