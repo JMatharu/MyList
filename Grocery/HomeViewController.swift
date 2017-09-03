@@ -16,7 +16,7 @@ class HomeViewController: UITableViewController {
     var homeItems: [HomeModal] = []
     
     override func viewDidLoad() {
-        self.title = "Month List"
+        self.title = "Home List"
         let homeItem1 = HomeModal()
         homeItem1.itemName = "Hello"
         homeItems.append(homeItem1)
