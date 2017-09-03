@@ -45,7 +45,7 @@ class HomeViewController: UITableViewController {
     }
     
     @IBAction func addItem(_ sender: Any) {
-        let alert = PMAlertController(withTitle: "Enter ", withDescription: "")
+        let alert = PMAlertController(withTitle: "Enter List name", withDescription: "For eg. July List, January List etc..")
         alert.addTextField { (textField) in
             textField?.becomeFirstResponder()
         }
