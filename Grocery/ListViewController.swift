@@ -15,15 +15,12 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     var groceryItemKeys: [String] = []
     var groceryItemUpdateKeys: [String] = []
     let heightOfHeader: CGFloat = 40
-    @IBOutlet weak var leftBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Create FAB button
         createFABButton()
-        leftBarButton.tintColor = UIColor.clear
-        leftBarButton.isEnabled = false
         
         // Make table cell expand if string is bigger than label size
         tableView.rowHeight = UITableViewAutomaticDimension

@@ -139,11 +139,8 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" id="8qS-2s-SRP"/>
-                    <navigationItem key="navigationItem" title="Grocery List" id="IA8-4s-1nO">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Yd8-fb-kWT"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Grocery List" id="IA8-4s-1nO"/>
                     <connections>
-                        <outlet property="leftBarButton" destination="Yd8-fb-kWT" id="Iq8-Qw-MqL"/>
                         <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="AddItem" id="eam-af-YY0"/>
                         <segue destination="ENC-tB-RvR" kind="presentation" identifier="calculateItems" id="jda-Lw-84v"/>
                         <segue destination="Lwe-LO-Hfx" kind="presentation" identifier="EditItem" id="emE-sk-kia"/>
