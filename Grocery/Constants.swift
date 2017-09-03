@@ -12,6 +12,7 @@ import UIKit
 struct Constants {
     struct Identifiers {
         static let ListViewControllerTableCellIdentifier = "ListItem"
+        static let HomeListViewControllerTableCellIdentifier = "HomeList"
         static let AllListViewControllerTableCellIdentifier = "AllListItem"
         static let StoreTagIdentifier = 50
         static let CategoryTagIdentifier = 51
@@ -20,6 +21,7 @@ struct Constants {
         static let AllListLabelTagIdentifier = 11
         static let AllListBadgeTagIdentifier = 12
         static let NameListTagIdentifier = 21
+        static let HomeListTagIdentifier = 31
         static let TableViewRowActionEdit = "Edit"
         static let TableViewRowActionDelete = "Delete"
         static let MainStoryBoard = "Main"
