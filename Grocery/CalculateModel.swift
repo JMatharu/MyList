@@ -58,7 +58,7 @@ class CalculateModel {
                     if brainCalculation.isEmpty {
                         if (amountPerHeadAfterClosure - Double(item.value)) < 0.0 {
                             // negative, this user should get money
-                            brainCalculation += item.key + " owe " + CurrencyFormatter().getLocalCurrency(amount: ((amountPerHeadAfterClosure - Double(item.value)) * -1) as NSNumber) + "🌟"
+                            brainCalculation += item.key + " will get " + CurrencyFormatter().getLocalCurrency(amount: ((amountPerHeadAfterClosure - Double(item.value)) * -1) as NSNumber) + "🌟"
                         } else if (amountPerHeadAfterClosure - Double(item.value)) > 0.0 {
                             // Positive, this user needs to give money
                             brainCalculation += item.key + " will pay " + CurrencyFormatter().getLocalCurrency(amount: (amountPerHeadAfterClosure - Double(item.value)) as NSNumber)
@@ -69,7 +69,7 @@ class CalculateModel {
                     } else {
                         if (amountPerHeadAfterClosure - Double(item.value)) < 0.0 {
                             // negative, this user should get money
-                            brainCalculation += "\n" + item.key + " owe " + CurrencyFormatter().getLocalCurrency(amount: ((amountPerHeadAfterClosure - Double(item.value)) * -1) as NSNumber) + "🌟"
+                            brainCalculation += "\n" + item.key + " will get " + CurrencyFormatter().getLocalCurrency(amount: ((amountPerHeadAfterClosure - Double(item.value)) * -1) as NSNumber) + "🌟"
                         } else if (amountPerHeadAfterClosure - Double(item.value)) > 0.0 {
                             // Positive, this user needs to give money
                             brainCalculation += "\n" + item.key + " will pay " + CurrencyFormatter().getLocalCurrency(amount: (amountPerHeadAfterClosure - Double(item.value)) as NSNumber)
