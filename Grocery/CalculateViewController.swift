@@ -14,11 +14,14 @@ class CalculateViewController: UIViewController {
     @IBOutlet weak var totalAmount: UILabel!
     @IBOutlet weak var amountPerName: UILabel!
     @IBOutlet weak var amountPerHead: UILabel!
+    @IBOutlet weak var finalCalculation: UILabel!
     var groceryItems:[GroceryItem] = []
     
     override func viewDidLoad() {
         totalAmount.text = CalculateModel.init(items: groceryItems).getTotalAmountSpent()
-        CalculateModel.init(items: groceryItems).brain()
+        CalculateModel.init(items: groceryItems).brain { (brainList) in
+            self.finalCalculation.text = brainList
+        }
         CalculateModel.init(items: groceryItems).amountPerHead(completion: { (amount) in
             self.amountPerHead.text = "Total amount per head 💸 " + String(amount)
         })

@@ -49,14 +49,37 @@ class CalculateModel {
         }
     }
     
-    func brain() {
+    func brain(completion:@escaping(String) -> ()) {
+        var brainCalculation = ""
         amountPerHead { (amountPerHeadAfterClosure) in
             NameCategorySharedService.sharedInstance.initializeNamesArray { (nameArray) in
                 self.nameList = nameArray
                 for item in self.getAmountSpentByEachNameAsArray() {
-                    print(item.key)
-                    print(amountPerHeadAfterClosure - Double(item.value))
+                    if brainCalculation.isEmpty {
+                        if (amountPerHeadAfterClosure - Double(item.value)) < 0.0 {
+                            // negative, this user should get money
+                            brainCalculation += item.key + " owe " + CurrencyFormatter().getLocalCurrency(amount: ((amountPerHeadAfterClosure - Double(item.value)) * -1) as NSNumber) + "🌟"
+                        } else if (amountPerHeadAfterClosure - Double(item.value)) > 0.0 {
+                            // Positive, this user needs to give money
+                            brainCalculation += item.key + " will pay " + CurrencyFormatter().getLocalCurrency(amount: (amountPerHeadAfterClosure - Double(item.value)) as NSNumber)
+                        } else if (amountPerHeadAfterClosure - Double(item.value)) == 0.0 {
+                            // 0 , no give no get
+                            brainCalculation += item.key + "neither owe nor pay"
+                        }
+                    } else {
+                        if (amountPerHeadAfterClosure - Double(item.value)) < 0.0 {
+                            // negative, this user should get money
+                            brainCalculation += "\n" + item.key + " owe " + CurrencyFormatter().getLocalCurrency(amount: ((amountPerHeadAfterClosure - Double(item.value)) * -1) as NSNumber) + "🌟" 
+                        } else if (amountPerHeadAfterClosure - Double(item.value)) > 0.0 {
+                            // Positive, this user needs to give money
+                            brainCalculation += "\n" + item.key + " will pay " + CurrencyFormatter().getLocalCurrency(amount: (amountPerHeadAfterClosure - Double(item.value)) as NSNumber)
+                        } else if (amountPerHeadAfterClosure - Double(item.value)) == 0.0 {
+                            // 0 , no give no get
+                            brainCalculation += "\n" + item.key + "neither owe nor pay"
+                        }
+                    }
                 }
+                completion(brainCalculation)
             }
         }
     }
