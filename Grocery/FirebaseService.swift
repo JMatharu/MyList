@@ -255,6 +255,10 @@ class FirebaseService {
         firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(key).setValue(dictionaryOfData)
     }
     
+    func saveHomeList(item:String) {
+        firebaseReference?.child(self.getUid()).child("homeAllList").childByAutoId().setValue(item)
+    }
+    
     private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], parentNode:String, items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {
         var itemsAsVar = items
         firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(updatedItemKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in

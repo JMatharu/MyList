@@ -64,6 +64,7 @@ class HomeViewController: UITableViewController {
                     let homeItem = HomeModal()
                     homeItem.itemName = text
                     self.homeItems.append(homeItem)
+                    FirebaseService().saveHomeList(item: homeItem.itemName)
                 }
             }
             self.tableView.reloadData()
