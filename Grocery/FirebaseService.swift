@@ -67,7 +67,7 @@ class FirebaseService {
         var innerItemKeys: [String] = []
         switch modalName {
         case Constants.Feature.Grocery:
-            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                 guard let snap = snapshot.value as? NSDictionary else { return }
                 for(key, _) in snap {
                     if let key = key as? String {
@@ -83,7 +83,7 @@ class FirebaseService {
                         innerItemKeys.append(self.itemsUpdatedKeys.sorted()[updatedListCount - newItemReverseIndex])
                         
                         // inner firebasecall
-                        self.getDifferentElementFromUpdatedList(updatedItemKeys: self.itemsUpdatedKeys, items: innerItems, updatedListCount: updatedListCount, newItemReverseIndex: newItemReverseIndex, completion: { (groceryItem) in
+                        self.getDifferentElementFromUpdatedList(updatedItemKeys: self.itemsUpdatedKeys, parentNode: parentNode, items: innerItems, updatedListCount: updatedListCount, newItemReverseIndex: newItemReverseIndex, completion: { (groceryItem) in
                             completion(groceryItem, innerItemKeys)
                         })
                     }
@@ -255,9 +255,9 @@ class FirebaseService {
         firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(key).setValue(dictionaryOfData)
     }
     
-    private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {
+    private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], parentNode:String, items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {
         var itemsAsVar = items
-        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ParentGroceryRoot).child(updatedItemKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(updatedItemKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             guard let snap = snapshot.value as? NSDictionary else { return }
             
             let firebaseRow = GroceryItem()
