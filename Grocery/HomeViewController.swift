@@ -14,13 +14,18 @@ class HomeViewController: UITableViewController {
     
     @IBOutlet weak var addItem: UINavigationItem!
     var homeItems: [HomeModal] = []
+    var homeItemsKeys: [String] = []
     
     override func viewDidLoad() {
         self.title = "Home List"
         
-        FirebaseService().getHomeListItems { (homeListItems) in
-            self.homeItems = homeListItems
+        FirebaseService().getHomeListItems { (keys, items) in
+            self.homeItems = items
+            self.homeItemsKeys = keys
             self.tableView.reloadData()
+        }
+        FirebaseService().getHomeListItems { (homeListItems) in
+            
         }
     }
     
@@ -40,6 +45,29 @@ class HomeViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "mainListToGroceryList", sender: indexPath.row)
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let rename = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Rename") { (action, indexPath) in
+            // Rename Name of list
+        }
+        let delete = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Delete") { (action, indexPath) in
+            let alert = PMAlertController(withTitle: "Are you sure?", withDescription: "This action will Delete current list and its child items!")
+            alert.addAction(PMAlertAction(title: "Cancel", style: PMAlertActionStyle.cancel, action: { 
+                alert.dismiss(animated: true, completion: nil)
+                self.tableView.reloadData()
+            }))
+            alert.addAction(PMAlertAction(title: "Ok", style: PMAlertActionStyle.default, action: { 
+               // remove all nodes
+                FirebaseService().deleteHomeListAndItsChildNode(parentNode: self.homeItems[indexPath.row].itemName, itemKey: self.homeItemsKeys[indexPath.row])
+                self.homeItemsKeys.remove(at: indexPath.row)
+                self.homeItems.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        return [rename, delete]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
