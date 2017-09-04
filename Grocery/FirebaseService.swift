@@ -95,10 +95,10 @@ class FirebaseService {
         
     }
     
-    func removeItemFrmFirebase(modalName: String, itemKeys: [String], index: Int) {
+    func removeItemFrmFirebase(modalName: String, parentNode:String, itemKeys: [String], index: Int) {
         switch modalName {
         case Constants.Feature.Grocery:
-            firebaseReference?.child(self.getUid()).child(Constants.Firebase.ParentGroceryRoot).child(itemKeys[index]).removeValue()
+            firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(itemKeys[index]).removeValue()
         default:
             print("Selected feature is not valid")
         }
