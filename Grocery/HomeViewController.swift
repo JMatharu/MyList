@@ -17,13 +17,11 @@ class HomeViewController: UITableViewController {
     
     override func viewDidLoad() {
         self.title = "Home List"
-        let homeItem1 = HomeModal()
-        homeItem1.itemName = "Hello"
-        homeItems.append(homeItem1)
         
-        let homeItem2 = HomeModal()
-        homeItem2.itemName = "Hello2"
-        homeItems.append(homeItem2)
+        FirebaseService().getHomeListItems { (homeListItems) in
+            self.homeItems = homeListItems
+            self.tableView.reloadData()
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

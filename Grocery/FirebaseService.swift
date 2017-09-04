@@ -259,6 +259,19 @@ class FirebaseService {
         firebaseReference?.child(self.getUid()).child("homeAllList").childByAutoId().setValue(item)
     }
     
+    func getHomeListItems(completion:@escaping([HomeModal])->()) {
+        firebaseReference?.child(self.getUid()).child("homeAllList").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            guard let snap = snapshot.value as? NSDictionary else { return }
+            var homeListItems = [HomeModal]()
+            for (_, value) in snap {
+                let homeItem = HomeModal()
+                homeItem.itemName = value as! String
+                homeListItems.append(homeItem)
+            }
+            completion(homeListItems)
+        })
+    }
+    
     private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], parentNode:String, items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {
         var itemsAsVar = items
         firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(updatedItemKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
