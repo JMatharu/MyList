@@ -15,6 +15,7 @@ class HomeViewController: UITableViewController {
     @IBOutlet weak var addItem: UINavigationItem!
     var homeItems: [HomeModal] = []
     var homeItemsKeys: [String] = []
+//    var homeKeysWithItems: [String] = []
     
     override func viewDidLoad() {
         self.title = "Home List"
@@ -23,9 +24,6 @@ class HomeViewController: UITableViewController {
             self.homeItems = items
             self.homeItemsKeys = keys
             self.tableView.reloadData()
-        }
-        FirebaseService().getHomeListItems { (homeListItems) in
-            
         }
     }
     

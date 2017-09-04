@@ -28,7 +28,7 @@ class FirebaseService {
     func getAllDataInSingleEvent(modalName:String, parentNode:String, completion:@escaping ([GroceryItem], [String]) -> ()) {
         var items: [GroceryItem] = []
         var itemsKeys: [String] = []
-        firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        firebaseReference?.child(self.getUid()).child("homeList").child(parentNode).child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             if snapshot.childrenCount == 0 {
                 //Stop Spinner
                 SwiftSpinner.hide()
@@ -67,7 +67,7 @@ class FirebaseService {
         var innerItemKeys: [String] = []
         switch modalName {
         case Constants.Feature.Grocery:
-            firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+            firebaseReference?.child(self.getUid()).child("homeList").child(parentNode).child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                 guard let snap = snapshot.value as? NSDictionary else { return }
                 for(key, _) in snap {
                     if let key = key as? String {
@@ -92,8 +92,21 @@ class FirebaseService {
         default:
             print("Selected feature is not valid")
         }
-        
     }
+    
+//    func getAllHomeWithItemsListKeys(completion:@escaping([String])->()) {
+//        firebaseReference?.child(self.getUid()).child("homeList").observeSingleEvent(of: .value, with: { (snapshot) in
+//            guard let snap = snapshot.value as? NSDictionary else { return }
+//            var keys = [String]()
+//            for (key, value) in  snap {
+//                keys.append(key as! String)
+//                for (innerKey, _) in value as! NSDictionary {
+//                    
+//                }
+//            }
+//            completion(keys)
+//        })
+//    }
     
     func removeItemFrmFirebase(modalName: String, parentNode:String, itemKeys: [String], index: Int) {
         switch modalName {
@@ -248,11 +261,11 @@ class FirebaseService {
     }
     
     func saveGroceryList(parentNode:String, dictionaryOfData:[String:String]) {
-        firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).childByAutoId().setValue(dictionaryOfData)
+        firebaseReference?.child(self.getUid()).child("homeList").child(parentNode).child(Constants.Firebase.ParentGroceryRoot).childByAutoId().setValue(dictionaryOfData)
     }
     
     func saveEditedGroceryList(key:String, parentNode:String, dictionaryOfData:[String:String]) {
-        firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(key).setValue(dictionaryOfData)
+        firebaseReference?.child(self.getUid()).child("homeList").child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(key).setValue(dictionaryOfData)
     }
     
     func saveHomeList(item:String) {
@@ -276,14 +289,15 @@ class FirebaseService {
     
     func deleteHomeListAndItsChildNode(parentNode: String, itemKey:String) {
         // Delete from homelist node
-//        firebaseReference?.child(self.getUid()).child("homeAllList").child(itemKey).removeValue()
+        firebaseReference?.child(self.getUid()).child("homeAllList").child(itemKey).removeValue()
         
         // Delete from Main home node
+        firebaseReference?.child(self.getUid()).child("homeList").child(itemKey).removeValue()
     }
     
     private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], parentNode:String, items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {
         var itemsAsVar = items
-        firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(updatedItemKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        firebaseReference?.child(self.getUid()).child("homeList").child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(updatedItemKeys.sorted()[updatedListCount - newItemReverseIndex]).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             guard let snap = snapshot.value as? NSDictionary else { return }
             
             let firebaseRow = GroceryItem()
