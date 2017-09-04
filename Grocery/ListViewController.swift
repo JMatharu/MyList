@@ -74,7 +74,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             tableView.deleteRows(at: indexPaths, with: .automatic)
             self.updateTitle()
             //Delete from firebase
-            FirebaseService().removeItemFrmFirebase(modalName: Constants.Feature.Grocery, parentNode: navTitle, itemKeys: self.groceryItemKeys, index: indexPath.row)
+            FirebaseService().removeItemFrmFirebase(modalName: Constants.Feature.Grocery, parentNode: self.navTitle, itemKeys: self.groceryItemKeys, index: indexPath.row)
             
             // Delete from local array
             self.groceryItemKeys.remove(at: indexPath.row)
