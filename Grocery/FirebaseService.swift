@@ -62,7 +62,7 @@ class FirebaseService {
     }
     
     // pass itemsKeys and groceryItemUpdateKeys
-    func getUpdatedDataInSingleEvent(modalName: String, itemsKeys:[String], completion:@escaping([GroceryItem], [String]) -> ()) {
+    func getUpdatedDataInSingleEvent(modalName: String, parentNode:String, itemsKeys:[String], completion:@escaping([GroceryItem], [String]) -> ()) {
         let innerItems: [GroceryItem] = []
         var innerItemKeys: [String] = []
         switch modalName {

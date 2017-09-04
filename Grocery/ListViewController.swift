@@ -208,7 +208,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         // Spinner
         _ = SwiftSpinner.init(title: Constants.Spinner.TitleAfterUpdate)
         
-        FirebaseService().getUpdatedDataInSingleEvent(modalName: Constants.Feature.Grocery, itemsKeys: self.groceryItemKeys) { (gItems, gItemsKeys) in
+        FirebaseService().getUpdatedDataInSingleEvent(modalName: Constants.Feature.Grocery, parentNode:navTitle, itemsKeys: self.groceryItemKeys) { (gItems, gItemsKeys) in
             self.groceryItems.append(contentsOf: gItems)
             self.groceryItemKeys.append(contentsOf: gItemsKeys)
             self.tableView.reloadData()
