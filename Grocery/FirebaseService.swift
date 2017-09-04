@@ -25,10 +25,10 @@ class FirebaseService {
         }
     }
     
-    func getAllDataInSingleEvent(modalName:String ,completion:@escaping ([GroceryItem], [String]) -> ()) {
+    func getAllDataInSingleEvent(modalName:String, parentNode:String, completion:@escaping ([GroceryItem], [String]) -> ()) {
         var items: [GroceryItem] = []
         var itemsKeys: [String] = []
-        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+        firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             if snapshot.childrenCount == 0 {
                 //Stop Spinner
                 SwiftSpinner.hide()
@@ -251,8 +251,8 @@ class FirebaseService {
         firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).childByAutoId().setValue(dictionaryOfData)
     }
     
-    func saveEditedGroceryList(key:String, dictionaryOfData:[String:String]) {
-        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ParentGroceryRoot).child(key).setValue(dictionaryOfData)
+    func saveEditedGroceryList(key:String, parentNode:String, dictionaryOfData:[String:String]) {
+        firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).child(key).setValue(dictionaryOfData)
     }
     
     private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {

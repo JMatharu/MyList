@@ -83,7 +83,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             item.category = categoryTextField.text!
             item.name = nameTextField.text!
             let dataToBeSavedAfterEdit = [Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store, Constants.Firebase.ChildDate : self.getCurrentDateWithTime()]
-            FirebaseService().saveEditedGroceryList(key: editKey, dictionaryOfData: dataToBeSavedAfterEdit)
+            FirebaseService().saveEditedGroceryList(key: editKey, parentNode: parentNode, dictionaryOfData: dataToBeSavedAfterEdit)
             delegate?.addItemViewController(didFinishEditing: item)
         } else {
             let item = GroceryItem()

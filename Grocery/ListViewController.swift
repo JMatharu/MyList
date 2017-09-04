@@ -189,7 +189,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
         
         // Get all items from service level
-        FirebaseService().getAllDataInSingleEvent(modalName: Constants.Feature.Grocery) { (groceryItem, groceryItemKeys) in
+        FirebaseService().getAllDataInSingleEvent(modalName: Constants.Feature.Grocery, parentNode: navTitle) { (groceryItem, groceryItemKeys) in
             self.groceryItems = groceryItem
             self.groceryItemKeys = groceryItemKeys
             
