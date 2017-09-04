@@ -34,6 +34,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     var categoryPicker = UIPickerView()
     weak var delegate: AddEditItemViewControllerDelegate?
     var itemToEdit: GroceryItem?
+    var parentNode: String = ""
     var tempItemToEdit: [String:GroceryItem?] = [:]
     var fireKey: String = ""
     var editKey: String = ""
@@ -93,7 +94,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
             
             //saving data to firebase
             let dataToBeSaved = [Constants.Firebase.ChildCategory : item.category, Constants.Firebase.ChildName : item.name, Constants.Firebase.ChildAmount : item.amount, Constants.Firebase.ChildStore : item.store, Constants.Firebase.ChildDate : self.getCurrentDateWithTime()]
-            FirebaseService().saveGroceryList(dictionaryOfData: dataToBeSaved)
+            FirebaseService().saveGroceryList(parentNode:parentNode, dictionaryOfData: dataToBeSaved)
             delegate?.addItemViewController(didFinishAdding: item)
         }
         // If using "Modal" then dismiss

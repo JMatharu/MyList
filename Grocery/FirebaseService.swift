@@ -247,8 +247,8 @@ class FirebaseService {
         }
     }
     
-    func saveGroceryList(dictionaryOfData:[String:String]) {
-        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ParentGroceryRoot).childByAutoId().setValue(dictionaryOfData)
+    func saveGroceryList(parentNode:String, dictionaryOfData:[String:String]) {
+        firebaseReference?.child(self.getUid()).child(parentNode).child(Constants.Firebase.ParentGroceryRoot).childByAutoId().setValue(dictionaryOfData)
     }
     
     func saveEditedGroceryList(key:String, dictionaryOfData:[String:String]) {

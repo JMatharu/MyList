@@ -158,6 +158,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         if segue.identifier == Constants.Identifiers.AddItemSegue {
             let controller = segue.destination as! AddEditItemViewController
             controller.delegate = self
+            controller.parentNode = navTitle
         } else if segue.identifier == Constants.Segue.CalculateGroceryList {
             let controller = segue.destination as! CalculateViewController
             controller.groceryItems = groceryItems
@@ -165,6 +166,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
         } else if segue.identifier == Constants.Segue.EditItem {
             let controller = segue.destination as! AddEditItemViewController
             controller.delegate = self
+            controller.parentNode = navTitle
             if let index = sender as? Int {
                 controller.itemToEdit = groceryItems[index]
                 controller.tempItemToEdit = [groceryItemKeys[index]:groceryItems[index]]
