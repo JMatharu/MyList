@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import PMAlertController
+import SwiftSpinner
 
 class HomeViewController: UITableViewController {
     
@@ -17,12 +18,14 @@ class HomeViewController: UITableViewController {
     var homeItemsKeys: [String] = []
     
     override func viewDidLoad() {
+        _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
         self.title = "Home List"
         
         FirebaseService().getHomeListItems { (keys, items) in
             self.homeItems = items
             self.homeItemsKeys = keys
             self.tableView.reloadData()
+            SwiftSpinner.hide()
         }
     }
     
