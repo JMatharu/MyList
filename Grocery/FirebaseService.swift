@@ -292,7 +292,7 @@ class FirebaseService {
         firebaseReference?.child(self.getUid()).child("homeAllList").child(itemKey).removeValue()
         
         // Delete from Main home node
-        firebaseReference?.child(self.getUid()).child("homeList").child(itemKey).removeValue()
+        firebaseReference?.child(self.getUid()).child("homeList").child(parentNode).removeValue()
     }
     
     private func getDifferentElementFromUpdatedList(updatedItemKeys: [String], parentNode:String, items:[GroceryItem], updatedListCount:Int, newItemReverseIndex: Int, completion:@escaping ([GroceryItem]) -> ()) {
