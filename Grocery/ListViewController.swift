@@ -16,6 +16,7 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
     var groceryItemUpdateKeys: [String] = []
     let heightOfHeader: CGFloat = 40
     var navTitle: String = ""
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,6 +133,10 @@ class ListViewController: UITableViewController, AddEditItemViewControllerDelega
             self.performSegue(withIdentifier: Constants.Segue.CalculateGroceryList, sender: nil)
         }
         self.tableView.addSubview(fabButton)
+    }
+    
+    @IBAction func backButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: - Add Item View Controller delegate
