@@ -64,7 +64,7 @@ class HomeViewController: UITableViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
-        return [rename, delete]
+        return [delete]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
