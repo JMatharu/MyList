@@ -10,22 +10,32 @@ import Foundation
 import UIKit
 import PMAlertController
 import SwiftSpinner
+import KCFloatingActionButton
 
 class HomeViewController: UITableViewController {
     
     @IBOutlet weak var addItem: UINavigationItem!
     var homeItems: [HomeModal] = []
     var homeItemsKeys: [String] = []
+    @IBOutlet weak var leftBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         _ = SwiftSpinner.init(title: Constants.Spinner.Title, subTitle: Constants.Spinner.SubTitle)
         self.title = "Home List"
+        leftBarButton.tintColor = UIColor.clear
+        leftBarButton.isEnabled = false
+        
+        createFABButton()
         
         FirebaseService().getHomeListItems { (keys, items) in
-            self.homeItems = items
-            self.homeItemsKeys = keys
-            self.tableView.reloadData()
-            SwiftSpinner.hide()
+            if keys.count == 1 && keys[0] == "" {
+                SwiftSpinner.hide()
+            } else {
+                self.homeItems = items
+                self.homeItemsKeys = keys
+                self.tableView.reloadData()
+                SwiftSpinner.hide()
+            }            
         }
     }
     
@@ -100,5 +110,13 @@ class HomeViewController: UITableViewController {
             self.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func createFABButton() {
+        let fabButton = KCFloatingActionButton().createFabButtonHome()
+        fabButton.addItem("Update Name or Category", icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
+            self.performSegue(withIdentifier: "HomeToName", sender: nil)
+        }
+        self.tableView.addSubview(fabButton)
     }
 }

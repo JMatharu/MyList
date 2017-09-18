@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: Constants.Identifiers.MainStoryBoard, bundle: nil)
             //TODO: check if there is a plist with data, if yes then ok else show name cat controller
-            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.GroceryListTabBarHomeView)
+            let initialStoryBoard = storyboard.instantiateViewController(withIdentifier: "LoadingScreen")
             let navigationController = UINavigationController(rootViewController: initialStoryBoard)
             navigationController.navigationBar.barTintColor = UIColor.navigationBarColor
             navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]

@@ -34,7 +34,20 @@ extension KCFloatingActionButton {
         floaty.itemTitleColor = UIColor.FabButtonItemTitleColor
         floaty.itemShadowColor = UIColor.blue
         floaty.buttonImage = #imageLiteral(resourceName: "addItem")
-        floaty.customShift = 50
+        floaty.customShift = 0
+        return floaty
+    }
+    
+    func createFabButtonHome() -> KCFloatingActionButton {
+        let floaty = KCFloatingActionButton()
+        floaty.sticky = true
+        floaty.openAnimationType = .slideLeft
+        floaty.buttonColor = UIColor.FabButtonColor
+        floaty.itemButtonColor = UIColor.FabButtonSecendoryColor
+        floaty.itemTitleColor = UIColor.FabButtonItemTitleColor
+        floaty.itemShadowColor = UIColor.blue
+        floaty.buttonImage = #imageLiteral(resourceName: "addItem")
+        floaty.customShift = 20
         return floaty
     }
 }

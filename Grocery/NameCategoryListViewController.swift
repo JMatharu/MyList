@@ -28,8 +28,17 @@ class NameCategoryListViewController: UITableViewController {
     var catDictionary:[String:String] = [:]
     var initialCatDictionaryKeys:[String] = []
     
+    var isBackButtonDisabled:Bool = false
+    
     override func viewDidLoad() {
         navigationItem.title = "Enter Name"
+        if isBackButtonDisabled {
+            self.leftBarButton.isEnabled = false
+            self.leftBarButton.tintColor = UIColor.clear
+        } else {
+            self.leftBarButton.isEnabled = true
+            self.leftBarButton.tintColor = UIColor.white
+        }
         createFABButton()
         updateListFromFirebase()
     }
@@ -79,13 +88,13 @@ class NameCategoryListViewController: UITableViewController {
     
     //MARK: - IBAction
     @IBAction func done(_ sender: Any) {
-        if initialDictionaryKeys.count > nameDictionary.count {
-            print("Something is removed")
-        } else if initialDictionaryKeys.count < nameDictionary.count {
-            print("Something is added")
-        } else if initialDictionaryKeys.count == nameDictionary.count {
-            print("All same")
-        }
+//        if initialDictionaryKeys.count > nameDictionary.count {
+//            print("Something is removed")
+//        } else if initialDictionaryKeys.count < nameDictionary.count {
+//            print("Something is added")
+//        } else if initialDictionaryKeys.count == nameDictionary.count {
+//            print("All same")
+//        }
         
         if isCurrentVCNameVC() {
             if self.nameDictionary.count < 2 {
@@ -107,6 +116,8 @@ class NameCategoryListViewController: UITableViewController {
                 }
                 navigationItem.title = "Category Item"
                 leftBarButton.title = "Back"
+                leftBarButton.isEnabled = true
+                leftBarButton.tintColor = UIColor.white
             }
         } else {
             if self.catDictionary.count < 1 {
@@ -166,6 +177,8 @@ class NameCategoryListViewController: UITableViewController {
             }
             self.leftBarButton.title = "Cancel"
             self.navigationItem.title = "Enter Name"
+            self.leftBarButton.isEnabled = false
+            self.leftBarButton.tintColor = UIColor.clear
         }
     }
     

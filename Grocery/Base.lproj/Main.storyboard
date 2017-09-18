@@ -64,12 +64,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="leftBarButton" destination="52l-q0-Wec" id="NZA-bX-yQr"/>
-                        <segue destination="fCD-Yy-lji" kind="show" identifier="NewToGroceryList" id="I5E-Ji-VfY"/>
+                        <segue destination="Y3d-MI-hBk" kind="show" identifier="NewToGroceryList" id="JyS-fD-Kdm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hyW-4v-EQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1410" y="-450"/>
+            <point key="canvasLocation" x="1999" y="-429"/>
         </scene>
         <!--Grocery List-->
         <scene sceneID="oxw-Pp-KNv">
@@ -397,13 +397,12 @@
                     <connections>
                         <outlet property="logoLabel" destination="Wjc-pD-mxX" id="IMD-tp-N35"/>
                         <segue destination="pts-at-4PZ" kind="show" identifier="" action="showDetailViewController:sender:" id="ERk-aR-WKv"/>
-                        <segue destination="90W-ae-YgF" kind="show" identifier="NewGroceryListIdentifier" id="8UH-fV-Xy0"/>
-                        <segue destination="Y3d-MI-hBk" kind="show" identifier="LoginToList" id="VKg-3j-EAL"/>
+                        <segue destination="yQJ-vS-2Xc" kind="show" identifier="LoadingScreen" id="JKU-Cw-M5M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxU-zz-vN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="184" y="6"/>
+            <point key="canvasLocation" x="-754" y="4"/>
         </scene>
         <!--My All Lists-->
         <scene sceneID="0rT-zc-3u1">
@@ -465,6 +464,28 @@
             </objects>
             <point key="canvasLocation" x="1013" y="-1294"/>
         </scene>
+        <!--Loading Screen-->
+        <scene sceneID="lOD-yd-Rst">
+            <objects>
+                <viewController storyboardIdentifier="LoadingScreen" id="yQJ-vS-2Xc" customClass="LoadingScreen" customModule="Grocery" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8hH-df-RN7"/>
+                        <viewControllerLayoutGuide type="bottom" id="T0u-qf-I9b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3hj-SL-rZk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="90W-ae-YgF" kind="show" identifier="NewGroceryListIdentifier" id="IYw-VJ-m5T"/>
+                        <segue destination="Y3d-MI-hBk" kind="show" identifier="LoginToList" id="o3Y-u3-gZJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NiA-Qs-uc9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="504" y="3"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="p5k-fi-9o8">
             <objects>
@@ -503,6 +524,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="A58-dV-Yoe">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="mZF-Qm-G73"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="PnX-B4-41T">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -511,12 +533,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="leftBarButton" destination="mZF-Qm-G73" id="208-Pk-bDh"/>
                         <segue destination="fCD-Yy-lji" kind="show" identifier="mainListToGroceryList" id="ojA-Pc-TbH"/>
+                        <segue destination="90W-ae-YgF" kind="show" identifier="HomeToName" id="JxI-9V-6Yu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5UZ-tP-gQT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1411" y="297"/>
+            <point key="canvasLocation" x="1178" y="515"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6WQ-e8-eSU">
@@ -538,11 +562,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="de6-NW-7DN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-673" y="4"/>
+            <point key="canvasLocation" x="-1524" y="5"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ojA-Pc-TbH"/>
+        <segue reference="JyS-fD-Kdm"/>
+        <segue reference="JxI-9V-6Yu"/>
         <segue reference="emE-sk-kia"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -260,6 +260,50 @@ class FirebaseService {
         }
     }
     
+    func isNameOrCategoryExist(completion:@escaping(Bool)->()) {
+        isNameExist { (status) in
+            if status == true {
+                self.isCategoryExist(completion: { (statusCat) in
+                    if statusCat == true {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    private func isNameExist(completion:@escaping(Bool)->()) {
+        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildNameList).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let snap = snapshot.value as? NSDictionary else {
+                completion(false)
+                return
+            }
+            if snap.count > 0 {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
+    }
+    
+    private func isCategoryExist(completion:@escaping(Bool)->()) {
+        firebaseReference?.child(self.getUid()).child(Constants.Firebase.ChildCategoryList).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let snap = snapshot.value as? NSDictionary else {
+                completion(false)
+                return
+            }
+            if snap.count > 0 {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
+    }
+    
     func saveGroceryList(parentNode:String, dictionaryOfData:[String:String]) {
         firebaseReference?.child(self.getUid()).child("homeList").child(parentNode).child(Constants.Firebase.ParentGroceryRoot).childByAutoId().setValue(dictionaryOfData)
     }
@@ -274,7 +318,10 @@ class FirebaseService {
     
     func getHomeListItems(completion:@escaping([String], [HomeModal])->()) {
         firebaseReference?.child(self.getUid()).child("homeAllList").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-            guard let snap = snapshot.value as? NSDictionary else { return }
+            guard let snap = snapshot.value as? NSDictionary else {
+                completion([""], [HomeModal()])
+                return
+            }
             var homeListItems = [HomeModal]()
             var homeListItemsKeys = [String]()
             for (keys, value) in snap {
