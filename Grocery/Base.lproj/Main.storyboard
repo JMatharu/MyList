@@ -385,11 +385,20 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Firebase" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njh-fy-jMb">
+                                <rect key="frame" x="26" y="512" width="268" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.30588235294117649" green="0.6470588235294118" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="DEM-PH-XN6" firstAttribute="top" secondItem="njh-fy-jMb" secondAttribute="bottom" constant="40" id="TpP-z5-TMd"/>
                             <constraint firstItem="Wjc-pD-mxX" firstAttribute="top" secondItem="64R-D8-7nc" secondAttribute="bottom" constant="50" id="Twg-4d-p7N"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="njh-fy-jMb" secondAttribute="trailing" constant="10" id="ZvP-ez-9So"/>
                             <constraint firstItem="Wjc-pD-mxX" firstAttribute="leading" secondItem="SvR-FS-1PG" secondAttribute="leadingMargin" constant="20" id="epR-fe-4si"/>
+                            <constraint firstItem="njh-fy-jMb" firstAttribute="leading" secondItem="SvR-FS-1PG" secondAttribute="leadingMargin" constant="10" id="m64-uA-LoR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Wjc-pD-mxX" secondAttribute="trailing" constant="20" id="qzK-O9-EiH"/>
                         </constraints>
                     </view>
