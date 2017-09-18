@@ -29,6 +29,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
         let fbLoginButton = FBSDKLoginButton()
         
+        logoLabel.font = logoLabel.font.withSize(self.view.frame.height * 0.090)
+        
         createSignInButton(loginButton: fbLoginButton)
     }
     
