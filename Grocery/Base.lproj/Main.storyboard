@@ -396,73 +396,12 @@
                     <navigationItem key="navigationItem" id="ulV-73-YB9"/>
                     <connections>
                         <outlet property="logoLabel" destination="Wjc-pD-mxX" id="IMD-tp-N35"/>
-                        <segue destination="pts-at-4PZ" kind="show" identifier="" action="showDetailViewController:sender:" id="ERk-aR-WKv"/>
                         <segue destination="yQJ-vS-2Xc" kind="show" identifier="LoadingScreen" id="JKU-Cw-M5M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxU-zz-vN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-754" y="4"/>
-        </scene>
-        <!--My All Lists-->
-        <scene sceneID="0rT-zc-3u1">
-            <objects>
-                <tableViewController storyboardIdentifier="AllListViewController" id="pts-at-4PZ" customClass="AllListViewController" customModule="Grocery" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NiW-S4-BlS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AllListItem" id="4ru-Hr-ViQ">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ru-Hr-ViQ" id="S3N-F2-gkj">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wdI-k2-C5v">
-                                            <rect key="frame" x="5" y="0.0" width="310" height="43.5"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-kc-7Cv">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view tag="12" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ks-jF-YL2">
-                                                    <rect key="frame" x="270" y="0.0" width="40" height="43.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="vbd-bm-u8N"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="wdI-k2-C5v" firstAttribute="leading" secondItem="S3N-F2-gkj" secondAttribute="leading" constant="5" id="G3w-cI-Sry"/>
-                                        <constraint firstItem="wdI-k2-C5v" firstAttribute="top" secondItem="S3N-F2-gkj" secondAttribute="top" id="Gmz-cK-CQX"/>
-                                        <constraint firstAttribute="bottom" secondItem="wdI-k2-C5v" secondAttribute="bottom" id="TKC-eg-zDh"/>
-                                        <constraint firstAttribute="trailing" secondItem="wdI-k2-C5v" secondAttribute="trailing" constant="5" id="vDe-ao-WVh"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="pts-at-4PZ" id="h8b-QJ-aYw"/>
-                            <outlet property="delegate" destination="pts-at-4PZ" id="YVO-Kc-Tv3"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="My All Lists" id="8Xa-wU-wA1"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="fCD-Yy-lji" kind="show" identifier="GrocerySegue" id="imA-HI-Tsz"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WGp-BV-rAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1013" y="-1294"/>
         </scene>
         <!--Loading Screen-->
         <scene sceneID="lOD-yd-Rst">
@@ -566,7 +505,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ojA-Pc-TbH"/>
         <segue reference="JyS-fD-Kdm"/>
         <segue reference="JxI-9V-6Yu"/>
         <segue reference="emE-sk-kia"/>

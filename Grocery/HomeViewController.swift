@@ -35,7 +35,7 @@ class HomeViewController: UITableViewController {
                 self.homeItemsKeys = keys
                 self.tableView.reloadData()
                 SwiftSpinner.hide()
-            }            
+            }
         }
     }
     
