@@ -75,13 +75,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             // self.navigationController?.pushViewController(listViewController, animated: true)
             
             // To push controller with segue
-            FirebaseService().getCountOfNameAndCat(completion: { (bool) in
-                if bool {
-                    self.performSegue(withIdentifier: Constants.Segue.LoginToList, sender: nil)
-                } else {
-                    self.performSegue(withIdentifier: Constants.Segue.NewGroceryListIdentifier, sender: nil)
-                }
-            })
+            self.performSegue(withIdentifier: "LoadingScreen", sender: nil)
         })
     }
     
