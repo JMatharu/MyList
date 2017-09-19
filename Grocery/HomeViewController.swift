@@ -113,7 +113,7 @@ class HomeViewController: UITableViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         }
-        fabButton.addItem("Update Name or Category", icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
+        fabButton.addItem("Update Name or Category", icon: #imageLiteral(resourceName: "edit")) { (fabButtonItem) in
             self.performSegue(withIdentifier: "HomeToName", sender: nil)
         }
         self.tableView.addSubview(fabButton)
