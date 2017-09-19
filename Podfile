@@ -20,4 +20,5 @@ target 'Grocery' do
   pod 'PMAlertController'
   pod 'EasyNotificationBadge'
   pod 'KCFloatingActionButton'
+  pod 'CZPicker'
 end

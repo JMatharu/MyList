@@ -9,6 +9,7 @@
 import UIKit
 import UIColor_Hex_Swift
 import PMAlertController
+import CZPicker
 
 struct AddItemVCConstants {
     static let DateFormat = "yyyyMMddHHmmss"
@@ -20,8 +21,7 @@ protocol AddEditItemViewControllerDelegate: class {
     func addItemViewControllerDidCancel()
 }
 
-class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-    
+class AddEditItemViewController: UITableViewController, CZPickerViewDelegate, CZPickerViewDataSource {
     @IBOutlet weak var storeName: UITextField!
     @IBOutlet weak var amount: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
@@ -30,8 +30,8 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     
     var pickerNameData:[String] = []
     var pickerCategoryData:[String] = []
-    var namePicker = UIPickerView()
-    var categoryPicker = UIPickerView()
+    var namePicker = CZPickerView()
+    var categoryPicker = CZPickerView()
     weak var delegate: AddEditItemViewControllerDelegate?
     var itemToEdit: GroceryItem?
     var parentNode: String = ""
@@ -44,9 +44,10 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         updateTableUI()
         storeName.becomeFirstResponder()
         loadNameAndCategory()
-        setDelegateAndDataSourceForPicker()
         addPaddingOnUITextFields()
         setDataforEditScreen()
+        nameTextField.isUserInteractionEnabled = false
+        categoryTextField.isUserInteractionEnabled = false
     }
  
     // MARK: - IBAction
@@ -108,15 +109,8 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         return nil
     }
     
-    
     //MARK: - Picker Methods
-    // returns the number of 'columns' to display.
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    // returns the # of rows in each component..
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func numberOfRows(in pickerView: CZPickerView!) -> Int {
         if pickerView == namePicker {
             return pickerNameData.count
         } else {
@@ -124,16 +118,7 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         }
     }
     
-    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == namePicker {
-            nameTextField.text = pickerNameData[row]
-        } else {
-            categoryTextField.text = pickerCategoryData[row]
-        }
-        self.view.endEditing(false)
-    }
-    
-    internal func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func czpickerView(_ pickerView: CZPickerView!, titleForRow row: Int) -> String! {
         if pickerView == namePicker {
             return pickerNameData[row]
         } else {
@@ -141,20 +126,23 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
         }
     }
     
+    func czpickerView(_ pickerView: CZPickerView!, didConfirmWithItemAtRow row: Int) {
+        if pickerView == namePicker {
+            nameTextField.text = pickerNameData[row]
+        } else {
+            categoryTextField.text = pickerCategoryData[row]
+        }
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    func czpickerViewDidClickCancelButton(_ pickerView: CZPickerView!) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     //MARK: - Methods
     private func addPadding(textField: UITextField) {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Constants.UIDimentions.PaddingWidth, height: textField.frame.height))
         textField.leftViewMode = UITextFieldViewMode.always
-    }
-    
-    private func setDelegateAndDataSourceForPicker() {
-        namePicker.delegate = self
-        namePicker.dataSource = self
-        nameTextField.inputView = namePicker
-        
-        categoryPicker.delegate = self
-        categoryPicker.dataSource = self
-        categoryTextField.inputView = categoryPicker
     }
     
     private func addPaddingOnUITextFields() {
@@ -208,6 +196,23 @@ class AddEditItemViewController: UITableViewController, UIPickerViewDataSource, 
     
     func updateTableUI() {
         tableView.tableHeaderView = UIView(frame: CGRect(x: CGFloat(0.0), y: CGFloat(0.0), width: CGFloat(tableView.bounds.size.width), height: Constants.UIDimentions.NavigationBarHeight))
+    }
+    
+    @IBAction func selectPatient(_ sender: Any) {
+        self.view.endEditing(true) // Disabling Keyboard
+        namePicker = CZPickerView(headerTitle: "Names", cancelButtonTitle: "Cancel", confirmButtonTitle: "Confirm")
+        namePicker.delegate = self
+        namePicker.dataSource = self
+        namePicker.needFooterView = true
+        namePicker.show()
+    }
+    @IBAction func selectCategory(_ sender: Any) {
+        self.view.endEditing(true) // Disabling Keyboard
+        categoryPicker = CZPickerView(headerTitle: "Categories", cancelButtonTitle: "Cancel", confirmButtonTitle: "Confirm")
+        categoryPicker.delegate = self
+        categoryPicker.dataSource = self
+        categoryPicker.needFooterView = true
+        categoryPicker.show()
     }
     
     func getCurrentDateWithTime() -> String {
