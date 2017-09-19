@@ -274,10 +274,11 @@
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LuV-Kz-eG3">
-                                                    <rect key="frame" x="0.0" y="6" width="153" height="30"/>
+                                                    <rect key="frame" x="0.0" y="4.5" width="153" height="33"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="153" id="Pqw-w9-yGj"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="Select Name"/>
                                                     <connections>
                                                         <action selector="selectPatient:" destination="Lwe-LO-Hfx" eventType="touchUpInside" id="Ntl-8Y-uN8"/>
@@ -311,10 +312,11 @@
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mV-Mu-rci">
-                                                    <rect key="frame" x="3" y="6" width="150" height="30"/>
+                                                    <rect key="frame" x="3" y="4.5" width="150" height="33"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="ajK-VM-Vm1"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="Select Category"/>
                                                     <connections>
                                                         <action selector="selectCategory:" destination="Lwe-LO-Hfx" eventType="touchUpInside" id="W9z-oA-dnt"/>
