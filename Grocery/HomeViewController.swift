@@ -89,31 +89,30 @@ class HomeViewController: UITableViewController {
         }
     }
     
-    @IBAction func addItem(_ sender: Any) {
-        let alert = PMAlertController(withTitle: "Enter List name", withDescription: "For eg. July List, January List etc..")
-        alert.addTextField { (textField) in
-            textField?.becomeFirstResponder()
-        }
-        alert.addAction(PMAlertAction.init(title: "Ok", style: PMAlertActionStyle.default, action: {
-            if let text = alert.textFields[0].text {
-                if !text.isEmpty {
-                    let homeItem = HomeModal()
-                    homeItem.itemName = text
-                    self.homeItems.append(homeItem)
-                    FirebaseService().saveHomeList(item: homeItem.itemName)
-                }
-            }
-            self.tableView.reloadData()
-            self.dismiss(animated: true, completion: nil)
-        }))
-        alert.addAction(PMAlertAction.init(title: "Cancel", style: .cancel, action: { 
-            self.dismiss(animated: true, completion: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     func createFABButton() {
         let fabButton = KCFloatingActionButton().createFabButtonHome()
+        fabButton.addItem("Add List", icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
+            let alert = PMAlertController(withTitle: "Enter List name", withDescription: "For eg. July List, January List etc..")
+            alert.addTextField { (textField) in
+                textField?.becomeFirstResponder()
+            }
+            alert.addAction(PMAlertAction.init(title: "Ok", style: PMAlertActionStyle.default, action: {
+                if let text = alert.textFields[0].text {
+                    if !text.isEmpty {
+                        let homeItem = HomeModal()
+                        homeItem.itemName = text
+                        self.homeItems.append(homeItem)
+                        FirebaseService().saveHomeList(item: homeItem.itemName)
+                    }
+                }
+                self.tableView.reloadData()
+                self.dismiss(animated: true, completion: nil)
+            }))
+            alert.addAction(PMAlertAction.init(title: "Cancel", style: .cancel, action: {
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
         fabButton.addItem("Update Name or Category", icon: #imageLiteral(resourceName: "add")) { (fabButtonItem) in
             self.performSegue(withIdentifier: "HomeToName", sender: nil)
         }

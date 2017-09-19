@@ -473,12 +473,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="A58-dV-Yoe">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="mZF-Qm-G73"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PnX-B4-41T">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="addItem:" destination="Y3d-MI-hBk" id="Dxe-bI-O3l"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="leftBarButton" destination="mZF-Qm-G73" id="208-Pk-bDh"/>
@@ -515,7 +509,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="o3Y-u3-gZJ"/>
-        <segue reference="IYw-VJ-m5T"/>
+        <segue reference="JxI-9V-6Yu"/>
         <segue reference="emE-sk-kia"/>
     </inferredMetricsTieBreakers>
 </document>
