@@ -20,10 +20,19 @@ class CalculateViewController: UIViewController {
     override func viewDidLoad() {
         totalAmount.text = CalculateModel.init(items: groceryItems).getTotalAmountSpent()
         CalculateModel.init(items: groceryItems).brain { (brainList) in
-            self.finalCalculation.text = brainList
+            if brainList.characters.count == 0 {
+                self.finalCalculation.text = "Nothing to Calculate\nPlease go back and enter some data for results."
+            } else {
+                self.finalCalculation.text = brainList
+            }
         }
         CalculateModel.init(items: groceryItems).amountPerHead(completion: { (amount) in
-            self.amountPerHead.text = "Total amount per head 💸 " + String(amount)
+            let result = CurrencyFormatter().getLocalCurrency(amount: (amount as NSNumber))
+            if amount == 0.0 {
+                self.amountPerHead.text = ""
+            } else {
+                self.amountPerHead.text = "Total amount per head 💸 " + String(result)
+            }
         })
         getAllNames()
     }

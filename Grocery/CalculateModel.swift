@@ -45,7 +45,11 @@ class CalculateModel {
             self.nameList = nameArray
             let totalNumberOfPeople = self.getAmountSpentByEachNameAsArray().count
             let amountPerHead = self.getTotalAmount() / Double(totalNumberOfPeople)
-            completion(amountPerHead)
+            if String(amountPerHead) == "nan" {
+                completion(0.0)
+            } else {
+                completion(amountPerHead)
+            }
         }
     }
     
