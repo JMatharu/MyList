@@ -79,7 +79,36 @@ class CalculateModel {
     func amountPerHead(completion:@escaping(Double)->()) {
         NameCategorySharedService.sharedInstance.initializeNamesArray { (nameArray) in
             self.nameList = nameArray
-            let totalNumberOfPeople = self.getAmountSpentByEachNameAsArray().count
+            
+            var amountPerName = [String:Int]()
+            if self.getAmountSpentByEachNameAsArray().count ==  self.nameList.count {
+                amountPerName = self.getAmountSpentByEachNameAsArray()
+            } else {
+                var tempName = [String]()
+                var tempNameAmount = [String]()
+                var tempAmount = [Int]()
+                
+                for name in self.nameList {
+                    tempName.append(name)
+                }
+                for (key, value) in self.getAmountSpentByEachNameAsArray() {
+                    tempNameAmount.append(key)
+                    tempAmount.append(value)
+                }
+                for name in tempName {
+                    if tempNameAmount.contains(name) {
+                        if self.getAmount(dictionary: self.getAmountSpentByEachNameAsArray(), key: name) != -1 {
+                            amountPerName.updateValue(self.getAmount(dictionary: self.getAmountSpentByEachNameAsArray(), key: name), forKey: name)
+                        }
+                        
+                    } else {
+                        amountPerName.updateValue(0, forKey: name)
+                    }
+                }
+            }
+
+            
+            let totalNumberOfPeople = amountPerName.count
             let amountPerHead = self.getTotalAmount() / Double(totalNumberOfPeople)
             if String(amountPerHead) == "nan" {
                 completion(0.0)
@@ -94,7 +123,37 @@ class CalculateModel {
         amountPerHead { (amountPerHeadAfterClosure) in
             NameCategorySharedService.sharedInstance.initializeNamesArray { (nameArray) in
                 self.nameList = nameArray
-                for item in self.getAmountSpentByEachNameAsArray() {
+                
+                var amountPerName = [String:Int]()
+                if self.getAmountSpentByEachNameAsArray().count ==  self.nameList.count {
+                    amountPerName = self.getAmountSpentByEachNameAsArray()
+                } else {
+                    var tempName = [String]()
+                    var tempNameAmount = [String]()
+                    var tempAmount = [Int]()
+                    
+                    for name in self.nameList {
+                        tempName.append(name)
+                    }
+                    for (key, value) in self.getAmountSpentByEachNameAsArray() {
+                        tempNameAmount.append(key)
+                        tempAmount.append(value)
+                    }
+                    for name in tempName {
+                        if tempNameAmount.contains(name) {
+                            if self.getAmount(dictionary: self.getAmountSpentByEachNameAsArray(), key: name) != -1 {
+                                amountPerName.updateValue(self.getAmount(dictionary: self.getAmountSpentByEachNameAsArray(), key: name), forKey: name)
+                            }
+                            
+                        } else {
+                            amountPerName.updateValue(0, forKey: name)
+                        }
+                    }
+                }
+
+                
+                
+                for item in amountPerName {
                     if brainCalculation.isEmpty {
                         if (amountPerHeadAfterClosure - Double(item.value)) < 0.0 {
                             // negative, this user should get money
